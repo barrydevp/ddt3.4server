@@ -1,0 +1,109 @@
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Languages\Language-vn.txt
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Languages\Language-zh_cn.txt
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Tank.Request.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Tank.Request.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Ajax.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Bussiness.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Newtonsoft.Json.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Road.Flash.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\SqlDataProvider.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Tank.Flash.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\zlib.net.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Game.Base.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Bussiness.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Road.Flash.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\SqlDataProvider.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Tank.Flash.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\log4net.xml
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\bin\Game.Base.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\obj\Debug\ResolveAssemblyReference.cache
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\obj\Debug\Tank.Request.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server\Tank.Request\obj\Debug\Tank.Request.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Languages\Language-vn.txt
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Languages\Language-zh_cn.txt
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Tank.Request.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Tank.Request.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Ajax.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Bussiness.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Newtonsoft.Json.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Road.Flash.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\SqlDataProvider.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Tank.Flash.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\zlib.net.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Game.Base.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Bussiness.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Road.Flash.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\SqlDataProvider.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Tank.Flash.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\log4net.xml
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\bin\Game.Base.pdb
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\obj\Debug\ResolveAssemblyReference.cache
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\obj\Debug\Tank.Request.dll
+E:\temp\download\Gunny.phien-nhatrang\Herman-PC\workspace\Server3.0\Tank.Request\obj\Debug\Tank.Request.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Languages\Language-vn.txt
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Languages\Language-zh_cn.txt
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Request.dll.config
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Request.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Request.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Ajax.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Bussiness.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Newtonsoft.Json.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Road.Flash.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\SqlDataProvider.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Flash.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\zlib.net.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Game.Base.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Bussiness.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Road.Flash.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\SqlDataProvider.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Flash.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Game.Base.pdb
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\obj\Debug\Tank.Request.csprojResolveAssemblyReference.cache
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\obj\Debug\Tank.Request.dll
+D:\Gunny Project\GUNNY 3.4 BASE\Tank.Request\obj\Debug\Tank.Request.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Languages\Language-vn.txt
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Languages\Language-zh_cn.txt
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Request.dll.config
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Request.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Request.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Ajax.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Bussiness.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Newtonsoft.Json.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Road.Flash.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\SqlDataProvider.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Flash.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\zlib.net.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Game.Base.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Bussiness.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Road.Flash.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\SqlDataProvider.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Tank.Flash.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\bin\Game.Base.pdb
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\obj\Debug\Tank.Request.csprojResolveAssemblyReference.cache
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\obj\Debug\Tank.Request.dll
+D:\OneDrive\Gunny Project\GUNNY 3.4 BASE\Tank.Request\obj\Debug\Tank.Request.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Languages\Language-vn.txt
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Languages\Language-zh_cn.txt
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Tank.Request.dll.config
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Tank.Request.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Tank.Request.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Ajax.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Bussiness.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Game.Base.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Newtonsoft.Json.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Road.Flash.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\SqlDataProvider.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Tank.Flash.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\zlib.net.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Bussiness.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Game.Base.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Road.Flash.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\SqlDataProvider.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\bin\Tank.Flash.pdb
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\obj\Debug\Tank.Request.csprojResolveAssemblyReference.cache
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\obj\Debug\Tank.Request.dll
+D:\OneDrive\Gunny Project\DDTANK 4.1\Tank.Request\obj\Debug\Tank.Request.pdb
+C:\Gunny\Request\obj\Debug\Tank.Request.csproj.AssemblyReference.cache
+C:\Gunny\Request\obj\Debug\Tank.Request.csproj.CoreCompileInputs.cache
+C:\Gunny\Request\obj\Debug\Tank.Request.dll
+C:\Gunny\Request\obj\Debug\Tank.Request.pdb
