@@ -4084,11 +4084,11 @@ namespace Bussiness
 			int num1 = 1;
 			int num2 = 0;
 
-            log.Error("SendMailAndItem: " + title + " - " + content + " - " + userID + " - " + gold + " - " + money + " - " + param);
+            //log.Error("SendMailAndItem: " + title + " - " + content + " - " + userID + " - " + gold + " - " + money + " - " + param);
 
             try
 			{
-				SqlParameter[] SqlParameters = new SqlParameter[8]
+                SqlParameter[] SqlParameters = new SqlParameter[8]
 				{
 				  new SqlParameter("@Title", (object) title),
 				  new SqlParameter("@Content", (object) content),
@@ -4123,7 +4123,7 @@ namespace Bussiness
 			}
 		}
 
-		public bool UpdateAuction(AuctionInfo info, double cess)
+        public bool UpdateAuction(AuctionInfo info, double cess)
 		{
 			bool flag = false;
 			try

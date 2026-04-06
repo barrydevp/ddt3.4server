@@ -4,7 +4,7 @@ using Game.Logic.Phy.Object;
 
 namespace Game.Logic.Cmd
 {
-	[GameCommand(114, "付费翻牌")]
+	[GameCommand((int)eTankCmdType.PAYMENT_TAKE_CARD, "付费翻牌")]
 	public class PaymentTakeCardCommand : ICommandHandler
 	{
 		public void HandleCommand(BaseGame game, Player player, GSPacketIn packet)
@@ -20,7 +20,9 @@ namespace Game.Logic.Cmd
 			}
 			else
 			{
-				int num = ((player.PlayerDetail.PlayerCharacter.typeVIP > 0) ? 437 : 486);
+                // Hardcoded, need to update Flash/UI/vietnam/language.txt as well
+                // tank.gameover.payConfirm.contentCommon
+                int num = ((player.PlayerDetail.PlayerCharacter.typeVIP > 0) ? 437 : 486);
 				flag = player.PlayerDetail.RemoveMoney(num, isConsume: true) > 0;
 			}
 			if (flag)

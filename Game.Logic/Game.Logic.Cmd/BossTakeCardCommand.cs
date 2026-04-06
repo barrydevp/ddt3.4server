@@ -3,7 +3,7 @@ using Game.Logic.Phy.Object;
 
 namespace Game.Logic.Cmd
 {
-	[GameCommand(130, "战胜关卡中Boss翻牌")]
+	[GameCommand((int)eTankCmdType.BOSS_TAKE_CARD, "战胜关卡中Boss翻牌")]
 	public class BossTakeCardCommand : ICommandHandler
 	{
 		public void HandleCommand(BaseGame game, Player player, GSPacketIn packet)

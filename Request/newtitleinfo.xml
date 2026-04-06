@@ -86,7 +86,7 @@
   <Item ID="615" Order="8" Show="1" Name="Chúa Tể Thú Cưỡi" Pic="1008" Att="0" Def="0" Agi="10" Luck="0" Desc="Thú cưỡi của bạn nổi tiếng trong thế giới Gunny." />
   <Item ID="616" Order="9" Show="1" Name="Đại Thần 5 đời" Pic="1009" Att="5" Def="5" Agi="5" Luck="5" Desc="Chứng minh sự trưởng thành của bạn trong Gunny." />
   <Item ID="617" Order="10" Show="1" Name="VUA BÓNG ĐÁ" Pic="1010" Att="30" Def="30" Agi="30" Luck="30" Desc="Trong thời gian World Cup, người dự đoán cuối cùng thi đấu." />
-  <Item ID="618" Order="13" Show="1" Name="Thẻ Ve sầu" Pic="1011" Att="20" Def="20" Agi="20" Luck="20" Desc="Ve ngày hè, mang ý nghĩa của Côn Trùng Chiến." />
+  <Item ID="618" Order="13" Show="1" Name="Thẻ Ve Sầu" Pic="1011" Att="20" Def="20" Agi="20" Luck="20" Desc="Ve ngày hè, mang ý nghĩa của Côn Trùng Chiến." />
   <Item ID="619" Order="14" Show="1" Name="Thẻ Cao Thủ Bắt Sâu" Pic="1012" Att="30" Def="30" Agi="30" Luck="30" Desc="Bạn có thể tham gia hoạt động Vẻ đẹp bất hủ Côn Trùng Chiến." />
   <Item ID="620" Order="15" Show="1" Name="Thẻ Thánh Bắt Sâu" Pic="1013" Att="50" Def="50" Agi="50" Luck="50" Desc="Hãy tha cho những côn trùng đáng thương này!" />
   <Item ID="621" Order="16" Show="1" Name="Thẻ Chuyên Gia Bắt Sâu" Pic="1014" Att="10" Def="10" Agi="10" Luck="10" Desc="Tài năng bắt côn trùng trong Chiến Hữu." />
@@ -109,12 +109,12 @@
   <Item ID="644" Order="222" Show="1" Name="Kỵ Sĩ Bí Đỏ" Pic="1037" Att="20" Def="10" Agi="20" Luck="10" Desc="Không mô tả" />
   <Item ID="647" Order="225" Show="1" Name="Sắc Hồng Dịu Dàng" Pic="1062" Att="10" Def="20" Agi="10" Luck="20" Desc="Không mô tả" />
   <Item ID="652" Order="223" Show="1" Name="Halloween Đến Rồi" Pic="1045" Att="10" Def="20" Agi="10" Luck="20" Desc="Không mô tả" />
-  <Item ID="660" Order="224" Show="1" Name="Chị Đại Thu Hút" Pic="1053" Att="5" Def="5" Agi="5" Luck="5" Desc="Không mô tả" />
+  <Item ID="660" Order="224" Show="1" Name="Chị Đại Thu Hút" Pic="1053" Att="20" Def="10" Agi="20" Luck="10" Desc="Không mô tả" />
   <Item ID="665" Order="131" Show="1" Name="Vô Địch Việt Nam 2015" Pic="1058" Att="80" Def="80" Agi="80" Luck="80" Desc="Vô Địch Việt Nam 2015" />
   <Item ID="666" Order="132" Show="1" Name="Hạng 2 Việt Nam 2015" Pic="1059" Att="60" Def="60" Agi="60" Luck="60" Desc="Hạng 2 Việt Nam 2015" />
   <Item ID="667" Order="133" Show="1" Name="Hạng 3 Việt Nam 2015" Pic="1060" Att="40" Def="40" Agi="40" Luck="40" Desc="Hạng 3 Việt Nam 2015" />
   <Item ID="668" Order="182" Show="1" Name="Tết Trung Thu" Pic="2068" Att="15" Def="8" Agi="15" Luck="8" Desc="Không mô tả" />
-  <Item ID="669" Order="183" Show="1" Name="Lễ Quốc Khánh" Pic="2069" Att="29" Def="29" Agi="29" Luck="29" Desc="Không mô tả" />
+  <Item ID="669" Order="183" Show="1" Name="Lễ Quốc Khánh" Pic="2069" Att="100" Def="100" Agi="100" Luck="100" Desc="Không mô tả" />
   <Item ID="670" Order="137" Show="1" Name="Tôn Sư Trọng Đạo" Pic="2070" Att="20" Def="11" Agi="20" Luck="11" Desc="Không mô tả" />
   <Item ID="675" Order="129" Show="1" Name="Kim ngọc lương duyên" Pic="1068" Att="10" Def="10" Agi="10" Luck="10" Desc="Không mô tả" />
   <Item ID="676" Order="130" Show="1" Name="Duyên trời định" Pic="1069" Att="30" Def="30" Agi="30" Luck="30" Desc="Không mô tả" />
@@ -132,11 +132,11 @@
   <Item ID="701" Order="146" Show="1" Name="Người Vàng" Pic="1094" Att="20" Def="20" Agi="20" Luck="20" Desc="Người Vàng" />
   <Item ID="702" Order="147" Show="1" Name="CG Thẻ Vàng" Pic="1095" Att="50" Def="50" Agi="50" Luck="50" Desc="CG Thẻ Vàng" />
   <Item ID="703" Order="148" Show="1" Name="Người Đồng" Pic="1096" Att="5" Def="5" Agi="5" Luck="5" Desc="Người Đồng" />
-  <Item ID="704" Order="149" Show="1" Name="Thành Chủ Hà Nội" Pic="1097" Att="5" Def="5" Agi="5" Luck="5" Desc="Thành Chủ Hà Nội" />
+  <Item ID="704" Order="149" Show="1" Name="Thành Chủ Hà Nội" Pic="1097" Att="200" Def="200" Agi="200" Luck="200" Desc="Thành Chủ Hà Nội" />
   <Item ID="705" Order="150" Show="1" Name="Thành Chủ Hải Phòng" Pic="1098" Att="100" Def="100" Agi="100" Luck="100" Desc="Thành Chủ Hải Phòng" />
-  <Item ID="706" Order="151" Show="1" Name="Thành Chủ Đà Nẵng" Pic="1099" Att="5" Def="5" Agi="5" Luck="5" Desc="Thành Chủ Đà Nẵng" />
-  <Item ID="707" Order="152" Show="1" Name="Thành Chủ Buôn Mê Thuật" Pic="1100" Att="5" Def="5" Agi="5" Luck="5" Desc="Thành Chủ Buôn Mê Thuật" />
-  <Item ID="708" Order="153" Show="1" Name="Thành Chủ Hồ Chí Minh" Pic="1101" Att="5" Def="5" Agi="5" Luck="5" Desc="Thành Chủ Hồ Chí Minh" />
+  <Item ID="706" Order="151" Show="1" Name="Thành Chủ Đà Nẵng" Pic="1099" Att="100" Def="100" Agi="100" Luck="100" Desc="Thành Chủ Đà Nẵng" />
+  <Item ID="707" Order="152" Show="1" Name="Thành Chủ Buôn Mê Thuật" Pic="1100" Att="100" Def="100" Agi="100" Luck="100" Desc="Thành Chủ Buôn Mê Thuật" />
+  <Item ID="708" Order="153" Show="1" Name="Thành Chủ Hồ Chí Minh" Pic="1101" Att="100" Def="100" Agi="100" Luck="100" Desc="Thành Chủ Hồ Chí Minh" />
   <Item ID="709" Order="154" Show="1" Name="Thành Chủ Cần Thơ" Pic="1102" Att="100" Def="100" Agi="100" Luck="100" Desc="Thành Chủ Cần Thơ" />
   <Item ID="710" Order="155" Show="1" Name="Thành Chủ Cà Mau" Pic="1103" Att="100" Def="100" Agi="100" Luck="100" Desc="Thành Chủ Cà Mau" />
   <Item ID="738" Order="363" Show="1" Name="S23 Sơ Cấp " Pic="2346" Att="5" Def="5" Agi="5" Luck="5" Desc="Danh hiệu chiến đội mùa 23" />
@@ -145,7 +145,7 @@
   <Item ID="741" Order="366" Show="1" Name="S23 Siêu Phàm" Pic="2349" Att="15" Def="15" Agi="15" Luck="15" Desc="Danh hiệu chiến đội mùa 23" />
   <Item ID="744" Order="168" Show="1" Name="Người Mới" Pic="3070" Att="5" Def="5" Agi="5" Luck="5" Desc="Nhận từ Tiệm Cổ Phiếu" />
   <Item ID="745" Order="169" Show="1" Name="Khách Lẻ-Siêu" Pic="2071" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận từ Tiệm Cổ Phiếu" />
-  <Item ID="746" Order="170" Show="1" Name="Toàn dân VIP" Pic="2072" Att="15" Def="15" Agi="15" Luck="15" Desc="Nhận từ Tiệm Cổ Phiếu" />
+  <Item ID="746" Order="170" Show="1" Name="Khách VIP-Siêu" Pic="2072" Att="15" Def="15" Agi="15" Luck="15" Desc="Nhận từ Tiệm Cổ Phiếu" />
   <Item ID="747" Order="171" Show="1" Name="Trùm Cổ Phiếu" Pic="2073" Att="30" Def="30" Agi="30" Luck="30" Desc="Nhận từ Tiệm Cổ Phiếu" />
   <Item ID="748" Order="172" Show="1" Name="Thần Cổ Phiếu" Pic="2074" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận từ Tiệm Cổ Phiếu" />
   <Item ID="749" Order="173" Show="1" Name="Đại Thần Gà " Pic="2083" Att="20" Def="20" Agi="20" Luck="20" Desc="Danh hiệu VIP12" />
@@ -182,10 +182,10 @@
   <Item ID="798" Order="0" Show="1" Name="Quốc Vương Tộc Bom" Pic="2124" Att="30" Def="30" Agi="30" Luck="30" Desc="Nhận từ Hoạt Động" />
   <Item ID="799" Order="359" Show="1" Name="S22 Dũng Cảm" Pic="2125" Att="8" Def="8" Agi="8" Luck="8" Desc="Danh hiệu chiến đội mùa 22" />
   <Item ID="800" Order="360" Show="1" Name="S22 Vĩnh Hằng" Pic="2126" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 22" />
-  <Item ID="801" Order="197" Show="1" Name="S5 Sơ Cấp " Pic="2127" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 5" />
-  <Item ID="802" Order="198" Show="1" Name="S5 Dũng Cảm" Pic="2128" Att="20" Def="20" Agi="20" Luck="20" Desc="Danh hiệu chiến đội mùa 5" />
-  <Item ID="803" Order="199" Show="1" Name="S5 Vĩnh Hằng" Pic="2129" Att="20" Def="20" Agi="20" Luck="20" Desc="Danh hiệu chiến đội mùa 5" />
-  <Item ID="804" Order="200" Show="1" Name="S5 Siêu Phàm" Pic="2130" Att="30" Def="30" Agi="30" Luck="30" Desc="Danh hiệu chiến đội mùa 5" />
+  <Item ID="801" Order="197" Show="1" Name="S5 Sơ Cấp " Pic="2127" Att="5" Def="5" Agi="5" Luck="5" Desc="Danh hiệu chiến đội mùa 5" />
+  <Item ID="802" Order="198" Show="1" Name="S5 Dũng Cảm" Pic="2128" Att="8" Def="8" Agi="8" Luck="8" Desc="Danh hiệu chiến đội mùa 5" />
+  <Item ID="803" Order="199" Show="1" Name="S5 Vĩnh Hằng" Pic="2129" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 5" />
+  <Item ID="804" Order="200" Show="1" Name="S5 Siêu Phàm" Pic="2130" Att="15" Def="15" Agi="15" Luck="15" Desc="Danh hiệu chiến đội mùa 5" />
   <Item ID="805" Order="361" Show="1" Name="S22 Siêu Phàm" Pic="2131" Att="15" Def="15" Agi="15" Luck="15" Desc="Danh hiệu chiến đội mùa 22" />
   <Item ID="806" Order="193" Show="1" Name="Tết Mậu Tuất " Pic="2132" Att="20" Def="18" Agi="20" Luck="18" Desc="Không mô tả" />
   <Item ID="807" Order="201" Show="1" Name="Trăm Trận Trăm Thắng" Pic="6001" Att="30" Def="15" Agi="30" Luck="15" Desc="Nhận từ Hoạt Động" />
@@ -228,9 +228,9 @@
   <Item ID="855" Order="249" Show="1" Name="Cung Chúc Tân Xuân" Pic="2179" Att="8" Def="8" Agi="8" Luck="8" Desc="Hoạt động Tri Ân nhận" />
   <Item ID="856" Order="235" Show="1" Name="Mê Cung 100" Pic="2180" Att="8" Def="8" Agi="8" Luck="8" Desc="Dành cho người vượt Tầng 100 Mê Cung" />
   <Item ID="857" Order="237" Show="1" Name="S10 Sơ Cấp " Pic="2181" Att="5" Def="5" Agi="5" Luck="5" Desc="Danh hiệu chiến đội mùa 10" />
-  <Item ID="858" Order="238" Show="1" Name="S10 Dũng Cảm" Pic="2182" Att="20" Def="20" Agi="20" Luck="20" Desc="Danh hiệu chiến đội mùa 10" />
-  <Item ID="859" Order="239" Show="1" Name="S10 Vĩnh Hằng" Pic="2183" Att="30" Def="30" Agi="30" Luck="30" Desc="Danh hiệu chiến đội mùa 10" />
-  <Item ID="860" Order="240" Show="1" Name="S10 Siêu Phàm" Pic="2184" Att="40" Def="40" Agi="40" Luck="40" Desc="Danh hiệu chiến đội mùa 10" />
+  <Item ID="858" Order="238" Show="1" Name="S10 Dũng Cảm" Pic="2182" Att="8" Def="8" Agi="8" Luck="8" Desc="Danh hiệu chiến đội mùa 10" />
+  <Item ID="859" Order="239" Show="1" Name="S10 Vĩnh Hằng" Pic="2183" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 10" />
+  <Item ID="860" Order="240" Show="1" Name="S10 Siêu Phàm" Pic="2184" Att="15" Def="15" Agi="15" Luck="15" Desc="Danh hiệu chiến đội mùa 10" />
   <Item ID="861" Order="246" Show="1" Name="Phát Tài Phát Lộc" Pic="2176" Att="20" Def="20" Agi="20" Luck="20" Desc="Hoạt động Tri Ân nhận" />
   <Item ID="862" Order="267" Show="1" Name="Bí Ẩn Chuồng Gà" Pic="2186" Att="5" Def="5" Agi="5" Luck="5" Desc="Phiên bản mới Bí Ẩn Chuồng Gà cập nhật 23/09/2019" />
   <Item ID="864" Order="0" Show="1" Name="Đại Vương Sa Mạc" Pic="2188" Att="100" Def="100" Agi="100" Luck="100" Desc="Nhận từ Hoạt Động" />
@@ -244,11 +244,11 @@
   <Item ID="872" Order="302" Show="1" Name="Gunny 8 Tuổi" Pic="2196" Att="12" Def="12" Agi="12" Luck="12" Desc="Kiện Tướng Gunny: Dành cho người chơi Gunny hơn 8 năm." />
   <Item ID="873" Order="303" Show="1" Name="Gunny 9 Tuổi" Pic="2197" Att="15" Def="15" Agi="15" Luck="15" Desc="Kiện Tướng Gunny: Dành cho người chơi Gunny hơn 9 năm." />
   <Item ID="874" Order="250" Show="1" Name="S11 Sơ Cấp " Pic="2198" Att="5" Def="5" Agi="5" Luck="5" Desc="Danh hiệu chiến đội mùa 11" />
-  <Item ID="875" Order="251" Show="1" Name="S11 Dũng Cảm" Pic="2199" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 11" />
-  <Item ID="876" Order="252" Show="1" Name="S11 Vĩnh Hằng" Pic="2200" Att="20" Def="20" Agi="20" Luck="20" Desc="Danh hiệu chiến đội mùa 11" />
-  <Item ID="877" Order="253" Show="1" Name="S11 Siêu Phàm" Pic="2201" Att="30" Def="30" Agi="30" Luck="30" Desc="Danh hiệu chiến đội mùa 11" />
+  <Item ID="875" Order="251" Show="1" Name="S11 Dũng Cảm" Pic="2199" Att="8" Def="8" Agi="8" Luck="8" Desc="Danh hiệu chiến đội mùa 11" />
+  <Item ID="876" Order="252" Show="1" Name="S11 Vĩnh Hằng" Pic="2200" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 11" />
+  <Item ID="877" Order="253" Show="1" Name="S11 Siêu Phàm" Pic="2201" Att="15" Def="15" Agi="15" Luck="15" Desc="Danh hiệu chiến đội mùa 11" />
   <Item ID="878" Order="241" Show="1" Name="2019" Pic="2202" Att="5" Def="5" Agi="5" Luck="5" Desc="Nhận từ Hoạt Động" />
-  <Item ID="879" Order="263" Show="1" Name="Sức Mạnh Nguyên Tố" Pic="2203" Att="5" Def="5" Agi="5" Luck="5" Desc="Phiên bản mới Sức Mạnh Nguyên Tố cập nhật 01/08/2019" />
+  <Item ID="879" Order="263" Show="1" Name="Sức Mạnh Nguyên Tố" Pic="2203" Att="300" Def="300" Agi="300" Luck="300" Desc="Phiên bản mới Sức Mạnh Nguyên Tố cập nhật 01/08/2019" />
   <Item ID="880" Order="242" Show="1" Name="Heo Vàng Mừng Tuổi" Pic="2204" Att="5" Def="5" Agi="5" Luck="5" Desc="Nhận từ Hoạt Động" />
   <Item ID="881" Order="243" Show="1" Name="Tình Yêu Bền Vững" Pic="2205" Att="20" Def="20" Agi="20" Luck="20" Desc="Nhận từ Hoạt Động" />
   <Item ID="882" Order="244" Show="1" Name="Lễ Hội Nguyên Tiêu" Pic="2206" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận từ Hoạt Động" />
@@ -274,7 +274,7 @@
   <Item ID="905" Order="375" Show="1" Name="Chuyên Gia Thể Thao" Pic="2229" Att="5" Def="5" Agi="3" Luck="3" Desc="Dành cho đội vượt ải Đấu Trường Gà (Anh Hùng) sớm nhất " />
   <Item ID="906" Order="376" Show="1" Name="Lãnh Chúa Thời Không" Pic="2230" Att="3" Def="5" Agi="5" Luck="3" Desc="Dành cho đội vượt ải Vòng Xoáy Thời Gian (Anh Hùng) sớm nhất " />
   <Item ID="907" Order="377" Show="1" Name="Đời Chẳng Sợ Ai" Pic="2231" Att="3" Def="3" Agi="5" Luck="5" Desc="Dành cho đội vượt ải Đấu Trường Dũng Sĩ (Anh Hùng) sớm nhất " />
-  <Item ID="908" Order="378" Show="1" Name="Chỉ Huy Mới Nổi" Pic="2232" Att="8" Def="8" Agi="5" Luck="5" Desc="Dành cho đội vượt ải Thành Phố Trên Không (Khó) sớm nhất " />
+  <Item ID="908" Order="378" Show="1" Name="Chỉ Huy Mới Nổi" Pic="2232" Att="200" Def="200" Agi="200" Luck="200" Desc="Dành cho đội vượt ải Thành Phố Trên Không (Khó) sớm nhất " />
   <Item ID="909" Order="379" Show="1" Name="Đấu Sĩ Rồng Bay" Pic="2233" Att="5" Def="8" Agi="8" Luck="5" Desc="Dành cho đội vượt ải Xưởng Hơi Nước (Anh Hùng) sớm nhất " />
   <Item ID="910" Order="380" Show="1" Name="Thợ Săn Kho Báu" Pic="2234" Att="8" Def="5" Agi="8" Luck="5" Desc="Dành cho đội vượt ải Kho Báu Người Cá (Anh Hùng) sớm nhất " />
   <Item ID="911" Order="381" Show="1" Name="Thám Hiểm Hang Động" Pic="2235" Att="5" Def="5" Agi="8" Luck="8" Desc="Dành cho đội vượt ải Hang Dung Nham (Khó) sớm nhất " />
@@ -320,8 +320,8 @@
   <Item ID="968" Order="323" Show="1" Name="S18 Vĩnh Hằng" Pic="2292" Att="10" Def="10" Agi="10" Luck="10" Desc="Danh hiệu chiến đội mùa 18" />
   <Item ID="969" Order="324" Show="1" Name="S18 Siêu Phàm" Pic="2293" Att="15" Def="15" Agi="15" Luck="15" Desc="Danh hiệu chiến đội mùa 18" />
   <Item ID="970" Order="368" Show="1" Name="Lôi Đài Gà LSV" Pic="2294" Att="5" Def="5" Agi="5" Luck="5" Desc="Mừng Phiên bản mới Lôi Đài Gà Liên Server cập nhật ngày 03/06/2021" />
-  <Item ID="971" Order="369" Show="1" Name="Thần Thái Kẻ Mạnh" Pic="2295" Att="10" Def="10" Agi="10" Luck="10" Desc="Dành cho Hạng 2-10 BXH Lôi Đài Tối Cao" />
-  <Item ID="972" Order="370" Show="1" Name="Đỉnh Cao Tối Thượng" Pic="2296" Att="20" Def="20" Agi="20" Luck="20" Desc="Dành cho Hạng 1 BXH Lôi Đài Tối Cao" />
+  <Item ID="971" Order="369" Show="1" Name="Thần Thái Kẻ Mạnh" Pic="2295" Att="30" Def="5" Agi="30" Luck="5" Desc="Dành cho Hạng 2-10 BXH Lôi Đài Tối Cao" />
+  <Item ID="972" Order="370" Show="1" Name="Đỉnh Cao Tối Thượng" Pic="2296" Att="100" Def="20" Agi="100" Luck="20" Desc="Dành cho Hạng 1 BXH Lôi Đài Tối Cao" />
   <Item ID="973" Order="313" Show="1" Name="Thiên Sứ Áo Trắng" Pic="2297" Att="5" Def="5" Agi="5" Luck="5" Desc="Nhận từ Hoạt Động" />
   <Item ID="975" Order="329" Show="1" Name="S19 Sơ Cấp " Pic="2159" Att="5" Def="5" Agi="5" Luck="5" Desc="Danh hiệu chiến đội mùa 19" />
   <Item ID="976" Order="330" Show="1" Name="S19 Dũng Cảm" Pic="2160" Att="8" Def="8" Agi="8" Luck="8" Desc="Danh hiệu chiến đội mùa 19" />
@@ -350,9 +350,9 @@
   <Item ID="1004" Order="25" Show="1" Name="Vua mua sắm " Pic="2004" Att="18" Def="18" Agi="18" Luck="18" Desc="Không mô tả" />
   <Item ID="1006" Order="441" Show="1" Name="Gà Vàng Chơi Tết" Pic="2330" Att="5" Def="5" Agi="5" Luck="5" Desc="Phiên bản mới Gà Vàng Chơi Tết cập nhật 30/12/2021" />
   <Item ID="1008" Order="27" Show="1" Name="Hoa ngọt ngào" Pic="2008" Att="2" Def="1" Agi="13" Luck="14" Desc="Không mô tả" />
-  <Item ID="1010" Order="28" Show="1" Name="Học Việc" Pic="2010" Att="5" Def="5" Agi="5" Luck="5" Desc="Không mô tả" />
-  <Item ID="1011" Order="29" Show="1" Name="Tập Sự" Pic="2011" Att="5" Def="5" Agi="5" Luck="5" Desc="Không mô tả" />
-  <Item ID="1012" Order="30" Show="1" Name="Bậc Thầy" Pic="2012" Att="5" Def="5" Agi="5" Luck="5" Desc="Không mô tả" />
+  <Item ID="1010" Order="28" Show="1" Name="Học Việc" Pic="2010" Att="0" Def="10" Agi="5" Luck="0" Desc="Không mô tả" />
+  <Item ID="1011" Order="29" Show="1" Name="Tập Sự" Pic="2011" Att="10" Def="0" Agi="5" Luck="0" Desc="Không mô tả" />
+  <Item ID="1012" Order="30" Show="1" Name="Bậc Thầy" Pic="2012" Att="10" Def="0" Agi="0" Luck="5" Desc="Không mô tả" />
   <Item ID="1013" Order="31" Show="1" Name="Tết Bính Thân" Pic="6000" Att="20" Def="16" Agi="20" Luck="16" Desc="Không mô tả" />
   <Item ID="1014" Order="347" Show="1" Name="S21 Sơ Cấp " Pic="2313" Att="5" Def="5" Agi="5" Luck="5" Desc="Danh hiệu chiến đội mùa 21" />
   <Item ID="1015" Order="348" Show="1" Name="S21 Dũng Cảm" Pic="2314" Att="8" Def="8" Agi="8" Luck="8" Desc="Danh hiệu chiến đội mùa 21" />
@@ -370,9 +370,9 @@
   <Item ID="1029" Order="158" Show="1" Name="Thẻ Gà Con" Pic="2022" Att="20" Def="8" Agi="20" Luck="8" Desc="Không mô tả" />
   <Item ID="1030" Order="159" Show="1" Name="Tự Hào Là Gunner" Pic="2023" Att="25" Def="10" Agi="25" Luck="10" Desc="Không mô tả" />
   <Item ID="1035" Order="110" Show="1" Name="360GAME VIP5" Pic="2035" Att="10" Def="10" Agi="10" Luck="10" Desc="Không mô tả" />
-  <Item ID="1036" Order="111" Show="1" Name="360GAME VIP6" Pic="2036" Att="10" Def="10" Agi="10" Luck="10" Desc="Không mô tả" />
+  <Item ID="1036" Order="111" Show="1" Name="360GAME VIP6" Pic="2036" Att="15" Def="15" Agi="15" Luck="15" Desc="Không mô tả" />
   <Item ID="1037" Order="112" Show="1" Name="360GAME VIP7" Pic="2037" Att="20" Def="20" Agi="20" Luck="20" Desc="Không mô tả" />
-  <Item ID="1038" Order="113" Show="1" Name="360GAME VIP8" Pic="2038" Att="40" Def="40" Agi="40" Luck="40" Desc="Không mô tả" />
+  <Item ID="1038" Order="113" Show="1" Name="360GAME VIP8" Pic="2038" Att="25" Def="25" Agi="25" Luck="25" Desc="Không mô tả" />
   <Item ID="1039" Order="114" Show="1" Name="Nữ Vương" Pic="2039" Att="8" Def="30" Agi="8" Luck="30" Desc="Không mô tả" />
   <Item ID="1040" Order="433" Show="1" Name="Bái Tướng" Pic="2364" Att="30" Def="30" Agi="30" Luck="30" Desc="Điểm Diễn Võ đạt 70000 được nhận" />
   <Item ID="1041" Order="434" Show="1" Name="Thường Thắng" Pic="2365" Att="20" Def="20" Agi="20" Luck="20" Desc="Điểm Diễn Võ đạt 65000 được nhận" />
@@ -381,7 +381,7 @@
   <Item ID="1044" Order="437" Show="1" Name="Tung Hoành" Pic="2368" Att="3" Def="3" Agi="3" Luck="3" Desc="Điểm Diễn Võ đạt 50000 được nhận" />
   <Item ID="1045" Order="421" Show="1" Name="Tuyết Trắng Xứ Gà" Pic="2369" Att="3" Def="3" Agi="30" Luck="3" Desc="Nhận từ Hoạt động" />
   <Item ID="1046" Order="121" Show="1" Name="Con Cháu Vua Hùng" Pic="2046" Att="10" Def="3" Agi="10" Luck="3" Desc="Không mô tả" />
-  <Item ID="1047" Order="122" Show="1" Name="Anh Hùng Giải Phóng" Pic="2047" Att="30" Def="4" Agi="30" Luck="4" Desc="Không mô tả" />
+  <Item ID="1047" Order="122" Show="1" Name="Anh Hùng Giải Phóng" Pic="2047" Att="50" Def="50" Agi="50" Luck="50" Desc="Không mô tả" />
   <Item ID="1048" Order="123" Show="1" Name="Anh Hùng Lao Động" Pic="2048" Att="1" Def="5" Agi="1" Luck="5" Desc="Không mô tả" />
   <Item ID="1051" Order="422" Show="1" Name="Nhân Phẩm (100K)" Pic="2375" Att="20" Def="20" Agi="20" Luck="20" Desc="Nhận từ hoạt động Lễ Hội Vui Vẻ" />
   <Item ID="1052" Order="423" Show="1" Name="Nhân Phẩm (200K)" Pic="2376" Att="20" Def="20" Agi="20" Luck="20" Desc="Nhận từ hoạt động Lễ Hội Vui Vẻ" />
@@ -433,7 +433,6 @@
   <Item ID="7004" Order="346" Show="1" Name="Mùa Đông Ấm Áp" Pic="2353" Att="5" Def="30" Agi="5" Luck="5" Desc="Nhận từ hoạt động Noel" />
   <Item ID="7005" Order="410" Show="1" Name="Danh Nổi Như Cồn" Pic="2358" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận từ hoạt động Trợ Uy Guild" />
   <Item ID="7006" Order="411" Show="1" Name="Thanh Danh Vang Dội" Pic="2359" Att="30" Def="30" Agi="30" Luck="30" Desc="Nhận từ hoạt động Trợ Uy Guild" />
-  <Item ID="7007" Order="412" Show="1" Name="Tiếng Tăm Lẫy Lừng" Pic="2360" Att="20" Def="20" Agi="20" Luck="20" Desc="Nhận từ hoạt động Trợ Uy Guild" />
   <Item ID="7008" Order="413" Show="1" Name="Đồng Tâm Hiệp Lực" Pic="2362" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận từ hoạt động Trợ Uy Guild" />
   <Item ID="7009" Order="414" Show="1" Name="Vua Lựu Đạn Raon" Pic="2332" Att="30" Def="5" Agi="5" Luck="30" Desc="Nhận từ hoạt động Khiêu Chiến BOSS" />
   <Item ID="7010" Order="415" Show="1" Name="Tà Thần Hồi Sinh" Pic="2333" Att="30" Def="30" Agi="5" Luck="5" Desc="Nhận từ hoạt động Khiêu Chiến BOSS" />
@@ -447,4 +446,51 @@
   <Item ID="50014" Order="50014" Show="1" Name="Fan Cứng FANPAGE" Pic="50014" Att="30" Def="30" Agi="15" Luck="10" Desc="Danh hiệu khi đạt Fan Cứng FANPAGE" />
   <Item ID="60007" Order="60007" Show="1" Name="Tại Ngán Anh" Pic="60007" Att="30" Def="30" Agi="15" Luck="10" Desc="Nhận được tại Lễ Đường" />
   <Item ID="60008" Order="60008" Show="1" Name="Ngại Tán Em" Pic="60008" Att="30" Def="30" Agi="15" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60012" Order="60012" Show="1" Name="1 Choi 100" Pic="50001" Att="200" Def="200" Agi="200" Luck="200" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60013" Order="60013" Show="1" Name="Fan Cung" Pic="7014" Att="500" Def="500" Agi="500" Luck="500" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60018" Order="60018" Show="1" Name="8386" Pic="25251325" Att="500" Def="500" Agi="500" Luck="500" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60029" Order="60029" Show="1" Name="Dân Chơi Vip9" Pic="33221101" Att="60" Def="60" Agi="60" Luck="60" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60030" Order="60030" Show="1" Name="Dân Chơi Vip8" Pic="352515" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60031" Order="60031" Show="1" Name="Thích Gái Đẹp" Pic="11223345" Att="30" Def="30" Agi="30" Luck="30" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60032" Order="60032" Show="1" Name="Dân Tổ Cày Chay" Pic="11223346" Att="30" Def="30" Agi="30" Luck="30" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60033" Order="60033" Show="1" Name="Tỵ 2025" Pic="556677" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60034" Order="60034" Show="1" Name="Em Tây Nè" Pic="336633" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60035" Order="60035" Show="1" Name="Đầu To nè" Pic="11991199" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60036" Order="60036" Show="1" Name="Hằng Nè" Pic="400000010" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60037" Order="60037" Show="1" Name="Top 1" Pic="50013" Att="99" Def="99" Agi="99" Luck="99" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60038" Order="60038" Show="1" Name="Top 2 " Pic="50014" Att="90" Def="90" Agi="90" Luck="90" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60039" Order="60039" Show="1" Name="Top 3 " Pic="50015" Att="80" Def="80" Agi="80" Luck="80" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60040" Order="60040" Show="1" Name="Top 4" Pic="50016" Att="70" Def="70" Agi="70" Luck="70" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60041" Order="60041" Show="1" Name="Top 5" Pic="50017" Att="70" Def="70" Agi="70" Luck="70" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60042" Order="60042" Show="1" Name="Top7" Pic="50018" Att="60" Def="60" Agi="60" Luck="60" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60043" Order="60043" Show="1" Name="Top 8" Pic="50019" Att="50" Def="50" Agi="50" Luck="50" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60044" Order="60044" Show="1" Name="Top 10" Pic="50020" Att="40" Def="40" Agi="40" Luck="40" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60045" Order="60045" Show="1" Name="Top 9" Pic="50023" Att="60" Def="60" Agi="60" Luck="60" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60046" Order="60046" Show="1" Name="Sinh Nhat" Pic="50022" Att="30" Def="30" Agi="30" Luck="30" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60047" Order="60047" Show="1" Name="Sinh Nhật 1" Pic="70016" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60048" Order="60048" Show="1" Name="bad boy" Pic="70017" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60049" Order="60049" Show="1" Name="Người lạ" Pic="70018" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60050" Order="60050" Show="1" Name="SNVV" Pic="70020" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60051" Order="60051" Show="1" Name="Luffy" Pic="70021" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60052" Order="60052" Show="1" Name="Sinh Nhật" Pic="70022" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60053" Order="60053" Show="1" Name="Sinh Nhật dzai" Pic="70023" Att="10" Def="10" Agi="10" Luck="10" Desc="Nhận được tại Lễ Đường" />
+  <Item ID="60054" Order="60054" Show="1" Name="Việt Nam" Pic="70024" Att="99" Def="99" Agi="99" Luck="99" Desc="Việt Nam" />
+  <Item ID="60055" Order="60055" Show="1" Name="Bố Săn Rồng" Pic="70025" Att="50" Def="50" Agi="50" Luck="50" Desc="Rồng " />
+  <Item ID="60056" Order="60056" Show="1" Name="Sinh Nhật TĐạt" Pic="70026" Att="10" Def="10" Agi="10" Luck="10" Desc="snzz" />
+  <Item ID="60057" Order="60057" Show="1" Name="Độc Quyền V11" Pic="70027" Att="50" Def="50" Agi="50" Luck="50" Desc="Độc Quyền V11" />
+  <Item ID="60058" Order="60058" Show="1" Name="Cay chay" Pic="70028" Att="50" Def="50" Agi="50" Luck="50" Desc="Cay chay" />
+  <Item ID="60059" Order="60059" Show="1" Name="Vip 12 " Pic="6011" Att="99" Def="99" Agi="99" Luck="99" Desc="Vip 11" />
+  <Item ID="60061" Order="60061" Show="1" Name="Trăm Năm Hạnh Phúc" Pic="7016" Att="30" Def="30" Agi="30" Luck="30" Desc="Hi" />
+  <Item ID="60062" Order="60062" Show="1" Name="Đại Sư Ma" Pic="7017" Att="99" Def="99" Agi="99" Luck="99" Desc="Đại Sư bắt ma" />
+  <Item ID="60063" Order="60063" Show="1" Name="Vip14" Pic="7018" Att="10" Def="10" Agi="10" Luck="10" Desc="Đặc Quyền VIP 14" />
+  <Item ID="60064" Order="60064" Show="1" Name="Top1 chặng7" Pic="7019" Att="600" Def="600" Agi="600" Luck="600" Desc="Top 1" />
+  <Item ID="60065" Order="60065" Show="1" Name="Top 2 Chặng 7" Pic="7020" Att="500" Def="500" Agi="500" Luck="500" Desc="Top 2 " />
+  <Item ID="60066" Order="60066" Show="1" Name="Top 3 Chặng 7 " Pic="7021" Att="400" Def="400" Agi="400" Luck="400" Desc="Top 3" />
+  <Item ID="60067" Order="60067" Show="1" Name="Top 4 Chặng 7" Pic="7022" Att="300" Def="300" Agi="300" Luck="300" Desc="Top 4" />
+  <Item ID="60068" Order="60068" Show="1" Name="Top 5 Chặng 7 " Pic="7023" Att="300" Def="300" Agi="300" Luck="300" Desc="Top 5 " />
+  <Item ID="60069" Order="60069" Show="1" Name="Top 6 Chặng 7" Pic="7024" Att="200" Def="200" Agi="200" Luck="200" Desc="Top 6 " />
+  <Item ID="60070" Order="60070" Show="1" Name="Top 7 Chặng 7 " Pic="7025" Att="200" Def="200" Agi="200" Luck="200" Desc="Top 7" />
+  <Item ID="60071" Order="60071" Show="1" Name="Top 8 chặng 7" Pic="7026" Att="200" Def="200" Agi="200" Luck="200" Desc="Top 8" />
+  <Item ID="60072" Order="60072" Show="1" Name="Top 9 chặng 7 " Pic="7027" Att="200" Def="200" Agi="200" Luck="200" Desc="Top 9" />
+  <Item ID="60073" Order="60073" Show="1" Name="Top 10 chặng 7" Pic="7028" Att="200" Def="200" Agi="200" Luck="200" Desc="Top 10 " />
 </Result>

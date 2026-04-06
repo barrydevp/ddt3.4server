@@ -12,6 +12,7 @@ using Game.Base.Packets;
 using Game.Logic.Actions;
 using Game.Logic.Phy.Maps;
 using Game.Logic.Phy.Object;
+using Game.Logic.Protocol;
 using log4net;
 using SqlDataProvider.Data;
 
@@ -375,7 +376,7 @@ namespace Game.Logic
 				int num9 = num4 + (int)Math.Round((double)(allFightPlayers.Count / 2) * 0.5);
 			}
 			int tieStatus = winTeam == -1 ? winTeam : 0;
-			GSPacketIn pkg = new GSPacketIn(91);
+			GSPacketIn pkg = new GSPacketIn((int)ePackageType.GAME_CMD);
 			pkg.WriteByte(100);
 			pkg.WriteInt(tieStatus);
 			pkg.WriteInt(base.PlayerCount);
@@ -420,7 +421,7 @@ namespace Game.Logic
 				double GPSTeam = Math.Ceiling((double)num8 * player4.PlayerDetail.GPSpouseTeam);
 				int num12 = ((num8 == 0) ? 1 : num8);
 				string msg = "";
-				bool val2 = player4.Team == winTeam;
+				bool isWin = player4.Team == winTeam;
 				if (base.RoomType == eRoomType.Match)
 				{
 					int leagueMoneyLose1 = LeagueMoney_Lose;
@@ -452,7 +453,7 @@ namespace Game.Logic
 						double timex2 = pvprate();
 						
 						#region Add Money For PVP
-						if (val2)
+						if (isWin)
 						{
 							int money_min_rate_win = int.Parse(ConfigurationManager.AppSettings["MONEY_MIN_RATE_WIN"]);
 							int money_max_rate_win = int.Parse(ConfigurationManager.AppSettings["MONEY_MAX_RATE_WIN"]);
@@ -492,7 +493,7 @@ namespace Game.Logic
 					}
 					else
 					{
-						if (val2)
+						if (isWin)
 						{
 							player4.PlayerDetail.SendHideMessage("Chiến thắng | Không có sát thương không nhận được xu và Exp");
 						}
@@ -518,7 +519,7 @@ namespace Game.Logic
 				}
 				else if(m_roomType == eRoomType.ConsortiaBattle)
                 {
-					player4.PlayerDetail.UpdateConsortiaBattle(player4.Blood, val2, tieStatus);
+					player4.PlayerDetail.UpdateConsortiaBattle(player4.Blood, isWin, tieStatus);
                 }
 				if (player4.PlayerDetail.PlayerCharacter.typeVIP > 0)
 				{
@@ -533,7 +534,7 @@ namespace Game.Logic
 
 				player4.CanTakeOut = ((player4.Team == 1) ? num3 : num2);
 				pkg.WriteInt(player4.Id);
-				pkg.WriteBoolean(val2);
+				pkg.WriteBoolean(isWin);
 				pkg.WriteInt(player4.PlayerDetail.PlayerCharacter.Grade);
 				pkg.WriteInt(player4.PlayerDetail.PlayerCharacter.GP);
 				pkg.WriteInt(player4.TotalKill);

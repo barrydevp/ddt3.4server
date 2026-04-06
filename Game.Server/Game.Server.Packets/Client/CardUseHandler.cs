@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(183, "卡片使用")]
+	[PacketHandler((int)ePackageType.CARD_USE, "卡片使用")]
 	public class CardUseHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)

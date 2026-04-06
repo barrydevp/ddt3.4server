@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Web;
 using System.Web.UI;
 using Bussiness;
@@ -34,7 +35,10 @@ namespace Tank.Request
 					string money = HttpUtility.UrlDecode(base.Request["money"]);
 					string str = HttpUtility.UrlDecode(base.Request["str"]);
 					PlayerBussiness pb = new PlayerBussiness();
-					if (pb.SendMailAndItem(title, content, Int32.Parse(userID), Int32.Parse(gold), Int32.Parse(money), str) == 0)
+					ProduceBussiness prob = new ProduceBussiness();
+
+					string param = prob.GetSendMailAndItemParam(title, content, Int32.Parse(userID), Int32.Parse(gold), Int32.Parse(money), str);
+                    if (pb.SendMailAndItem(title, content, Int32.Parse(userID), Int32.Parse(gold), Int32.Parse(money), param) == 0)
 					{
 						num = 1;
 						base.Response.Write(num);

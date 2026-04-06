@@ -198,6 +198,27 @@ namespace SqlDataProvider.BaseClass
             return false;
         }
 
+        public bool QueryReader(ref SqlDataReader Sdr, string query)
+        {
+            if (!Sql_DbObject.OpenConnection(_SqlConnection))
+                return false;
+            try
+            {
+                _SqlCommand = new SqlCommand();
+                _SqlCommand.Connection = _SqlConnection;
+                _SqlCommand.CommandType = CommandType.Text;
+                _SqlCommand.CommandText = query;
+                Sdr = _SqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            catch (SqlException ex)
+            {
+                ApplicationLog.WriteError("Execute query：" + query + " error：" + ex.Message.Trim());
+                return false;
+            }
+
+            return true;
+        }
+
         public DataTable GetDataTableBySqlcomm(string TableName, string Sqlcomm, int StartRecordNo, int PageSize)
         {
             DataTable dataTable = new DataTable(TableName);

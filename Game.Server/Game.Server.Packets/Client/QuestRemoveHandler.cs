@@ -3,7 +3,7 @@ using Game.Server.Quests;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(177, "删除任务")]
+	[PacketHandler((int)ePackageType.QUEST_REMOVE, "删除任务")]
 	public class QuestRemoveHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)

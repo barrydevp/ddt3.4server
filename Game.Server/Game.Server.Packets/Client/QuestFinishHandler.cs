@@ -60,7 +60,7 @@ namespace Game.Server.Packets.Client
 
             if (result)
             {
-                GSPacketIn pkg = new GSPacketIn(179, client.Player.PlayerCharacter.ID);
+                GSPacketIn pkg = new GSPacketIn((int)ePackageType.QUEST_FINISH, client.Player.PlayerCharacter.ID);
                 pkg.WriteInt(id);
                 client.Out.SendTCP(pkg);
             }

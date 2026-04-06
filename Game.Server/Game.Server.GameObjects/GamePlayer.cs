@@ -1252,7 +1252,21 @@ namespace Game.Server.GameObjects
 			Out.SendUpdatePublicPlayer(PlayerCharacter, MatchInfo, Extra.Info);
 		}
 
-		public void AddExpVip(int value)
+		public void ResetVipOpenBoss()
+		{
+            if (m_character.VIPLevel == 5)
+                m_extra.Info.BuyCountOpenBoss = 5;
+            if (m_character.VIPLevel == 6)
+                m_extra.Info.BuyCountOpenBoss = 6;
+            if (m_character.VIPLevel == 7)
+                m_extra.Info.BuyCountOpenBoss = 7;
+            if (m_character.VIPLevel == 8)
+                m_extra.Info.BuyCountOpenBoss = 8;
+            if (m_character.VIPLevel >= 9)
+                m_extra.Info.BuyCountOpenBoss = 99; // !TODO: TEST, fix later
+        }
+
+        public void AddExpVip(int value)
 		{
 			List<int> list = GameProperties.VIPExp();
 
@@ -1273,16 +1287,17 @@ namespace Game.Server.GameObjects
 					//Console.WriteLine($"Before{m_character.VIPLevel}");
 					m_character.VIPLevel++;
                     //Console.WriteLine($"After{m_character.VIPLevel}");
-                    #region Vip OpenBoss
-                    if (m_character.VIPLevel == 6)
-						m_extra.Info.BuyCountOpenBoss = 3;
-					if (m_character.VIPLevel == 7)
-						m_extra.Info.BuyCountOpenBoss = 4;
-					if (m_character.VIPLevel == 8)
-						m_extra.Info.BuyCountOpenBoss = 5;
-                    if (m_character.VIPLevel == 9)
-                        m_extra.Info.BuyCountOpenBoss = 7;
-                    #endregion
+					//#region Vip OpenBoss
+					//if (m_character.VIPLevel == 6)
+					//	m_extra.Info.BuyCountOpenBoss = 3;
+					//if (m_character.VIPLevel == 7)
+					//	m_extra.Info.BuyCountOpenBoss = 4;
+					//if (m_character.VIPLevel == 8)
+					//	m_extra.Info.BuyCountOpenBoss = 5;
+					//if (m_character.VIPLevel == 9)
+					//	m_extra.Info.BuyCountOpenBoss = 7;
+					//#endregion
+					ResetVipOpenBoss();
                     if (m_character.VIPLevel >= 7 && PetBag != null)
 					{
 						PetBag.UpdatePetFiveKillSlot(m_character.VIPLevel);
@@ -3088,7 +3103,8 @@ namespace Game.Server.GameObjects
                 EventRewardProcessInfo eventProcess1 = this.Extra.GetEventProcess(4);
 				EventRewardProcessInfo eventProcess2 = this.Extra.GetEventProcess(5);
 				if (m_character.CheckNewDay())
-				{
+                //if (true)
+                {
 					if (DateTime.Today.DayOfWeek == DayOfWeek.Monday)
                     {
 						//Reset GodCardRaise
@@ -3102,7 +3118,7 @@ namespace Game.Server.GameObjects
 					m_playerActive.ResetCryptBossData();
 					GmActivityMgr.OnPlayerLogin(this, DateTime.Now);
 					QuestInventory.Restart();
-					QuestInventory.LoadFromDatabase(PlayerCharacter.ID);
+					//QuestInventory.LoadFromDatabase(PlayerCharacter.ID);
 					OnPlayerLogin();
 					m_character.NewDay = DateTime.Now;
 					m_battle.Reset();
@@ -3115,15 +3131,16 @@ namespace Game.Server.GameObjects
 					//if (m_character.typeVIP == 1)
 					//	AddExpVip(10);
 
-					#region Vip OpenBoss
-					if (m_character.VIPLevel == 5)
-						m_extra.Info.BuyCountOpenBoss = 2;
-					if (m_character.VIPLevel == 6)
-						m_extra.Info.BuyCountOpenBoss = 3;
-					if (m_character.VIPLevel >= 7)
-						m_extra.Info.BuyCountOpenBoss = 4;
-					#endregion
-					m_extra.Info.FreeSendMailCount = 0;
+					//#region Vip OpenBoss
+					//if (m_character.VIPLevel == 5)
+					//	m_extra.Info.BuyCountOpenBoss = 2;
+					//if (m_character.VIPLevel == 6)
+					//	m_extra.Info.BuyCountOpenBoss = 3;
+					//if (m_character.VIPLevel >= 7)
+					//	m_extra.Info.BuyCountOpenBoss = 4;
+					//#endregion
+					ResetVipOpenBoss();
+                    m_extra.Info.FreeSendMailCount = 0;
 					m_extra.Info.BuyTimeHotSpringCount = 0;
 					m_extra.Info.LeftRoutteCount = 1;
 					m_extra.Info.LeftRoutteRate = 0f;
@@ -4669,7 +4686,8 @@ namespace Game.Server.GameObjects
 				CardBag.SaveToDatabase();
 				StoreBag.SaveToDatabase();
 				Rank.SaveToDatabase();
-				QuestInventory.SaveToDatabase();
+				//Console.WriteLine("Save From ply.SaveIntoDatabase()");
+                QuestInventory.SaveToDatabase();
 				AchievementInventory.SaveToDatabase();
 				//BufferList.SaveToDatabase();
 				BattleData.SaveToDatabase();

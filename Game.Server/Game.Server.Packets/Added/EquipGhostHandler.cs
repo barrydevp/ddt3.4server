@@ -103,7 +103,7 @@ using SqlDataProvider.Data;
 
 namespace Game.Server.Packets.Client
 {
-    [PacketHandler((int)ePackageType.EQUIP_GHOST, "user ac action")]
+    [PacketHandler((int)ePackageType.EQUIP_GHOST, "Equip Ghost (Tang sao)")]
     public class EquipGhostHandler : IPacketHandler
     {
         public static Random random = new Random();

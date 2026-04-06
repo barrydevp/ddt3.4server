@@ -5,7 +5,7 @@ using System;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(92, "场景用户离开")]
+	[PacketHandler((int)ePackageType.VIP_RENEWAL, "场景用户离开")]
 	public class OpenVipHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)
@@ -18,10 +18,11 @@ namespace Game.Server.Packets.Client
 			#region OpenVip
 			string NickName = packet.ReadString();
 			int reneval_days = packet.ReadInt();
-			int ONE_MONTH_PAY = 320000;
-			int THREE_MONTH_PAY = 960000;
-			int SIX_MONTH_PAY = 1920000;
-			int ONE_YEAR_PAY = 3380000;
+            // To get the price shown in the client, update this shop price item "getMoneyShopItemByTemplateID(11992)"
+            int ONE_MONTH_PAY = 399;
+			int THREE_MONTH_PAY = 1197;
+			int SIX_MONTH_PAY = 2394;
+			int ONE_YEAR_PAY = 4200;
 			int money;
 			int days = reneval_days;
 			string msg = string.Format("Kích hoạt VIP thành công!");
@@ -41,7 +42,7 @@ namespace Game.Server.Packets.Client
 					money = ONE_YEAR_PAY;
 					break;
 				default:
-					money = days / 31 * 320000;
+					money = days / 31 * ONE_MONTH_PAY;
 					break;
 			}
 

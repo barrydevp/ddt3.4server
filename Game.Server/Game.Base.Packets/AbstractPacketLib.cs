@@ -1792,7 +1792,7 @@ namespace Game.Base.Packets
 			{
 				return null;
 			}
-			GSPacketIn packet = new GSPacketIn(178, player.PlayerCharacter.ID);
+			GSPacketIn packet = new GSPacketIn((int)ePackageType.QUEST_UPDATE, player.PlayerCharacter.ID);
 			packet.WriteInt(infos.Length);
 			foreach (BaseQuest info in infos)
 			{

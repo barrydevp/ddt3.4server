@@ -8,7 +8,7 @@ using SqlDataProvider.Data;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(59, "物品强化")]
+	[PacketHandler((int)ePackageType.ITEM_STRENGTHEN, "物品强化")]
 	public class ItemStrengthenHandler : IPacketHandler
 	{
 		public static int countConnect;
@@ -19,16 +19,16 @@ namespace Game.Server.Packets.Client
 		{
 			GSPacketIn packet2 = packet.Clone();
 			packet2.ClearContext();
-			bool flag1 = packet.ReadBoolean();
-			List<ItemInfo> itemInfoList = new List<ItemInfo>();
+			bool isConsortia = packet.ReadBoolean();
+			List<ItemInfo> stoneItems = new List<ItemInfo>();
 			ItemInfo mainItem = client.Player.StoreBag.GetItemAt(5);
-			ItemInfo itemInfo1 = null;
-			ItemInfo itemInfo2 = null;
-			bool flag2 = false;
-			double num1 = 0.0;
-			double num2 = 0.0;
-			double num3 = 0.0;
-			double num4 = 0.0;
+			ItemInfo luckItem = null;
+			ItemInfo protectItem = null;
+			bool isProtected = false;
+			double originalPoint = 0.0;
+			double luckPoint = 0.0;
+			double vipProb = 0.0;
+			double consortiaProb = 0.0;
 			if (mainItem != null && mainItem.Template.CanStrengthen && mainItem.Count == 1)
 			{
 				if (mainItem.StrengthenLevel >= 12)
@@ -36,56 +36,56 @@ namespace Game.Server.Packets.Client
 					client.Out.SendMessage(eMessageType.GM_NOTICE, "Vật phẩm này đã đạt cấp cường hóa tối đa!");
 					return 0;
 				}
-				bool flag3 = mainItem.IsBinds;
+				bool isBind = mainItem.IsBinds;
 				ItemInfo itemAt1 = client.Player.StoreBag.GetItemAt(0);
-				if (itemAt1 != null && itemAt1.Template.CategoryID == 11 && (itemAt1.Template.Property1 == 2 || itemAt1.Template.Property1 == 35) && !itemInfoList.Contains(itemAt1))
+				if (itemAt1 != null && itemAt1.Template.CategoryID == 11 && (itemAt1.Template.Property1 == 2 || itemAt1.Template.Property1 == 35) && !stoneItems.Contains(itemAt1))
 				{
-					itemInfoList.Add(itemAt1);
-					num1 += StrengthenMgr.RateItems[itemAt1.Template.Level - 1];
+					stoneItems.Add(itemAt1);
+					originalPoint += StrengthenMgr.RateItems[itemAt1.Template.Level - 1];
 				}
 				ItemInfo itemAt2 = client.Player.StoreBag.GetItemAt(1);
-				if (itemAt2 != null && itemAt2.Template.CategoryID == 11 && (itemAt2.Template.Property1 == 2 || itemAt2.Template.Property1 == 35) && !itemInfoList.Contains(itemAt2))
+				if (itemAt2 != null && itemAt2.Template.CategoryID == 11 && (itemAt2.Template.Property1 == 2 || itemAt2.Template.Property1 == 35) && !stoneItems.Contains(itemAt2))
 				{
-					itemInfoList.Add(itemAt2);
-					num1 += StrengthenMgr.RateItems[itemAt2.Template.Level - 1];
+					stoneItems.Add(itemAt2);
+					originalPoint += StrengthenMgr.RateItems[itemAt2.Template.Level - 1];
 				}
 				ItemInfo itemAt3 = client.Player.StoreBag.GetItemAt(2);
-				if (itemAt3 != null && itemAt3.Template.CategoryID == 11 && (itemAt3.Template.Property1 == 2 || itemAt3.Template.Property1 == 35) && !itemInfoList.Contains(itemAt3))
+				if (itemAt3 != null && itemAt3.Template.CategoryID == 11 && (itemAt3.Template.Property1 == 2 || itemAt3.Template.Property1 == 35) && !stoneItems.Contains(itemAt3))
 				{
-					itemInfoList.Add(itemAt3);
-					num1 += StrengthenMgr.RateItems[itemAt3.Template.Level - 1];
+					stoneItems.Add(itemAt3);
+					originalPoint += StrengthenMgr.RateItems[itemAt3.Template.Level - 1];
 				}
 				if (client.Player.StoreBag.GetItemAt(4) != null)
 				{
-					itemInfo1 = client.Player.StoreBag.GetItemAt(4);
-					if (itemInfo1 != null && itemInfo1.Template.CategoryID == 11 && itemInfo1.Template.Property1 == 3)
+					luckItem = client.Player.StoreBag.GetItemAt(4);
+					if (luckItem != null && luckItem.Template.CategoryID == 11 && luckItem.Template.Property1 == 3)
 					{
-						num2 += num1 + (double)(itemInfo1.Template.Property2 / 100);
+						luckPoint += originalPoint + (double)(luckItem.Template.Property2 / 100);
 					}
 					else
 					{
-						itemInfo1 = null;
+						luckItem = null;
 					}
 				}
 				if (client.Player.StoreBag.GetItemAt(3) != null)
 				{
-					itemInfo2 = client.Player.StoreBag.GetItemAt(3);
-					if (itemInfo2 != null && itemInfo2.Template.CategoryID == 11 && itemInfo2.Template.Property1 == 7)
+					protectItem = client.Player.StoreBag.GetItemAt(3);
+					if (protectItem != null && protectItem.Template.CategoryID == 11 && protectItem.Template.Property1 == 7)
 					{
-						flag2 = true;
+						isProtected = true;
 					}
 					else
 					{
-						itemInfo2 = null;
+						protectItem = null;
 					}
 				}
-				double num5 = num1 * 100.0 / (double)StrengthenMgr.GetNeedRate(mainItem);
-				double num6 = num2 * 100.0 / (double)StrengthenMgr.GetNeedRate(mainItem);
-				if ((itemAt1 != null && itemAt1.IsBinds) || (itemAt2 != null && itemAt2.IsBinds) || (itemAt3 != null && itemAt3.IsBinds) || (itemInfo1 != null && itemInfo1.IsBinds) || (itemInfo2 != null && itemInfo2.IsBinds))
+				double originalProb = originalPoint * 100.0 / (double)StrengthenMgr.GetNeedRate(mainItem);
+				double luckProb = luckPoint * 100.0 / (double)StrengthenMgr.GetNeedRate(mainItem);
+				if ((itemAt1 != null && itemAt1.IsBinds) || (itemAt2 != null && itemAt2.IsBinds) || (itemAt3 != null && itemAt3.IsBinds) || (luckItem != null && luckItem.IsBinds) || (protectItem != null && protectItem.IsBinds))
 				{
-					flag3 = true;
+					isBind = true;
 				}
-				if (flag1)
+				if (isConsortia)
 				{
 					ConsortiaInfo consortiaInfo = ConsortiaMgr.FindConsortiaInfo(client.Player.PlayerCharacter.ConsortiaID);
 					ConsortiaEquipControlInfo consortiaEuqipRiches = new ConsortiaBussiness().GetConsortiaEuqipRiches(client.Player.PlayerCharacter.ConsortiaID, 0, 2);
@@ -99,21 +99,22 @@ namespace Game.Server.Packets.Client
 					}
 					else
 					{
-						num4 = num5 * (0.1 * (double)consortiaInfo.SmithLevel);
+						consortiaProb = originalProb * (0.1 * (double)consortiaInfo.SmithLevel);
 					}
 				}
 				if (client.Player.PlayerCharacter.typeVIP > 0)
 				{
-					num3 += StrengthenMgr.VIPStrengthenEx * num5;
+					vipProb += StrengthenMgr.VIPStrengthenEx * originalProb;
 				}
-				if (itemInfoList.Count >= 1)
+				if (stoneItems.Count >= 1)
 				{
 					mainItem.StrengthenTimes++;
-					mainItem.IsBinds = flag3;
+					mainItem.IsBinds = isBind;
 					client.Player.StoreBag.ClearBag();
-					double num7 = Math.Floor((num5 + num6 + num4 + num3) * 100.0);					
-					int randomUp = random.Next(10000);
-					if (num7 > (double)randomUp)
+					double totalProb = Math.Floor((originalProb + luckProb + consortiaProb + vipProb) * 100.0);
+					//Console.WriteLine("originalProb: " + originalProb + " luckProb: " + luckProb + " consortiaProb: " + consortiaProb + " vipProb: " + vipProb + " totalProb: " + totalProb);
+                    int randomUp = random.Next(10000);
+					if (totalProb > (double)randomUp)
 					{
 						packet2.WriteByte(0);
 						packet2.WriteBoolean(val: true);
@@ -133,7 +134,7 @@ namespace Game.Server.Packets.Client
 						client.Player.StoreBag.AddItemTo(mainItem, 5);
 						client.Player.OnItemStrengthen(mainItem.Template.CategoryID, mainItem.StrengthenLevel);
 						client.Player.SaveIntoDatabase();
-						if (mainItem.StrengthenLevel >= 6)
+						if (mainItem.StrengthenLevel >= 7)
 						{
 							GameServer.Instance.LoginServer.SendPacket(WorldMgr.SendSysNotice(eMessageType.ChatNormal, LanguageMgr.GetTranslation("ItemStrengthenHandler.congratulation", client.Player.ZoneName, client.Player.PlayerCharacter.NickName, mainItem.TemplateID, mainItem.StrengthenLevel), mainItem.ItemID, mainItem.TemplateID, null));
 						}
@@ -146,23 +147,27 @@ namespace Game.Server.Packets.Client
 					{
 						packet2.WriteByte(1);
 						packet2.WriteBoolean(val: false);
-						if (!flag2)
+						if (!isProtected)
 						{
 							if (mainItem.Template.Level == 3)
 							{
 								mainItem.StrengthenLevel = ((mainItem.StrengthenLevel < 5) ? mainItem.StrengthenLevel : (mainItem.StrengthenLevel - 1));
-								StrengthenGoodsInfo strengthenGoodInfo = StrengthenMgr.FindRealStrengthenGoodInfo(mainItem.StrengthenLevel, mainItem.TemplateID);
-								if (strengthenGoodInfo != null && mainItem.Template.CategoryID == 7 && mainItem.TemplateID != strengthenGoodInfo.GainEquip)
-								{
-									ItemTemplateInfo itemTemplate = ItemMgr.FindItemTemplate(strengthenGoodInfo.GainEquip);
-									if (itemTemplate != null)
-									{
-										ItemInfo itemInfo4 = ItemInfo.CloneFromTemplate(itemTemplate, mainItem);
-										client.Player.StoreBag.RemoveItemAt(5);
-										mainItem = itemInfo4;
-									}
-								}
-								client.Player.StoreBag.AddItemTo(mainItem, 5);
+                                if (mainItem.Template.CategoryID == 7)
+                                {
+                                    StrengthenGoodsInfo strengthenGoodInfo = StrengthenMgr.FindRealStrengthenGoodInfo(mainItem.StrengthenLevel, mainItem.TemplateID);
+                                    if (strengthenGoodInfo != null && mainItem.TemplateID != strengthenGoodInfo.GainEquip)
+                                    {
+                                        ItemTemplateInfo itemTemplate = ItemMgr.FindItemTemplate(strengthenGoodInfo.GainEquip);
+                                        if (itemTemplate != null)
+                                        {
+                                            ItemInfo itemInfo4 = ItemInfo.CloneFromTemplate(itemTemplate, mainItem);
+                                            client.Player.StoreBag.RemoveItemAt(5);
+                                            mainItem = itemInfo4;
+                                        }
+                                    }
+                                }
+
+                                client.Player.StoreBag.AddItemTo(mainItem, 5);
 							}
 							else
 							{

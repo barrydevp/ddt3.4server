@@ -4,7 +4,7 @@ using SqlDataProvider.Data;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(176, "添加任务")]
+	[PacketHandler((int)ePackageType.QUEST_ADD, "添加任务")]
 	public class QuestAddHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)

@@ -70,7 +70,7 @@ namespace Game.Server.Quests
 
 		public bool CanCompleted(GamePlayer player)
 		{
-			if (m_data.IsComplete)
+			if (m_data.IsComplete && m_data.RepeatFinish <= 0)
 			{
 				return false;
 			}
@@ -152,12 +152,15 @@ namespace Game.Server.Quests
 			}
 		}
 
-		public void CheckRepeat()
+		public bool CheckRepeat()
         {
 			if((DateTime.Now.Date - m_data.CompletedDate.Date).TotalDays >= (double)m_info.RepeatInterval && m_info.CanRepeat && m_info.RepeatInterval > 0)
             {
 				m_data.RepeatFinish = m_info.RepeatMax;
+				return true;
             }
+
+			return false;
         }
 
 		public void Reset(GamePlayer player, int rand)

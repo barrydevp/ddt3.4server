@@ -27,7 +27,8 @@ namespace Tank.Request
 				stringBuilder.Append(ShopItemList.Bulid(context));
 				stringBuilder.Append(ShopGoodsShowList.Bulid(context));
 				stringBuilder.Append(LoadItemsCategory.Bulid(context));
-				stringBuilder.Append(MapServerList.Bulid(context));
+                stringBuilder.Append(ItemStrengthenList.Bulid(context));
+                stringBuilder.Append(MapServerList.Bulid(context));
 				stringBuilder.Append(ConsortiaLevelList.Bulid(context));
 				stringBuilder.Append(DailyAwardList.Bulid(context));
 				stringBuilder.Append(NPCInfoList.Bulid(context));

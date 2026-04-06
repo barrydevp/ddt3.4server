@@ -1,135 +1,3 @@
-//using Bussiness;
-//using Bussiness.Managers;
-//using Game.Base.Packets;
-//using Game.Server.Managers;
-//using SqlDataProvider.Data;
-//using System.Text;
-
-//namespace Game.Server.Packets.Client
-//{
-//    [PacketHandler(61, "物品转移")]
-//    public class ItemTransferHandler : IPacketHandler
-//    {
-//        public int HandlePacket(GameClient client, GSPacketIn packet)
-//        {
-//            GSPacketIn gSPacketIn = packet.Clone();
-//            gSPacketIn.ClearContext();
-//            new StringBuilder();
-//            int num = 10000;
-//            bool tranHole = packet.ReadBoolean();
-//            bool tranHoleFivSix = packet.ReadBoolean();
-//            ItemInfo itemZero = client.Player.StoreBag.GetItemAt(0);
-//            ItemInfo itemOne = client.Player.StoreBag.GetItemAt(1);
-//            if (itemZero != null && itemOne != null && itemZero.Template.CategoryID == itemOne.Template.CategoryID && itemOne.Count == 1 && itemZero.Count == 1)
-//            {
-//                if (client.Player.PlayerCharacter.Gold < num)
-//                {
-//                    client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("ItemTransferHandler.NoGold"));
-//                    return 1;
-//                }
-//                client.Player.RemoveGold(num);
-//                StrengthenMgr.InheritTransferProperty(ref itemZero, ref itemOne, tranHole, tranHoleFivSix);
-//                int num2 = OrginWeaponID(itemZero);
-//                int num3 = OrginWeaponID(itemOne);
-//                ItemTemplateInfo itemTemplateInfo = null;
-//                ItemTemplateInfo itemTemplateInfo2 = null;
-//                if (num2 > 0)
-//                {
-//                    itemTemplateInfo = ItemMgr.FindItemTemplate(GainWeaponID(itemZero));
-//                }
-//                if (num3 > 0)
-//                {
-//                    itemTemplateInfo2 = ItemMgr.FindItemTemplate(GainWeaponID(itemOne));
-//                }
-//                if (TransferCondition(itemOne, itemZero) && itemTemplateInfo != null && itemTemplateInfo2 != null)
-//                {
-//                    ItemInfo item = ItemInfo.CloneFromTemplate(itemTemplateInfo, itemZero);
-//                    ItemInfo.OpenHole(ref item);
-//                    if (item.isGold)
-//                    {
-//                        GoldEquipTemplateInfo goldEquipTemplateInfo = GoldEquipMgr.FindGoldEquipByTemplate(itemTemplateInfo.TemplateID);
-//                        if (goldEquipTemplateInfo != null)
-//                        {
-//                            ItemTemplateInfo itemTemplateInfo3 = ItemMgr.FindItemTemplate(goldEquipTemplateInfo.NewTemplateId);
-//                            if (itemTemplateInfo3 != null)
-//                            {
-//                                item.GoldEquip = itemTemplateInfo3;
-//                            }
-//                        }
-//                    }
-//                    client.Player.StoreBag.RemoveItemAt(0);
-//                    client.Player.StoreBag.AddItemTo(item, 0);
-//                    ItemInfo item2 = ItemInfo.CloneFromTemplate(itemTemplateInfo2, itemOne);
-//                    ItemInfo.OpenHole(ref item2);
-//                    if (item2.isGold)
-//                    {
-//                        GoldEquipTemplateInfo goldEquipTemplateInfo2 = GoldEquipMgr.FindGoldEquipByTemplate(itemTemplateInfo2.TemplateID);
-//                        if (goldEquipTemplateInfo2 != null)
-//                        {
-//                            ItemTemplateInfo itemTemplateInfo4 = ItemMgr.FindItemTemplate(goldEquipTemplateInfo2.NewTemplateId);
-//                            if (itemTemplateInfo4 != null)
-//                            {
-//                                item2.GoldEquip = itemTemplateInfo4;
-//                            }
-//                        }
-//                    }
-//                    client.Player.StoreBag.RemoveItemAt(1);
-//                    client.Player.StoreBag.AddItemTo(item2, 1);
-//                }
-//                else
-//                {
-//                    client.Player.StoreBag.UpdateItem(itemZero);
-//                    client.Player.StoreBag.UpdateItem(itemOne);
-//                }
-//                gSPacketIn.WriteByte(0);
-//                client.SendTCP(gSPacketIn);
-//            }
-//            else
-//            {
-//                client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("itemtransferhandler.nocondition"));
-//            }
-//            return 0;
-//        }
-
-//        public bool TransferCondition(ItemInfo itemAtZero, ItemInfo itemAtOne)
-//        {
-//            if (itemAtZero.Template.CategoryID != 7 && itemAtOne.Template.CategoryID != 7)
-//            {
-//                return false;
-//            }
-//            if (itemAtZero.StrengthenLevel < 10 && itemAtOne.StrengthenLevel < 10)
-//            {
-//                return false;
-//            }
-//            return true;
-//        }
-
-//        private int OrginWeaponID(ItemInfo _item)
-//        {
-//            StrengthenGoodsInfo strengthenGoodsInfo = StrengthenMgr.FindTransferInfo(_item.TemplateID);
-//            if (strengthenGoodsInfo == null)
-//            {
-//                GoldEquipTemplateInfo goldEquipTemplateInfo = GoldEquipMgr.FindGoldEquipOldTemplate(_item.TemplateID);
-//                if (goldEquipTemplateInfo == null)
-//                {
-//                    return 0;
-//                }
-//                strengthenGoodsInfo = StrengthenMgr.FindTransferInfo(goldEquipTemplateInfo.OldTemplateId);
-//            }
-//            return strengthenGoodsInfo.OrginEquip;
-//        }
-
-//        private int GainWeaponID(ItemInfo _item)
-//        {
-//            if (_item.StrengthenLevel >= 10)
-//            {
-//                return StrengthenMgr.FindTransferInfo(_item.StrengthenLevel, _item.TemplateID)?.GainEquip ?? (-1);
-//            }
-//            return StrengthenMgr.FindTransferInfo(_item.TemplateID)?.OrginEquip ?? (-1);
-//        }
-//    }
-//}
-
 using System;
 using System.Text;
 using Bussiness;
@@ -154,66 +22,81 @@ namespace Game.Server.Packets.Client
             GSPacketIn pkg = packet.Clone();
             pkg.ClearContext();
             new StringBuilder();
-            int num = 10000;
+            int requiredGold = 10000;
             bool tranHole = packet.ReadBoolean();
             bool tranHoleFivSix = packet.ReadBoolean();
             ItemInfo itemZero = client.Player.StoreBag.GetItemAt(0);
             ItemInfo itemOne = client.Player.StoreBag.GetItemAt(1);
             if (itemZero != null && itemOne != null && itemZero.Template.CategoryID == itemOne.Template.CategoryID && itemOne.Count == 1 && itemZero.Count == 1)
             {
-                if (client.Player.PlayerCharacter.Gold < num)
+                if (client.Player.PlayerCharacter.Gold < requiredGold)
                 {
                     client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("ItemTransferHandler.NoGold"));
                     return 1;
                 }
-                client.Player.RemoveGold(num);
+                client.Player.RemoveGold(requiredGold);
                 StrengthenMgr.InheritTransferProperty(ref itemZero, ref itemOne, tranHole, tranHoleFivSix);
                 int m_itemZero = OrginWeaponID(itemZero);
                 int m_itemOne = OrginWeaponID(itemOne);
-                ItemTemplateInfo iteminfoA = null;
-                ItemTemplateInfo iteminfoB = null;
+                ItemTemplateInfo newItemZero = null;
+                ItemTemplateInfo newItemOne = null;
                 if (m_itemZero > 0)
                 {
-                    iteminfoA = ItemMgr.FindItemTemplate(GainWeaponID(itemZero.StrengthenLevel, m_itemZero));
+                    newItemZero = ItemMgr.FindItemTemplate(GainWeaponID(itemZero.StrengthenLevel, m_itemZero));
                 }
                 if (m_itemOne > 0)
                 {
-                    iteminfoB = ItemMgr.FindItemTemplate(GainWeaponID(itemOne.StrengthenLevel, m_itemOne));
+                    newItemOne = ItemMgr.FindItemTemplate(GainWeaponID(itemOne.StrengthenLevel, m_itemOne));
                 }
-                if (TransferCondition(itemOne, itemZero) && iteminfoA != null && iteminfoB != null)
+                //OLD if (TransferCondition(newItem, ordItem) && temOrd != null && temNew != null)
+                //NEW: This new fix allows the transform to happen even if one of the tranformed items doesn't exists
+                if (TransformCondition(itemOne, itemZero))
                 {
-                    ItemInfo item = ItemInfo.CloneFromTemplate(iteminfoA, itemZero);
-                    ItemInfo.OpenHole(ref item);
-                    if (item.isGold)
+                    if (newItemZero != null)
                     {
-                        GoldEquipTemplateInfo info = GoldEquipMgr.FindGoldEquipByTemplate(iteminfoA.TemplateID);
-                        if (info != null)
+                        ItemInfo item = ItemInfo.CloneFromTemplate(newItemZero, itemZero);
+                        ItemInfo.OpenHole(ref item);
+                        if (item.isGold)
                         {
-                            ItemTemplateInfo iteminfoC = ItemMgr.FindItemTemplate(info.NewTemplateId);
-                            if (iteminfoC != null)
+                            GoldEquipTemplateInfo info = GoldEquipMgr.FindGoldEquipByTemplate(newItemZero.TemplateID);
+                            if (info != null)
                             {
-                                item.GoldEquip = iteminfoC;
+                                ItemTemplateInfo iteminfoC = ItemMgr.FindItemTemplate(info.NewTemplateId);
+                                if (iteminfoC != null)
+                                {
+                                    item.GoldEquip = iteminfoC;
+                                }
                             }
                         }
-                    }
-                    client.Player.StoreBag.RemoveItemAt(0);
-                    client.Player.StoreBag.AddItemTo(item, 0);
-                    ItemInfo item2 = ItemInfo.CloneFromTemplate(iteminfoB, itemOne);
-                    ItemInfo.OpenHole(ref item2);
-                    if (item2.isGold)
+                        client.Player.StoreBag.RemoveItemAt(0);
+                        client.Player.StoreBag.AddItemTo(item, 0);
+                    } else
                     {
-                        GoldEquipTemplateInfo goldEquipTemplateInfo2 = GoldEquipMgr.FindGoldEquipByTemplate(iteminfoB.TemplateID);
-                        if (goldEquipTemplateInfo2 != null)
+                        client.Player.StoreBag.UpdateItem(itemZero);
+                    }
+
+                    if (newItemOne != null)
+                    {
+                        ItemInfo item2 = ItemInfo.CloneFromTemplate(newItemOne, itemOne);
+                        ItemInfo.OpenHole(ref item2);
+                        if (item2.isGold)
                         {
-                            ItemTemplateInfo itemTemplateInfo4 = ItemMgr.FindItemTemplate(goldEquipTemplateInfo2.NewTemplateId);
-                            if (itemTemplateInfo4 != null)
+                            GoldEquipTemplateInfo goldEquipTemplateInfo2 = GoldEquipMgr.FindGoldEquipByTemplate(newItemOne.TemplateID);
+                            if (goldEquipTemplateInfo2 != null)
                             {
-                                item2.GoldEquip = itemTemplateInfo4;
+                                ItemTemplateInfo itemTemplateInfo4 = ItemMgr.FindItemTemplate(goldEquipTemplateInfo2.NewTemplateId);
+                                if (itemTemplateInfo4 != null)
+                                {
+                                    item2.GoldEquip = itemTemplateInfo4;
+                                }
                             }
                         }
+                        client.Player.StoreBag.RemoveItemAt(1);
+                        client.Player.StoreBag.AddItemTo(item2, 1);
+                    } else
+                    {
+                        client.Player.StoreBag.UpdateItem(itemOne);
                     }
-                    client.Player.StoreBag.RemoveItemAt(1);
-                    client.Player.StoreBag.AddItemTo(item2, 1);
                 }
                 else
                 {
@@ -230,7 +113,7 @@ namespace Game.Server.Packets.Client
             return 0;
         }
 
-        public bool TransferCondition(ItemInfo itemAtZero, ItemInfo itemAtOne)
+        public bool TransformCondition(ItemInfo itemAtZero, ItemInfo itemAtOne)
         {
             if (itemAtZero.Template.CategoryID != 7 && itemAtOne.Template.CategoryID != 7)
             {

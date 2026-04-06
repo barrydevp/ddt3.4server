@@ -22,7 +22,7 @@ namespace Game.Server.Quests
 
 		private UnicodeEncoding m_converter = new UnicodeEncoding();
 
-		private int m_changeCount;
+		private int m_simultaneousChangeCount;
 
 		protected List<BaseQuest> m_changedQuests = new List<BaseQuest>();
 
@@ -126,6 +126,7 @@ namespace Game.Server.Quests
 			}
 			if (msg == "")
 			{
+				//Console.WriteLine("Reset from AddQuest QuestID: " + info.ID);
 				QuestMgr.GetQuestCondiction(info);
 				int rand = 1;
 				if ((decimal)ThreadSafeRandom.NextStatic(1000000) <= info.Rands)
@@ -156,14 +157,30 @@ namespace Game.Server.Quests
 		{
 			lock (m_list)
 			{
-				m_datas.Add(data);
+				//if (FindQuestData(data.QuestID) != null)
+				//{
+				//	return false;
+    //            }
+                m_datas.Add(data);
 			}
 			return true;
 		}
 
-		private void BeginChanges()
+		private  QuestDataInfo FindQuestData(int QuestID)
 		{
-			Interlocked.Increment(ref m_changeCount);
+			foreach (QuestDataInfo info in m_datas)
+			{
+				if (info.QuestID == QuestID)
+				{
+					return info;
+				}
+			}
+			return null;
+        }
+
+        private void BeginChanges()
+		{
+			Interlocked.Increment(ref m_simultaneousChangeCount);
 		}
 
 		public bool ClearConsortiaQuest()
@@ -178,14 +195,14 @@ namespace Game.Server.Quests
 
 		private void CommitChanges()
 		{
-			int num = Interlocked.Decrement(ref m_changeCount);
+			int num = Interlocked.Decrement(ref m_simultaneousChangeCount);
 			if (num < 0)
 			{
 				if (log.IsErrorEnabled)
 				{
 					log.Error("Inventory changes counter is bellow zero (forgot to use BeginChanges?)!\n\n" + Environment.StackTrace);
 				}
-				Thread.VolatileWrite(ref m_changeCount, 0);
+				Thread.VolatileWrite(ref m_simultaneousChangeCount, 0);
 			}
 			if (num <= 0 && m_changedQuests.Count > 0)
 			{
@@ -481,17 +498,20 @@ namespace Game.Server.Quests
 				{
 					QuestDataInfo[] userQuest = bussiness.GetUserQuest(playerId);
 					BeginChanges();
-					QuestDataInfo[] array = userQuest;
+					//Console.WriteLine("LoadFromDatabase cur.Length: " + m_list.Count);
+                    QuestDataInfo[] array = userQuest;
 					foreach (QuestDataInfo info in array)
 					{
 						QuestInfo singleQuest = QuestMgr.GetSingleQuest(info.QuestID);
-						if (singleQuest != null)
+                        //if (singleQuest != null && FindQuest(info.QuestID) != null)
+                        if (singleQuest != null)
 						{
 							AddQuest(new BaseQuest(singleQuest, info));
 						}
 						AddQuestData(info);
 					}
-					CommitChanges();
+                    //Console.WriteLine("LoadFromDatabase after.Length: " + m_list.Count);
+                    CommitChanges();
 				}
 				_ = m_list;
 			}
@@ -508,7 +528,7 @@ namespace Game.Server.Quests
 			{
 				m_changedQuests.Add(quest);
 			}
-			if (m_changeCount <= 0 && m_changedQuests.Count > 0)
+			if (m_simultaneousChangeCount <= 0 && m_changedQuests.Count > 0)
 			{
 				UpdateChangedQuests();
 			}
@@ -562,12 +582,14 @@ namespace Game.Server.Quests
 						quest.SaveData();
 						if (quest.Data.IsDirty)
 						{
-							bussiness.UpdateDbQuestDataInfo(quest.Data);
+                            //Console.WriteLine("SaveToDatabase QuestID: " + quest.Info.ID + " IsCompleted:" + quest.Data.IsComplete + " RepeatFinish: " + quest.Data.RepeatFinish);
+                            bussiness.UpdateDbQuestDataInfo(quest.Data);
 						}
 					}
 					foreach (BaseQuest quest2 in m_clearList)
 					{
-						quest2.SaveData();
+                        //Console.WriteLine("222 SaveToDatabase QuestID: " + quest2.Info.ID + " IsCompleted:" + quest2.Data.IsComplete + " RepeatFinish: " + quest2.Data.RepeatFinish);
+                        quest2.SaveData();
 						bussiness.UpdateDbQuestDataInfo(quest2.Data);
 					}
 					m_clearList.Clear();
@@ -601,7 +623,8 @@ namespace Game.Server.Quests
 
 		public bool Restart()
 		{
-			bool flag = false;
+            BeginChanges();
+            bool flag = false;
 			foreach (QuestDataInfo quest in GetAllQuestData())
 			{
 				BaseQuest baseQuest = FindQuest(quest.QuestID);
@@ -624,15 +647,30 @@ namespace Game.Server.Quests
 					{
 						baseQuest.Data.Condition4 = conditions[3].Para2;
 					}
-					baseQuest.Data.RepeatFinish--;
+					//Console.WriteLine("BEFORE== QuestID: " + baseQuest.Info.ID + " RepeatFinish: " + baseQuest.Data.RepeatFinish);
+					// OLD
+					//baseQuest.Data.RepeatFinish--;
+					// NEW
+					if (!baseQuest.CheckRepeat())
+					{
+						baseQuest.Data.RepeatFinish--;
+					}
+					//Console.WriteLine("AFTER == QuestID: " + baseQuest.Info.ID + " RepeatFinish: " + baseQuest.Data.RepeatFinish);
 					baseQuest.Data.IsComplete = false;
 					baseQuest.Reset(m_player);
 					baseQuest.Update();
-					SaveToDatabase();
+					//SaveToDatabase();
 					flag = true;
 				}
 			}
+			CommitChanges();
+			// New
+			if (flag)
+			{
+				//Console.WriteLine("Restart Quests Save DB");
+                SaveToDatabase();
+            }
 			return flag;
 		}
-	}
+    }
 }

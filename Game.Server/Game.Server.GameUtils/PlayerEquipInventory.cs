@@ -1088,28 +1088,39 @@ namespace Game.Server.GameUtils
 					{
 						if (item.Template.CategoryID == 1 || item.Template.CategoryID == 5)
 						{
-							i = i > 01 ? i : 02;
+							i = i > 02 ? i : 02;
 						}
 
 						if (item.Template.CategoryID == 7 || item.Template.CategoryID == 27)
 						{
-							j = j > 01 ? j : 02;
+							j = j > 02 ? j : 02;
 						}
 					}
 					else if (item.StrengthenLevel >= 12 && item.StrengthenLevel <= 14)
 					{
 						if (item.Template.CategoryID == 1 || item.Template.CategoryID == 5)
 						{
-							i = i > 01 ? i : 03;
+							i = i > 03 ? i : 03;
 						}
 
 						if (item.Template.CategoryID == 7 || item.Template.CategoryID == 27)
 						{
-							j = j > 01 ? j : 03;
+							j = j > 03 ? j : 03;
 						}
-					}
+					} else if (item.StrengthenLevel >= 15)
+                    {
+                        if (item.Template.CategoryID == 1 || item.Template.CategoryID == 5)
+                        {
+                            i = i > 04 ? i : 04;
+                        }
 
-					if (item.GoldValidDate())
+                        if (item.Template.CategoryID == 7 || item.Template.CategoryID == 27)
+                        {
+                            j = j > 04 ? j : 04;
+                        }
+                    }
+
+                    if (item.GoldValidDate())
 					{
 						if (item.Template.CategoryID == 1 || item.Template.CategoryID == 5)
 						{

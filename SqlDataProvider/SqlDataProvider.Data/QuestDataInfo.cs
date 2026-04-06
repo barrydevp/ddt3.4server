@@ -138,7 +138,10 @@ namespace SqlDataProvider.Data
 			set
 			{
 				_questID = value;
-				_isDirty = true;
+				if (value != _questID)
+				{
+                    _isDirty = true;
+                }
 			}
 		}
 
@@ -164,7 +167,10 @@ namespace SqlDataProvider.Data
 			set
 			{
 				_repeatFinish = value;
-				_isDirty = true;
+				if (value != _repeatFinish)
+				{
+					_isDirty = true;
+				}
 			}
 		}
 

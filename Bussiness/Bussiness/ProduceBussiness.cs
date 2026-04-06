@@ -1,9 +1,10 @@
-﻿using System;
+﻿using log4net;
+using SqlDataProvider.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
-using SqlDataProvider.Data;
 
 namespace Bussiness
 {
@@ -4832,40 +4833,40 @@ namespace Bussiness
 			return list.ToArray();
 		}
 
-        public IEnumerable<JampsChapterItemList> Get_JampsChapterItemList()
-        {
-            List<JampsChapterItemList> jampsChapterItemListList = new List<JampsChapterItemList>();
-            SqlDataReader ResultDataReader = (SqlDataReader)null;
-            try
-            {
-                this.db.GetReader(ref ResultDataReader, "SP_JampsChapterItemList");
-                while (ResultDataReader.Read())
-                {
-                    JampsChapterItemList jampsChapterItemList = new JampsChapterItemList();
-                    for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
-                    {
-                        if (jampsChapterItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
-                            this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsChapterItemList.GetType()?.ToString()));
-                        else
-                            jampsChapterItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsChapterItemList, ResultDataReader[ordinal]);
-                    }
-                    jampsChapterItemListList.Add(jampsChapterItemList);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (this.log.IsErrorEnabled)
-                    this.log.Error((object)"Init", ex);
-            }
-            finally
-            {
-                if (ResultDataReader != null && !ResultDataReader.IsClosed)
-                    ResultDataReader.Close();
-            }
-            return (IEnumerable<JampsChapterItemList>)jampsChapterItemListList.ToArray();
-        }
+		public IEnumerable<JampsChapterItemList> Get_JampsChapterItemList()
+		{
+			List<JampsChapterItemList> jampsChapterItemListList = new List<JampsChapterItemList>();
+			SqlDataReader ResultDataReader = (SqlDataReader)null;
+			try
+			{
+				this.db.GetReader(ref ResultDataReader, "SP_JampsChapterItemList");
+				while (ResultDataReader.Read())
+				{
+					JampsChapterItemList jampsChapterItemList = new JampsChapterItemList();
+					for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
+					{
+						if (jampsChapterItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
+							this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsChapterItemList.GetType()?.ToString()));
+						else
+							jampsChapterItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsChapterItemList, ResultDataReader[ordinal]);
+					}
+					jampsChapterItemListList.Add(jampsChapterItemList);
+				}
+			}
+			catch (Exception ex)
+			{
+				if (this.log.IsErrorEnabled)
+					this.log.Error((object)"Init", ex);
+			}
+			finally
+			{
+				if (ResultDataReader != null && !ResultDataReader.IsClosed)
+					ResultDataReader.Close();
+			}
+			return (IEnumerable<JampsChapterItemList>)jampsChapterItemListList.ToArray();
+		}
 
-        public JampsDebrisItemList[] Get_JampsDebrisItemList()
+		public JampsDebrisItemList[] Get_JampsDebrisItemList()
 		{
 			List<JampsDebrisItemList> list = new List<JampsDebrisItemList>();
 			SqlDataReader sqlDataReader = null;
@@ -4907,112 +4908,187 @@ namespace Bussiness
 			return list.ToArray();
 		}
 
-        public JampsDebrisItemList[] Get_JampsDebrisItemList(int pageID)
-        {
-            List<JampsDebrisItemList> jampsDebrisItemListList = new List<JampsDebrisItemList>();
-            SqlDataReader ResultDataReader = (SqlDataReader)null;
-            try
-            {
-                SqlParameter[] SqlParameters = new SqlParameter[1]
-                {
-          new SqlParameter("@pageID", (object) pageID)
-                };
-                this.db.GetReader(ref ResultDataReader, "SP_JampsDebrisItemList", SqlParameters);
-                while (ResultDataReader.Read())
-                {
-                    JampsDebrisItemList jampsDebrisItemList = new JampsDebrisItemList();
-                    for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
-                    {
-                        if (jampsDebrisItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
-                            this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsDebrisItemList.GetType()?.ToString()));
-                        else
-                            jampsDebrisItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsDebrisItemList, ResultDataReader[ordinal]);
-                    }
-                    jampsDebrisItemListList.Add(jampsDebrisItemList);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (this.log.IsErrorEnabled)
-                    this.log.Error((object)"Init", ex);
-            }
-            finally
-            {
-                if (ResultDataReader != null && !ResultDataReader.IsClosed)
-                    ResultDataReader.Close();
-            }
-            return jampsDebrisItemListList.ToArray();
-        }
+		public JampsDebrisItemList[] Get_JampsDebrisItemList(int pageID)
+		{
+			List<JampsDebrisItemList> jampsDebrisItemListList = new List<JampsDebrisItemList>();
+			SqlDataReader ResultDataReader = (SqlDataReader)null;
+			try
+			{
+				SqlParameter[] SqlParameters = new SqlParameter[1]
+				{
+		  new SqlParameter("@pageID", (object) pageID)
+				};
+				this.db.GetReader(ref ResultDataReader, "SP_JampsDebrisItemList", SqlParameters);
+				while (ResultDataReader.Read())
+				{
+					JampsDebrisItemList jampsDebrisItemList = new JampsDebrisItemList();
+					for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
+					{
+						if (jampsDebrisItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
+							this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsDebrisItemList.GetType()?.ToString()));
+						else
+							jampsDebrisItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsDebrisItemList, ResultDataReader[ordinal]);
+					}
+					jampsDebrisItemListList.Add(jampsDebrisItemList);
+				}
+			}
+			catch (Exception ex)
+			{
+				if (this.log.IsErrorEnabled)
+					this.log.Error((object)"Init", ex);
+			}
+			finally
+			{
+				if (ResultDataReader != null && !ResultDataReader.IsClosed)
+					ResultDataReader.Close();
+			}
+			return jampsDebrisItemListList.ToArray();
+		}
 
-        public IEnumerable<JampsPageItemList> Get_JampsPageItemList(int ID)
-        {
-            List<JampsPageItemList> jampsPageItemListList = new List<JampsPageItemList>();
-            SqlDataReader ResultDataReader = (SqlDataReader)null;
-            try
-            {
-                SqlParameter[] SqlParameters = new SqlParameter[1]
-                {
-          new SqlParameter("@capitulo", (object) ID)
-                };
-                this.db.GetReader(ref ResultDataReader, "SP_JampsPageItemList", SqlParameters);
-                while (ResultDataReader.Read())
-                {
-                    JampsPageItemList jampsPageItemList = new JampsPageItemList();
-                    for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
-                    {
-                        if (jampsPageItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
-                            this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsPageItemList.GetType()?.ToString()));
-                        else
-                            jampsPageItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsPageItemList, ResultDataReader[ordinal]);
-                    }
-                    jampsPageItemListList.Add(jampsPageItemList);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (this.log.IsErrorEnabled)
-                    this.log.Error((object)"Init", ex);
-            }
-            finally
-            {
-                if (ResultDataReader != null && !ResultDataReader.IsClosed)
-                    ResultDataReader.Close();
-            }
-            return (IEnumerable<JampsPageItemList>)jampsPageItemListList.ToArray();
-        }
+		public IEnumerable<JampsPageItemList> Get_JampsPageItemList(int ID)
+		{
+			List<JampsPageItemList> jampsPageItemListList = new List<JampsPageItemList>();
+			SqlDataReader ResultDataReader = (SqlDataReader)null;
+			try
+			{
+				SqlParameter[] SqlParameters = new SqlParameter[1]
+				{
+		  new SqlParameter("@capitulo", (object) ID)
+				};
+				this.db.GetReader(ref ResultDataReader, "SP_JampsPageItemList", SqlParameters);
+				while (ResultDataReader.Read())
+				{
+					JampsPageItemList jampsPageItemList = new JampsPageItemList();
+					for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
+					{
+						if (jampsPageItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
+							this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsPageItemList.GetType()?.ToString()));
+						else
+							jampsPageItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsPageItemList, ResultDataReader[ordinal]);
+					}
+					jampsPageItemListList.Add(jampsPageItemList);
+				}
+			}
+			catch (Exception ex)
+			{
+				if (this.log.IsErrorEnabled)
+					this.log.Error((object)"Init", ex);
+			}
+			finally
+			{
+				if (ResultDataReader != null && !ResultDataReader.IsClosed)
+					ResultDataReader.Close();
+			}
+			return (IEnumerable<JampsPageItemList>)jampsPageItemListList.ToArray();
+		}
 
-        public IEnumerable<JampsManualItemList> Get_JampsManualItemList()
-        {
-            List<JampsManualItemList> jampsManualItemListList = new List<JampsManualItemList>();
-            SqlDataReader ResultDataReader = (SqlDataReader)null;
+		public IEnumerable<JampsManualItemList> Get_JampsManualItemList()
+		{
+			List<JampsManualItemList> jampsManualItemListList = new List<JampsManualItemList>();
+			SqlDataReader ResultDataReader = (SqlDataReader)null;
+			try
+			{
+				this.db.GetReader(ref ResultDataReader, "SP_JampsManualItemList");
+				while (ResultDataReader.Read())
+				{
+					JampsManualItemList jampsManualItemList = new JampsManualItemList();
+					for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
+					{
+						if (jampsManualItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
+							this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsManualItemList.GetType()?.ToString()));
+						else
+							jampsManualItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsManualItemList, ResultDataReader[ordinal]);
+					}
+					jampsManualItemListList.Add(jampsManualItemList);
+				}
+			}
+			catch (Exception ex)
+			{
+				if (this.log.IsErrorEnabled)
+					this.log.Error((object)"Init", ex);
+			}
+			finally
+			{
+				if (ResultDataReader != null && !ResultDataReader.IsClosed)
+					ResultDataReader.Close();
+			}
+			return (IEnumerable<JampsManualItemList>)jampsManualItemListList.ToArray();
+		}
+		#endregion
+
+		public string GetSendMailAndItemParam(string title, string content, int userID, int gold, int money, string param)
+		{
+            SqlDataReader reader = null;
+
             try
-            {
-                this.db.GetReader(ref ResultDataReader, "SP_JampsManualItemList");
-                while (ResultDataReader.Read())
-                {
-                    JampsManualItemList jampsManualItemList = new JampsManualItemList();
-                    for (int ordinal = 0; ordinal < ResultDataReader.FieldCount; ++ordinal)
-                    {
-                        if (jampsManualItemList.GetType().GetField(ResultDataReader.GetName(ordinal)) == (FieldInfo)null)
-                            this.log.Info((object)("Campo " + ResultDataReader.GetName(ordinal) + " Faltando em " + jampsManualItemList.GetType()?.ToString()));
-                        else
-                            jampsManualItemList.GetType().GetField(ResultDataReader.GetName(ordinal)).SetValue((object)jampsManualItemList, ResultDataReader[ordinal]);
-                    }
-                    jampsManualItemListList.Add(jampsManualItemList);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (this.log.IsErrorEnabled)
-                    this.log.Error((object)"Init", ex);
-            }
-            finally
-            {
-                if (ResultDataReader != null && !ResultDataReader.IsClosed)
-                    ResultDataReader.Close();
-            }
-            return (IEnumerable<JampsManualItemList>)jampsManualItemListList.ToArray();
-        }
-        #endregion
-    }
+			{
+				var items = param.Split('|');
+				var templateIdStr = new List<string>(items.Length);
+				var templateIds = new List<int>();
+
+				for (int i = 0; i < items.Length; i++)
+				{
+					var item = items[i];
+					var parts = item.Split(',');
+					templateIdStr.Add(parts[0]);
+					if (parts.Length > 0 && int.TryParse(parts[0], out int templateId))
+					{
+						templateIds.Add(templateId);
+					}
+				}
+				//log.Error("templateIds: " + string.Join(",", templateIds));
+
+				var templateDict = new Dictionary<string, int>();
+				if (templateIds.Count > 0)
+				{
+					var idList = string.Join(",", new HashSet<int>(templateIds));
+					var sql = $@"
+						SELECT TemplateID, ISNULL(MaxCount,1)
+						FROM Shop_Goods
+						WHERE TemplateID IN ({idList})";
+					//log.Error("sql: " + sql);
+
+					if (!this.db.QueryReader(ref reader, sql))
+					{
+						throw new Exception("Failed to query shop goods for template IDs: " + idList);
+					}
+					while (reader.Read())
+					{
+						int id = reader.GetInt32(0);
+						int max = reader.GetInt32(1);
+						templateDict.Add(id.ToString(), max);
+					}
+				}
+
+				var newItems = new List<string>(items.Length);
+				for (int i = 0; i < items.Length; i++)
+				{
+					var part = items[i];
+					if (part.Length > 0)
+					{
+						string templateId = "0";
+						int maxCount = 0;
+						if (templateDict.TryGetValue(templateIdStr[i], out var max) && max > 0)
+						{
+							templateId = templateIdStr[i];
+							maxCount = max;
+						}
+						newItems.Add(templateId + "," + maxCount + "," + part);
+					}
+				}
+
+				var newParam = string.Join("|", newItems);
+				//log.Error("newParam: " + newParam);
+
+				return newParam;
+			}
+			finally
+			{
+				if (reader != null && !reader.IsClosed)
+				{
+					reader.Close();
+				}
+			}
+		}
+	}
 }

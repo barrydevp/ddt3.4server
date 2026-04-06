@@ -3,7 +3,7 @@ using Game.Server.Quests;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(181, "客服端任务检查")]
+	[PacketHandler((int)ePackageType.QUEST_CHECK, "客服端任务检查")]
 	public class QuestCheckHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)
