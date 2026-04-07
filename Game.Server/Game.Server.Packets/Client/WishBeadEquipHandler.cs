@@ -29,11 +29,11 @@ namespace Game.Server.Packets.Client
                     client.Player.RunningGold = false;
                     return 0;
                 }
-                int Place = packet.ReadInt(); //param1.itemInfo.Place          
+                int Place = packet.ReadInt(); //param1.itemInfo.Place
                 int BagType = packet.ReadInt(); //param1.itemInfo.BagType
                 int templateID = packet.ReadInt(); //param1.info.TemplateID
 
-                int PlaceBead = packet.ReadInt(); //_loc_3.Place           
+                int PlaceBead = packet.ReadInt(); //_loc_3.Place
                 int BagTypeBead = packet.ReadInt(); //_loc_3.BagType
                 int BeadId = packet.ReadInt(); //_loc_3.TemplateID
                 GSPacketIn pkg = new GSPacketIn((byte)ePackageType.WISHBEADEQUIP, client.Player.PlayerCharacter.ID);
@@ -54,6 +54,13 @@ namespace Game.Server.Packets.Client
                 {
                     client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("WishBeadEquipHandler.Msg2"));
                     pkg.WriteInt(5);
+                    client.Out.SendTCP(pkg);
+                    return 0;
+                }
+
+                if (!item.IsValidGoldItem())
+                {
+                    pkg.WriteInt(6);
                     client.Out.SendTCP(pkg);
                     return 0;
                 }

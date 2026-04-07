@@ -1,6 +1,7 @@
 using Bussiness;
 using Bussiness.Managers;
 using Game.Base.Packets;
+using Game.Server.GameUtils;
 using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(138, "物品强化")]
+	[PacketHandler((int)ePackageType.ITEM_ADVANCE, "物品强化")]
 	public class ItemAdvanceHandler : IPacketHandler
 	{
 		public static ThreadSafeRandom random = new ThreadSafeRandom();
@@ -19,15 +20,24 @@ namespace Game.Server.Packets.Client
 			//return 0;
 			StringBuilder stringBuilder = new StringBuilder();
 			bool flag = false;
-			packet.ReadBoolean();
-			packet.ReadBoolean();
-			GSPacketIn gSPacketIn = new GSPacketIn(138, client.Player.PlayerCharacter.ID);
-			ItemInfo itemAt = client.Player.StoreBag.GetItemAt(0);
-			ItemInfo itemInfo = client.Player.StoreBag.GetItemAt(1);
-			int strengthenLevel = itemInfo.StrengthenLevel;
+			//packet.ReadBoolean();
+			//packet.ReadBoolean();
+            int Place = packet.ReadInt();  
+            int BagType = packet.ReadInt();
+            //int templateID = packet.ReadInt();
+            int stonePlace = packet.ReadInt();
+            int stongBagType = packet.ReadInt();
+            //int stoneId = packet.ReadInt();
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.ITEM_ADVANCE, client.Player.PlayerCharacter.ID);
+            PlayerInventory itemBag = client.Player.GetInventory((eBageType)BagType);
+            PlayerInventory stoneBag = client.Player.GetInventory((eBageType)stongBagType);
+            ItemInfo mainItem = itemBag.GetItemAt(Place);
+            ItemInfo stoneItem = stoneBag.GetItemAt(stonePlace);
+
+			int strengthenLevel = mainItem.StrengthenLevel;
 			int num;
 			int result;
-			if (itemAt == null || itemInfo == null || itemAt.Count <= 0)
+			if (stoneItem == null || mainItem == null || stoneItem.Count <= 0)
 			{
 				client.Out.SendMessage(eMessageType.BIGBUGLE_NOTICE, LanguageMgr.GetTranslation("Đặt đá tăng cấp và trang bị cần tăng cấp vào!", new object[0]));
 				num = 0;
@@ -41,91 +51,96 @@ namespace Game.Server.Packets.Client
 			{
 				int count = 1;
 				string text = "";
-				if (itemInfo != null && itemInfo.Template.CanStrengthen && itemInfo.Template.CategoryID < 18 && itemInfo.Count == 1)
+				if (mainItem != null && mainItem.Template.CanStrengthen && mainItem.Template.CategoryID < 18 && mainItem.Count == 1)
 				{
-					flag = (flag || itemInfo.IsBinds);
+					flag = (flag || mainItem.IsBinds);
 					stringBuilder.Append(string.Concat(new object[]
 					{
-						itemInfo.ItemID,
+						mainItem.ItemID,
 						":",
-						itemInfo.TemplateID,
+						mainItem.TemplateID,
 						","
 					}));
-					if (itemAt.TemplateID < 11150 && itemAt.TemplateID > 11154)
+					if (stoneItem.TemplateID < 11150 && stoneItem.TemplateID > 11154)
 					{
 						client.Out.SendMessage(eMessageType.BIGBUGLE_NOTICE, LanguageMgr.GetTranslation("Đặt đá tăng cấp vào!", new object[0]));
 						num = 0;
 						result = num;
 						return result;
 					}
-					flag = (flag || itemAt.IsBinds);
+					flag = (flag || stoneItem.IsBinds);
 					string text2 = text;
 					text = string.Concat(new string[]
 					{
 						text2,
 						",",
-						itemAt.ItemID.ToString(),
+						stoneItem.ItemID.ToString(),
 						":",
-						itemAt.Template.Name
+						stoneItem.Template.Name
 					});
-					int num2 = (itemAt.Template.Property2 < 10) ? 10 : itemAt.Template.Property2;
+					int num2 = (stoneItem.Template.Property2 < 10) ? 10 : stoneItem.Template.Property2;
 					stringBuilder.Append("true");
 					bool flag2 = false;
 					int num3 = ItemAdvanceHandler.random.Next(50000);
 					//double num4 = (double)(itemInfo.StrengthenExp / strengthenLevel);
 					bool ActiveUpgrade = false;
-					if (itemInfo.StrengthenExp >= random.Next(4000,7500) && itemInfo.StrengthenLevel == 12)
+					if (mainItem.StrengthenExp >= random.Next(4000,7500) && mainItem.StrengthenLevel == 12)
 						ActiveUpgrade = true;
-					if (itemInfo.StrengthenExp >= random.Next(12500,17500) && itemInfo.StrengthenLevel == 13)
+					if (mainItem.StrengthenExp >= random.Next(12500,17500) && mainItem.StrengthenLevel == 13)
 						ActiveUpgrade = true;
-					if (itemInfo.StrengthenExp >= random.Next(25000,35000) && itemInfo.StrengthenLevel == 14)
+					if (mainItem.StrengthenExp >= random.Next(25000,35000) && mainItem.StrengthenLevel == 14)
 						ActiveUpgrade = true;
 					if (ActiveUpgrade)
 					{
-						itemInfo.IsBinds = flag;
-						itemInfo.StrengthenLevel++;
-						itemInfo.StrengthenExp = 0;
+						mainItem.IsBinds = flag;
+						mainItem.StrengthenLevel++;
+						mainItem.StrengthenExp = 0;
 						gSPacketIn.WriteByte(0);
 						gSPacketIn.WriteInt(num2);
 						flag2 = true;
-						StrengthenGoodsInfo strengthenGoodsInfo = StrengthenMgr.FindStrengthenGoodsInfo(itemInfo.StrengthenLevel, itemInfo.TemplateID);
-						if (strengthenGoodsInfo != null && itemInfo.Template.CategoryID == 7 && strengthenGoodsInfo.GainEquip > itemInfo.TemplateID)
+						StrengthenGoodsInfo strengthenGoodsInfo = StrengthenMgr.FindStrengthenGoodsInfo(mainItem.StrengthenLevel, mainItem.TemplateID);
+						if (strengthenGoodsInfo != null && mainItem.Template.CategoryID == 7 && strengthenGoodsInfo.GainEquip > mainItem.TemplateID)
 						{
 							ItemTemplateInfo itemTemplateInfo = ItemMgr.FindItemTemplate(strengthenGoodsInfo.GainEquip);
 							if (itemTemplateInfo != null)
 							{
-								ItemInfo itemInfo2 = ItemInfo.CloneFromTemplate(itemTemplateInfo, itemInfo);
-								client.Player.StoreBag.RemoveItemAt(1);
-								client.Player.StoreBag.AddItemTo(itemInfo2, 1);
-								itemInfo = itemInfo2;
-							}
+								ItemInfo newMainItem = ItemInfo.CloneFromTemplate(itemTemplateInfo, mainItem);
+								itemBag.RemoveItemAt(Place);
+								itemBag.AddItemTo(newMainItem, Place);
+								mainItem = newMainItem;
+
+                                if (mainItem.Place < 31)
+                                {
+                                    client.Player.EquipBag.UpdatePlayerProperties();
+                                }
+                            }
 						}
 					}
 					else
 					{
-						itemInfo.StrengthenExp += num2;
+						mainItem.StrengthenExp += num2;
 						gSPacketIn.WriteByte(1);
 						gSPacketIn.WriteInt(num2);
 					}
-					client.Player.StoreBag.RemoveCountFromStack(itemAt, count);
-					client.Player.StoreBag.UpdateItem(itemInfo);
+					stoneBag.RemoveCountFromStack(stoneItem, count);
+					itemBag.UpdateItem(mainItem);
 					client.Out.SendTCP(gSPacketIn);
-					if (flag2 && itemInfo.ItemID > 0)
+					if (flag2 && mainItem.ItemID > 0)
 					{
-						string msg = LanguageMgr.GetTranslation("ItemStrengthenHandler.congratulation2", client.Player.PlayerCharacter.NickName, itemInfo.TemplateID, itemInfo.StrengthenLevel - 12);
-						GSPacketIn sysNotice = WorldMgr.SendSysNotice(eMessageType.SYS_TIP_NOTICE, msg, itemInfo.ItemID, itemInfo.TemplateID, null);
+						string msg = LanguageMgr.GetTranslation("ItemStrengthenHandler.congratulation2", client.Player.PlayerCharacter.NickName, mainItem.TemplateID, mainItem.StrengthenLevel - 12);
+						GSPacketIn sysNotice = WorldMgr.SendSysNotice(eMessageType.SYS_TIP_NOTICE, msg, mainItem.ItemID, mainItem.TemplateID, null);
 						GameServer.Instance.LoginServer.SendPacket(sysNotice);
 					}
-					stringBuilder.Append(itemInfo.StrengthenLevel);
+					stringBuilder.Append(mainItem.StrengthenLevel);
 				}
 				else
 				{
-					client.Out.SendMessage(eMessageType.GM_NOTICE, LanguageMgr.GetTranslation("ItemStrengthenHandler.Content1", new object[0]) + itemAt.Template.Name + LanguageMgr.GetTranslation("ItemStrengthenHandler.Content2", new object[0]));
+					client.Out.SendMessage(eMessageType.GM_NOTICE, LanguageMgr.GetTranslation("ItemStrengthenHandler.Content1", new object[0]) + stoneItem.Template.Name + LanguageMgr.GetTranslation("ItemStrengthenHandler.Content2", new object[0]));
 				}
-				if (itemInfo.Place < 31)
-				{
-					client.Player.EquipBag.UpdatePlayerProperties();
-				}
+				//if (mainItem.Place < 31)
+				//{
+				//	client.Player.EquipBag.UpdatePlayerProperties();
+				//}
 				num = 0;
 			}
 			result = num;
