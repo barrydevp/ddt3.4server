@@ -26,11 +26,11 @@ namespace Game.Server.Packets.Client
             int BagType = packet.ReadInt();
             //int templateID = packet.ReadInt();
             int stonePlace = packet.ReadInt();
-            int stongBagType = packet.ReadInt();
+            int stoneBagType = packet.ReadInt();
             //int stoneId = packet.ReadInt();
             GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.ITEM_ADVANCE, client.Player.PlayerCharacter.ID);
             PlayerInventory itemBag = client.Player.GetInventory((eBageType)BagType);
-            PlayerInventory stoneBag = client.Player.GetInventory((eBageType)stongBagType);
+            PlayerInventory stoneBag = client.Player.GetInventory((eBageType)stoneBagType);
             ItemInfo mainItem = itemBag.GetItemAt(Place);
             ItemInfo stoneItem = stoneBag.GetItemAt(stonePlace);
 

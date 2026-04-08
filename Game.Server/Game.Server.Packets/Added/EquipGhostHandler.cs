@@ -90,16 +90,17 @@
 //    }
 //}
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
 using Bussiness;
 using Game.Base.Packets;
+using Game.Server.GameUtils;
 using Game.Server.Managers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SqlDataProvider.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 
 namespace Game.Server.Packets.Client
 {
@@ -110,16 +111,36 @@ namespace Game.Server.Packets.Client
 
         public int HandlePacket(GameClient client, GSPacketIn packet)
         {
-            ItemInfo item = client.Player.StoreBag.GetItemAt(1);
-            ItemInfo luckItem = client.Player.StoreBag.GetItemAt(0);
-            ItemInfo stone = client.Player.StoreBag.GetItemAt(2);
+            int Place = packet.ReadInt();
+            int BagType = packet.ReadInt();
+            //int templateID = packet.ReadInt();
+            int stonePlace = packet.ReadInt();
+            int luckyPlace = packet.ReadInt();
+            int propBagType = packet.ReadInt();
+            //int stoneId = packet.ReadInt();
+            PlayerInventory itemBag = client.Player.GetInventory((eBageType)BagType);
+            PlayerInventory propBag = client.Player.GetInventory((eBageType)propBagType);
+            ItemInfo mainItem = itemBag.GetItemAt(Place);
+            ItemInfo stoneItem = null;
+            if(stonePlace > -1)
+            {
+                stoneItem = propBag.GetItemAt(stonePlace);
+            }
+            ItemInfo luckItem = null;
+            if(luckyPlace > -1)
+            {
+                luckItem = propBag.GetItemAt(luckyPlace);
+            }
+            //ItemInfo item = client.Player.StoreBag.GetItemAt(1);
+            //ItemInfo luckItem = client.Player.StoreBag.GetItemAt(0);
+            //ItemInfo stone = client.Player.StoreBag.GetItemAt(2);
 
             var ClothLevel = 0;
             var HeadLevel = 0;
             var WeaponLevel = 0;
             bool isUp = false;
 
-            if (item == null || stone == null || stone.Template.Property1 != 118)
+            if (mainItem == null || stoneItem == null || stoneItem.Template.Property1 != 118)
             {
                 client.Player.SendMessage(LanguageMgr.GetTranslation("GameServer.EquipGhost.Msg1"));
                 return 0;
@@ -132,7 +153,7 @@ namespace Game.Server.Packets.Client
             }
 
             // get spirit item
-            List<SpiritInfo> spiList = SpiritInfoMgr.GetSpirit(item.Template.CategoryID);
+            List<SpiritInfo> spiList = SpiritInfoMgr.GetSpirit(mainItem.Template.CategoryID);
 
             if (spiList.Count <= 0)
             {
@@ -160,7 +181,7 @@ namespace Game.Server.Packets.Client
             if (nextLevelInfo != null)
             {
                 double luckratio = (luckItem != null) ? (1 + (float)luckItem.Template.Property2 / 100f) : 1f;
-                double rawRatio = 5f * Math.Pow(2f, Math.Pow(2f, (stone.Template.Level - 1f)) + 2f - (float)nextLevelInfo.Level) * luckratio;
+                double rawRatio = 5f * Math.Pow(2f, Math.Pow(2f, (stoneItem.Template.Level - 1f)) + 2f - (float)nextLevelInfo.Level) * luckratio;
 
                 #region GetLevel
                 if (client.Player.PlayerCharacter.GhostEquipList != null)
@@ -202,7 +223,7 @@ namespace Game.Server.Packets.Client
                 #endregion
                 var totalLevel = HeadLevel + ClothLevel + WeaponLevel;
                 #region Running
-                switch (item.Template.CategoryID)
+                switch (mainItem.Template.CategoryID)
                 {
                     case 7://vukhi
                         {
@@ -238,8 +259,11 @@ namespace Game.Server.Packets.Client
 
                 if (isUp)
                 {
-                    client.Player.StoreBag.RemoveCountFromStack(stone, 1);
-                    client.Player.StoreBag.RemoveCountFromStack(luckItem, 1);
+                    propBag.RemoveCountFromStack(stoneItem, 1);
+                    if (luckItem != null)
+                    {
+                        propBag.RemoveCountFromStack(luckItem, 1);
+                    }
 
                     bool isSuccess = false;
                     var rnd = random.Next(0, 100000);
@@ -252,7 +276,7 @@ namespace Game.Server.Packets.Client
                         client.Player.EquipBag.UpdatePlayerProperties();
                         client.Player.SaveEquipGhost();
                         client.Out.SendUserSyncEquipGhost(client.Player);
-                        GameServer.Instance.LoginServer.SendPacket(WorldMgr.SendSysNotice(eMessageType.ChatNormal, LanguageMgr.GetTranslation("ItemEquipGhost.Success", client.Player.ZoneName, client.Player.PlayerCharacter.NickName, item.TemplateID, equip.Level), item.ItemID, item.TemplateID, null));
+                        GameServer.Instance.LoginServer.SendPacket(WorldMgr.SendSysNotice(eMessageType.ChatNormal, LanguageMgr.GetTranslation("ItemEquipGhost.Success", client.Player.ZoneName, client.Player.PlayerCharacter.NickName, mainItem.TemplateID, equip.Level), mainItem.ItemID, mainItem.TemplateID, null));
 
                     }
                     GSPacketIn pkg = new GSPacketIn((int)ePackageType.EQUIP_GHOST);
