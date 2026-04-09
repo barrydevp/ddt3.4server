@@ -2,6 +2,7 @@
 .idea
 Bussiness/bin
 Center.Server/bin
+Center.Service/bin
 Center.Service/bin/Release/*
 Center.Service/bin/Debug/*
 !Center.Service/bin/Debug/Languages
@@ -13,6 +14,7 @@ Center.Service/bin/Debug/logs/*
 !Center.Service/bin/Debug/logconfig.xml
 !Center.Service/bin/Debug/protobuf-net.xml
 Fighting.Server/bin
+Fighting.Service/bin
 Fighting.Service/bin/Release/*
 Fighting.Service/bin/Debug/*
 !Fighting.Service/bin/Debug/bomb
@@ -28,6 +30,7 @@ Game.Base/bin
 Game.Logic/bin
 Game.Server/bin
 Road.Flash/bin
+Road.Service/bin
 Road.Service/bin/Release/*
 Road.Service/bin/Debug/*
 !Road.Service/bin/Debug/bomb
