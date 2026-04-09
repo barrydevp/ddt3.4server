@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Bussiness;
+﻿using Bussiness;
 using Bussiness.Managers;
 using Game.Server;
 using Game.Server.Buffer;
 using Game.Server.ConsortiaTask;
 using Game.Server.GameObjects;
 using Game.Server.GameUtils;
+using Game.Server.GMActives;
+using Game.Server.LittleGame;
 using Game.Server.Managers;
 using Game.Server.Packets;
 using Game.Server.Quests;
 using Game.Server.Rooms;
 using Game.Server.SceneMarryRooms;
 using log4net;
-using SqlDataProvider.Data;
-using Game.Server.LittleGame;
-using Game.Server.GMActives;
-using System.Linq;
 using Newtonsoft.Json;
+using SqlDataProvider.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Reflection;
 
 namespace Game.Base.Packets
 {
@@ -2518,8 +2519,9 @@ namespace Game.Base.Packets
 		public void SendLittleGameActived()
 		{
 			GSPacketIn pkg = new GSPacketIn((byte)ePackageType.LITTLEGAME_ACTIVED);
-			pkg.WriteBoolean(LittleGameWorldMgr.IsOpen);//(true);//(LittleGameWorldMgr.IsOpen);
-			m_gameClient.SendTCP(pkg);
+			//log.Info("LittleGameActived: " + LittleGameWorldMgr.IsOpen);
+            pkg.WriteBoolean(LittleGameWorldMgr.IsOpen);//(true);//(LittleGameWorldMgr.IsOpen);
+			SendTCP(pkg);
 		}
 
 		public GSPacketIn SendChickenBoxOpen(int ID, int flushPrice, int[] openCardPrice, int[] eagleEyePrice)
@@ -2756,14 +2758,15 @@ namespace Game.Base.Packets
 		public void SendOpenWorldBoss(int pX, int pY)
 		{
 			BaseWorldBossRoom worldBossRoom = RoomMgr.WorldBossRoom;
-			GSPacketIn gSPacketIn = new GSPacketIn(102);
+			GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
 			gSPacketIn.WriteByte(0);
 			gSPacketIn.WriteString(worldBossRoom.BossResourceId);
 			gSPacketIn.WriteInt(worldBossRoom.CurrentPVE);
 			gSPacketIn.WriteString("Thần thú");
 			gSPacketIn.WriteString(worldBossRoom.Name);
 			gSPacketIn.WriteLong(worldBossRoom.MaxBlood);
-			gSPacketIn.WriteInt(0);
+            gSPacketIn.WriteLong(worldBossRoom.Blood);
+            gSPacketIn.WriteInt(0);
 			gSPacketIn.WriteInt(0);
 			gSPacketIn.WriteInt(1);
 			gSPacketIn.WriteInt((pX == 0 ? worldBossRoom.playerDefaultPosX : pX));
@@ -2777,18 +2780,21 @@ namespace Game.Base.Packets
 			gSPacketIn.WriteInt(worldBossRoom.need_ticket_count);
 			gSPacketIn.WriteInt(worldBossRoom.timeCD);
 			gSPacketIn.WriteInt(worldBossRoom.reviveMoney);
-			//gSPacketIn.WriteInt(worldBossRoom.reFightMoney);
-			//gSPacketIn.WriteInt(worldBossRoom.addInjureBuffMoney);
-			//gSPacketIn.WriteInt(worldBossRoom.addInjureValue);
-			gSPacketIn.WriteInt(0);
-			//gSPacketIn.WriteInt(1);
-			//gSPacketIn.WriteString("Thần thúa");
-			//gSPacketIn.WriteInt(123);
-			//gSPacketIn.WriteString("Thần thúb");
-			//gSPacketIn.WriteInt(1);
-			gSPacketIn.WriteBoolean(true);
-			gSPacketIn.WriteBoolean(false);
-			this.SendTCP(gSPacketIn);
+            //gSPacketIn.WriteInt(worldBossRoom.reFightMoney);
+            //gSPacketIn.WriteInt(worldBossRoom.addInjureBuffMoney);
+            //gSPacketIn.WriteInt(worldBossRoom.addInjureValue);
+            // START BUFF ARRAY
+            gSPacketIn.WriteInt(1); // nBuff
+            // Buff1                        
+            gSPacketIn.WriteInt(1);    //_loc_6.ID = event.pkg.readInt();
+            gSPacketIn.WriteString("Tăng Sát Thương");    //_loc_6.name = event.pkg.readUTF();
+            gSPacketIn.WriteInt(30);    //_loc_6.price = event.pkg.readInt();
+            gSPacketIn.WriteString("Sát thương cơ bản tăng 200.");    //_loc_6.decription = event.pkg.readUTF();  
+            gSPacketIn.WriteInt(-1);//_loc_8.costID = event.pkg.readInt();
+			//END BUFF ARRAY
+            gSPacketIn.WriteBoolean(true); //_isShowBlood = event.pkg.readBoolean();
+            gSPacketIn.WriteBoolean(false); //_autoBlood = event.pkg.readBoolean();
+            SendTCP(gSPacketIn);
 		}
 
 		public GSPacketIn SendAvatarColectionAllInfo(int PlayerId, Dictionary<int, UserAvatarColectionInfo> infos)

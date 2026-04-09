@@ -49,6 +49,13 @@ namespace Game.Server.LittleGame.Data
 
             #endregion
 
+            if (timeToStart >= timeToStop)
+            {
+                // no need to start
+                Console.WriteLine("[TaskScheduler] No need to start task {0} because start time is after stop time", name);
+                return;
+            }
+
             Timers.Add(name, (startTimer, stopTimer));
         }
 

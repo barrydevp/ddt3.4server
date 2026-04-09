@@ -99,7 +99,7 @@ namespace GameServerScript.AI.Messions
 			LivingConfig livingConfig = base.Game.BaseLivingConfig();
 			livingConfig.IsFly = true;
 			livingConfig.IsWorldBoss = true;
-			this.simpleBoss_0 = base.Game.CreateBoss(this.int_0, 1170, 370, -1, 1, "", livingConfig);
+            this.simpleBoss_0 = base.Game.CreateBoss(this.int_0, 1170, 370, -1, 1, "", livingConfig);
 			this.simpleBoss_0.SetRelateDemagemRect(this.simpleBoss_0.NpcInfo.X, this.simpleBoss_0.NpcInfo.Y, this.simpleBoss_0.NpcInfo.Width, this.simpleBoss_0.NpcInfo.Height);
 		}
 

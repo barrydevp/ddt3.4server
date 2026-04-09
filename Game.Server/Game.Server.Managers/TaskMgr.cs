@@ -15,23 +15,24 @@ namespace Game.Server.Managers
         {
             try
             {
-                TaskScheduler.Instance.ScheduleTask(
-                    "LittleGame",
-                    (GameProperties.LittleGameStartHourse, GameProperties.LittleGameStartHourse + GameProperties.LittleGameTimeSpending),
-                    (0, 0),
-                    new List<DayOfWeek>
-                    {
-                        DayOfWeek.Monday,
-                        DayOfWeek.Tuesday,
-                        DayOfWeek.Wednesday,
-                        DayOfWeek.Thursday,
-                        DayOfWeek.Friday,
-                        DayOfWeek.Saturday,
-                        DayOfWeek.Sunday
-                    },
-                    (LittleGameWorldMgr.OpenLittleGame, LittleGameWorldMgr.CloseLittleGame));
-                if (Log.IsInfoEnabled)
-                    Log.Info("LittleGame timer initialized!");
+                //Log.Info("Initializing LittleGame start: " + GameProperties.LittleGameStartHourse + " end: " + (GameProperties.LittleGameStartHourse + GameProperties.LittleGameTimeSpending));
+                //TaskScheduler.Instance.ScheduleTask(
+                //    "LittleGame",
+                //    (GameProperties.LittleGameStartHourse, GameProperties.LittleGameStartHourse + GameProperties.LittleGameTimeSpending),
+                //    (0, 0),
+                //    new List<DayOfWeek>
+                //    {
+                //        DayOfWeek.Monday,
+                //        DayOfWeek.Tuesday,
+                //        DayOfWeek.Wednesday,
+                //        DayOfWeek.Thursday,
+                //        DayOfWeek.Friday,
+                //        DayOfWeek.Saturday,
+                //        DayOfWeek.Sunday
+                //    },
+                //    (LittleGameWorldMgr.OpenLittleGame, LittleGameWorldMgr.CloseLittleGame));
+                //if (Log.IsInfoEnabled)
+                //    Log.Info("LittleGame timer initialized!");
 
                 return true;
             }

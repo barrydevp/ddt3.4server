@@ -5,7 +5,7 @@ using Game.Server.Rooms;
 using System;
 namespace Game.Server.Packets.Client
 {
-    [PacketHandler(102, "场景用户离开")]
+    [PacketHandler((int)ePackageType.WORLD_BOSS, "场景用户离开")]
     public class WorldBossHandler : IPacketHandler
     {
         public int HandlePacket(GameClient client, GSPacketIn packet)
@@ -13,10 +13,10 @@ namespace Game.Server.Packets.Client
             byte b = packet.ReadByte();
             if (!RoomMgr.WorldBossRoom.WorldbossOpen)
             {
-                client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("Boss thế giới đã kết thúc", new object[0]));
+                client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("Boss thế giới đã kết thúc!"));
                 return 0;
             }
-            GSPacketIn gSPacketIn = new GSPacketIn(102, client.Player.PlayerCharacter.ID);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS, client.Player.PlayerCharacter.ID);
             {
                 switch(b)
                 {
@@ -102,10 +102,10 @@ namespace Game.Server.Packets.Client
                             int num3 = packet.ReadInt();
                             packet.ReadBoolean();
                             int value = RoomMgr.WorldBossRoom.reviveMoney;
-                            //if (num3 == 2)
-                            //{
-                            //    value = RoomMgr.WorldBossRoom.reFightMoney;
-                            //}
+                            if (num3 == 2)
+                            {
+                                value = RoomMgr.WorldBossRoom.reFightMoney;
+                            }
                             if (client.Player.MoneyDirect(value, false))
                             {
                                 gSPacketIn.WriteByte(11);
@@ -114,21 +114,21 @@ namespace Game.Server.Packets.Client
                             }
                             break;
                         }
-                    //case 38:
-                    //    {
-                    //        int addInjureBuffMoney = RoomMgr.WorldBossRoom.addInjureBuffMoney;
-                    //        int addInjureValue = RoomMgr.WorldBossRoom.addInjureValue;
-                    //        if (client.Player.MoneyDirect(addInjureBuffMoney, false))
-                    //        {
-                    //            client.Player.RemoveMoney(addInjureBuffMoney);
-                    //            AbstractBuffer abstractBuffer = BufferList.CreatePayBuffer(403, addInjureValue, 1);
-                    //            if (abstractBuffer != null)
-                    //            {
-                    //                abstractBuffer.Start(client.Player);
-                    //            }
-                    //        }
-                    //        break;
-                    //    }
+                    case 38:
+                        {
+                            int addInjureBuffMoney = RoomMgr.WorldBossRoom.addInjureBuffMoney;
+                            int addInjureValue = RoomMgr.WorldBossRoom.addInjureValue;
+                            if (client.Player.MoneyDirect(addInjureBuffMoney, false))
+                            {
+                                client.Player.RemoveMoney(addInjureBuffMoney);
+                                AbstractBuffer abstractBuffer = BufferList.CreatePayBuffer(403, addInjureValue, 1);
+                                if (abstractBuffer != null)
+                                {
+                                    abstractBuffer.Start(client.Player);
+                                }
+                            }
+                            break;
+                        }
                     default:
                         Console.WriteLine("WorldBossPackageType." + (WorldBossPackageType)b);
                         break;

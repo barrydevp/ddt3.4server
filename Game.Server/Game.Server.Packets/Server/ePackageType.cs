@@ -267,6 +267,7 @@ namespace Game.Server.Packets
         USER_UPDATE_GIFT = 220,
         USER_RELOAD_GIFT = 214,
         NEWCHICKENBOX_SYS = 87,
-        SAN_XIAO = 329
+        SAN_XIAO = 329,
+        WORLD_BOSS = 102,
     }
 }

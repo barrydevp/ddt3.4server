@@ -99,10 +99,10 @@ namespace Game.Server
 						case 79:
 							HandleWorldBossUpdateBlood(pkg);
 							break;
-						case 80:
+						case (int)eServerCmdType.WORLDBOSS_UPDATE_INFO:
 							HandleWorldBossUpdate(pkg);
 							break;
-						case 81:
+						case (int)eServerCmdType.WORLDBOSS_UPDATE_RANK:
 							HandleWorldBossRank(pkg);
 							break;
 						case 82:

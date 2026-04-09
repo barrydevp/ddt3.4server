@@ -632,7 +632,7 @@ namespace Center.Server
 				}
 				ThreadPriority priority = Thread.CurrentThread.Priority;
 				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-				//SendUpdateWorldEvent();
+				SendUpdateWorldEvent();
 				Thread.CurrentThread.Priority = priority;
 				tickCount = Environment.TickCount - tickCount;
 				if (log.IsInfoEnabled)
@@ -895,37 +895,43 @@ namespace Center.Server
 			//Console.WriteLine($"{hour}h, {minute}m, {WorldMgr.worldOpen} open");
 			if (!WorldMgr.worldOpen)
 			{
-				switch (hour)
-				{
-					case 13:
-					case 19:
-						if (minute == 30)
-						{
-							WorldMgr.SetupWorldBoss(0);
-							WorldMgr.WorldBossClearRank();
-							SendPrivateInfo();
-							SendSystemNotice("Boss Cuồng long sẽ mở sau 1 phút nữa, chuẩn bị chiến đấu.");
-						}
-						break;
-					default:
-						SendRoomClose(0);
-						SendRoomClose(1);
-						break;
-				}
-			}
+				//switch (hour)
+				//{
+				//	case 13:
+				//	case 19:
+				//		if (minute == 30)
+				//		{
+				//			WorldMgr.SetupWorldBoss(0);
+				//			WorldMgr.WorldBossClearRank();
+				//			SendPrivateInfo();
+				//			SendSystemNotice("Boss Cuồng long sẽ mở sau 1 phút nữa, chuẩn bị chiến đấu.");
+				//		}
+				//		break;
+				//	default:
+				//		SendRoomClose(0);
+				//		SendRoomClose(1);
+				//		break;
+				//}
+                WorldMgr.SetupWorldBoss(0);
+                WorldMgr.WorldBossClearRank();
+                SendPrivateInfo();
+                SendSystemNotice("Boss Cuồng long sẽ mở sau 1 phút nữa, chuẩn bị chiến đấu.");
+				log.Info("World Boss opened!");
+            }
 			else
 			{
-				if (hour == 14 || hour == 20)
-				{
+				//if (hour == 14 || hour == 20)
+                if (minute > 58)
+                {
 					var isNotFightOver = !WorldMgr.fightOver;
 					if (isNotFightOver)
 					{
 						WorldMgr.WorldBossFightOver();
 						SendWorldBossFightOver();
 					}
-					if (minute < 5)
+					if (minute < 15)
 					{
-						SendSystemNotice("Boss thế giới Cuồng Long sẽ đóng sau 5 phút nữa, vui lòng đổi hết điểm.");
+						SendSystemNotice("Boss thế giới Cuồng Long sẽ đóng sau 15 phút nữa, vui lòng đổi hết điểm.");
 					}
 					else
 					{
@@ -936,7 +942,8 @@ namespace Center.Server
 							SendRoomClose(0);
 							SendUpdateRank(true);
 						}
-					}
+						log.Info("World Boss closed!");
+                    }
 				}
 				SendPrivateInfo();
 				WorldMgr.UpdateFightTime();

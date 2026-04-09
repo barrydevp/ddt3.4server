@@ -74,6 +74,7 @@
     <Compile Include="Bussiness.Managers\TotemHonorMgr.cs" />
     <Compile Include="Bussiness.Managers\TotemMgr.cs" />
     <Compile Include="Bussiness.Protocol\QiYuanPackageType.cs" />
+    <Compile Include="Bussiness\PackageTypes.cs" />
     <Compile Include="Bussiness\DateTimeExtensions.cs" />
     <Compile Include="Bussiness\MarshalBussiness.cs" />
     <Compile Include="Game.Server.Managers\ConsortiaLevelMgr.cs" />

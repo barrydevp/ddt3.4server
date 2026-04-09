@@ -3455,7 +3455,7 @@ namespace Game.Server.GameObjects
 						Out.SendWeaklessGuildProgress(PlayerCharacter);
 						ProcessConsortiaAndPet();
 						Out.SendDateTime();
-						SendPkgLimitGrade();
+						SendPkgLimitGrade(); // including world boss
 						Out.SendDailyAward(this);
 						LoadMarryMessage();
 						if (!m_showPP)

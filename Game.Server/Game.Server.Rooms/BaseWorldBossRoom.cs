@@ -6,6 +6,7 @@ using Game.Base.Packets;
 using Game.Server;
 using Game.Server.GameObjects;
 using Game.Server.Managers;
+using Game.Server.Packets;
 using SqlDataProvider.Data;
 using System;
 using System.Collections.Generic;
@@ -186,8 +187,8 @@ namespace Game.Server.Rooms
             }
             if (flag)
             {
-                GSPacketIn gSPacketIn = new GSPacketIn(102);
-                gSPacketIn.WriteByte(3);
+                GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+                gSPacketIn.WriteByte((byte)eWorldBossPackageType.ENTER);
                 gSPacketIn.WriteInt(player.PlayerCharacter.Grade);
                 gSPacketIn.WriteInt(player.PlayerCharacter.Hide);
                 gSPacketIn.WriteInt(player.PlayerCharacter.Repute);
@@ -213,7 +214,7 @@ namespace Game.Server.Rooms
 
         public void FightOverAll()
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(82);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)eServerCmdType.WORLDBOSS_FIGHTOVER);
             GameServer.Instance.LoginServer.SendPacket(gSPacketIn);
         }
 
@@ -234,7 +235,7 @@ namespace Game.Server.Rooms
 
         public void ReduceBlood(int value)
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(84);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)eServerCmdType.WORLDBOSS_REDUCE_BLOOD);
             gSPacketIn.WriteInt(value);
             GameServer.Instance.LoginServer.SendPacket(gSPacketIn);
         }
@@ -274,7 +275,7 @@ namespace Game.Server.Rooms
 
         public void SendPrivateInfo(string name, int damage, int honor)
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(102);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
             gSPacketIn.WriteByte(22);
             gSPacketIn.WriteInt(damage);
             gSPacketIn.WriteInt(honor);
@@ -292,8 +293,8 @@ namespace Game.Server.Rooms
 
         public void SendRoomClose()
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(102);
-            gSPacketIn.WriteByte(9);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+            gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_ROOM_CLOSE);
             this.SendToALLPlayers(gSPacketIn);
         }
 
@@ -337,23 +338,24 @@ namespace Game.Server.Rooms
         {
             long num = packet.ReadLong();
             this.m_blood = packet.ReadLong();
-            GSPacketIn gSPacketIn = new GSPacketIn(102);
-            gSPacketIn.WriteByte(5);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+            gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_BLOOD_UPDATE);
             gSPacketIn.WriteBoolean(false);
             gSPacketIn.WriteLong(num);
             gSPacketIn.WriteLong(this.m_blood);
+            Console.WriteLine("Boss Blood Update:" + this.m_blood);
             this.SendToALL(gSPacketIn);
         }
 
         public void ShowRank()
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(86);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)eServerCmdType.WORLDBOSS_SHOW_RANK);
             GameServer.Instance.LoginServer.SendPacket(gSPacketIn);
         }
 
         public void UpdateRank(int damage, int honor, string nickName)
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(81);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)eServerCmdType.WORLDBOSS_UPDATE_RANK);
             gSPacketIn.WriteInt(damage);
             gSPacketIn.WriteInt(honor);
             gSPacketIn.WriteString(nickName);
@@ -400,8 +402,8 @@ namespace Game.Server.Rooms
 
         public void UpdateWorldBossRankCrosszone(GSPacketIn packet)
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(102);
-            gSPacketIn.WriteByte(10);
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+            gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_RANKING);
             bool flag = packet.ReadBoolean();
             int num = packet.ReadInt();
             gSPacketIn.WriteBoolean(flag);
@@ -458,8 +460,8 @@ namespace Game.Server.Rooms
                 GamePlayer gamePlayer = playersSafe[i];
                 if (gamePlayer != player)
                 {
-                    GSPacketIn gSPacketIn = new GSPacketIn(102);
-                    gSPacketIn.WriteByte(3);
+                    GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+                    gSPacketIn.WriteByte((byte)eWorldBossPackageType.ENTER);
                     gSPacketIn.WriteInt(gamePlayer.PlayerCharacter.Grade);
                     gSPacketIn.WriteInt(gamePlayer.PlayerCharacter.Hide);
                     gSPacketIn.WriteInt(gamePlayer.PlayerCharacter.Repute);

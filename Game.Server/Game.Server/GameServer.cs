@@ -54,7 +54,9 @@ namespace Game.Server
 
 		protected Timer m_buffScanTimer;
 
-		private static bool m_compiled = false;
+        protected Timer m_worldEventScanTimer;
+
+        private static bool m_compiled = false;
 
 		private GameServerConfig m_config;
 
@@ -133,7 +135,6 @@ namespace Game.Server
 		{
 			try
 			{
-				upTOP.UpdateCeleb();
 				int tickCount = Environment.TickCount;
 				if (log.IsInfoEnabled)
 				{
@@ -144,8 +145,6 @@ namespace Game.Server
 				ThreadPriority priority = Thread.CurrentThread.Priority;
 				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 
-				EliteGameMgr.CheckEliteGameEvent();
-
 				GamePlayer[] allPlayers = WorldMgr.GetAllPlayers();
 				foreach (GamePlayer player in allPlayers)
 				{
@@ -155,32 +154,6 @@ namespace Game.Server
 						num2++;
 					}
 					player.ResetTotem(false);
-				}
-
-				// save all gmactives
-				GmActivityMgr.ScanAction();
-				GmActivityMgr.DoAction();
-
-				if (DateTime.Now.Hour == GameProperties.LittleGameStartHourse)
-				{
-					Console.ForegroundColor = ConsoleColor.Green;
-					Console.WriteLine("Little Game Running Sucess!");
-					Console.ResetColor();
-					if (!LittleGameWorldMgr.IsOpen)
-					{
-						TaskMgr.Init();
-					}
-				}
-
-				if (DateTime.Now.Hour == GameProperties.LittleGameStartHourse + GameProperties.LittleGameTimeSpending)
-				{
-					Console.ForegroundColor = ConsoleColor.Green;
-					Console.WriteLine("Little Game Closed Sucess!");
-					Console.ResetColor();
-					if (LittleGameWorldMgr.IsOpen)
-					{
-						TaskMgr.Init();
-					}
 				}
 
 				Thread.CurrentThread.Priority = priority;
@@ -202,14 +175,20 @@ namespace Game.Server
 					log.Error("BuffScanTimerProc", exception);
 				}
 			}
-			finally
+            finally
             {
-				if (log.IsErrorEnabled)
-                {
-					log.Info("GameMgr Scaning ...");
-				}
+                GameMgrScanProc(null);
+            }
+        }
+
+		protected void GameMgrScanProc(object sender)
+		{
+			try
+			{
+				log.Info("GameMgr Scaning ...");
+
 				if (GameMgr.SynDate < 0)
-                {
+				{
 					GameMgr.ClearAllGames();
 					GameMgr.Stop();
 					GameMgr.Setup(Configuration.ServerID, GameProperties.BOX_APPEAR_CONDITION);
@@ -231,9 +210,48 @@ namespace Game.Server
 					log.Info("GameMgr Scan complete!");
 				}
 			}
+			catch (Exception exception)
+			{
+				if (log.IsErrorEnabled)
+				{
+					log.Error("GameMgrScanProc", exception);
+				}
+			}
 		}
 
-		public static void CreateInstance(GameServerConfig config)
+        protected void WorldEventScanProc(object sender)
+        {
+            try
+            {
+                int tickCount = Environment.TickCount;
+                log.Info("WorldEvent Scaning ...");
+                log.Debug("WorldEventScan ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+                int num2 = 0;
+                ThreadPriority priority = Thread.CurrentThread.Priority;
+                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+
+                EliteGameMgr.CheckEliteGameEvent();
+				LittleGameWorldMgr.Scan();
+
+                Thread.CurrentThread.Priority = priority;
+                tickCount = Environment.TickCount - tickCount;
+                
+                if (tickCount > 120000)
+                {
+                    log.WarnFormat("WroldEvent Scan take long time {0} ms", tickCount);
+                } 
+				else
+				{
+                    log.Info("WroldEvent Scan complete in " + tickCount + "ms!");
+                }
+            }
+            catch (Exception exception)
+            {
+                log.Error("WroldEventScanProc", exception);
+            }
+        }
+
+        public static void CreateInstance(GameServerConfig config)
 		{
 			if (m_instance == null)
 			{
@@ -346,7 +364,17 @@ namespace Game.Server
 			{
 				m_buffScanTimer.Change(dueTime, dueTime);
 			}
-			return true;
+
+            if (m_worldEventScanTimer == null)
+            {
+                m_worldEventScanTimer = new Timer(WorldEventScanProc, null, dueTime, dueTime);
+            }
+            else
+            {
+                m_worldEventScanTimer.Change(dueTime, dueTime);
+            }
+
+            return true;
 		}
 
 		private bool InitLoginServer()
@@ -581,7 +609,15 @@ namespace Game.Server
 				AcademyMgr.RemoveOldRequest();
 				// save data in World
 				GmActivityMgr.SaveData();
-				Thread.CurrentThread.Priority = priority;
+
+                // save all gmactives
+                GmActivityMgr.ScanAction();
+                GmActivityMgr.DoAction();
+
+                // update rank
+                upTOP.UpdateCeleb();
+
+                Thread.CurrentThread.Priority = priority;
 				tickCount = Environment.TickCount - tickCount;
 				if (log.IsInfoEnabled)
 				{
@@ -870,7 +906,7 @@ namespace Game.Server
 				{
 					return false;
 				}
-                if (!this.InitComponent(JampsManualMgr.Init(), "初始化手册系统 by久伴"))
+                if (!InitComponent(JampsManualMgr.Init(), "JampsManualMgr Init"))
                 {
                     return false;
                 }
@@ -947,8 +983,7 @@ namespace Game.Server
 					return false;
 				if (!InitComponent(ActiveMgr.Init(), "ActiveMgr Init"))
 					return false;
-				if (!InitComponent(JampsManualMgr.Init(), "JampsManualMgr Init"))
-					return false;
+
 				RoomMgr.Start();
 				GameMgr.Start();
 				BattleMgr.Start();

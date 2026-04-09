@@ -77,7 +77,7 @@ namespace Game.Server.LittleGame
                     gSPacketIn.WriteInt(bg.X);
                     gSPacketIn.WriteInt(bg.Y);
                     gSPacketIn.WriteInt(2);
-                    gSPacketIn.WriteString("温泉小游戏");
+                    gSPacketIn.WriteString("LittleGame");
                     gSPacketIn.WriteString(bg.Model);
                     gSPacketIn.WriteBoolean(true);
                     gSPacketIn.WriteInt(bg.X);

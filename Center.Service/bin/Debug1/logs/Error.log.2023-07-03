@@ -1,0 +1,85 @@
+23:31:18,242 - [MAIN] - ERROR - Bussiness.GameProperties - Cannot find server property TimeForBxh1vs1,keep it default value!
+23:32:18,614 - [18] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:33:18,603 - [25] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:34:18,582 - [32] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:35:18,561 - [36] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:36:18,606 - [44] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:37:18,616 - [46] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:38:18,632 - [56] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:39:18,612 - [51] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:40:18,653 - [72] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:41:18,656 - [61] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:42:18,662 - [90] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:43:18,672 - [93] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:44:18,723 - [91] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:45:18,702 - [108] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:46:18,711 - [115] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:47:18,721 - [121] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:48:18,692 - [134] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:49:18,732 - [136] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:50:18,738 - [150] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:51:18,744 - [59] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:52:18,748 - [55] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:53:18,759 - [49] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:54:18,803 - [40] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:55:18,779 - [38] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:56:18,794 - [29] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:57:18,809 - [36] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:58:18,850 - [155] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245
+23:59:18,889 - [165] - ERROR - Bussiness.BaseBussiness - Init
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Bussiness.ConsortiaBussiness.ScanConsortia(String& noticeID) in F:\Gunny\gunlegends\newGun\gameSrc\Bussiness\Bussiness\ConsortiaBussiness.cs:line 2245

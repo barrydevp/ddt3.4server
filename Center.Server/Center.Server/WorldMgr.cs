@@ -35,7 +35,7 @@ namespace Center.Server
 
         public static long current_blood = 0;
 
-        public static readonly long MAX_BLOOD = 2100000000;
+        public static readonly long MAX_BLOOD = 210000000;
 
         public static int currentPVE_ID;
 

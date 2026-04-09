@@ -1,9 +1,11 @@
 ﻿using Bussiness;
 using Game.Base;
 using Game.Server.GameObjects;
+using Game.Server.GMActives;
 using Game.Server.LittleGame.Data;
 using Game.Server.LittleGame.Objects;
 using Game.Server.Managers;
+using Game.Server.Packets;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -83,6 +85,55 @@ namespace Game.Server.LittleGame
             }
         }
 
+        public static void Scan()
+        {
+            List<DayOfWeek> opendays = new List<DayOfWeek>//3 5 7
+            {
+                DayOfWeek.Monday,
+                DayOfWeek.Tuesday,
+                DayOfWeek.Wednesday,
+                DayOfWeek.Thursday,
+                DayOfWeek.Friday,
+                DayOfWeek.Saturday,
+                DayOfWeek.Sunday
+            };
+
+            if (opendays.Contains(DateTime.Now.DayOfWeek))
+            {
+                int startTime = GameProperties.LittleGameStartHourse;
+                int stopTime = GameProperties.LittleGameStartHourse + GameProperties.LittleGameTimeSpending;
+                if (DateTime.Now.Hour >= startTime && DateTime.Now.Hour < stopTime && !IsOpen)
+                {
+                    OpenLittleGame();
+                }
+                else if (DateTime.Now.Hour >= stopTime && IsOpen)
+                {
+                    CloseLittleGame();
+                }
+                else if (DateTime.Now.Hour == startTime - 1 && !IsOpen && DateTime.Now.Minute >= 55)
+                {
+                    foreach (var player in WorldMgr.GetAllPlayers())
+                    {
+                        player.Out.SendLittleGameActived();
+                        player.Out.SendMessage(eMessageType.Normal, $"Sự kiện Đại chiến Hút Gà còn {(int)(60 - DateTime.Now.Minute)} phút sẽ bắt đầu, tham gia từ Đặc Sắc ở sảnh game nhé !");
+                    }
+                }
+                else if (DateTime.Now.Hour == stopTime - 1 && IsOpen && DateTime.Now.Minute >= 55)
+                {
+                    foreach (var player in WorldMgr.GetAllPlayers())
+                    {
+                        player.Out.SendLittleGameActived();
+                        player.Out.SendMessage(eMessageType.Normal, $"Sự kiện Đại chiến Hút Gà còn {(int)(60 - DateTime.Now.Minute)} phút sẽ kết thúc. Nhanh chóng đổi thưởng nàoo !");
+                    }
+                }
+                
+                log.Info("LittleGameScan completed!");
+            }
+            else
+            {
+                log.Info("LittleGameScan not open today!");
+            }
+        }
         public static void OpenLittleGame()
         {
             try
@@ -93,11 +144,11 @@ namespace Game.Server.LittleGame
                     _ScanTimer = new Timer(ScanTimerProc, null, 60000, 60000);
                     _SpawTimer = new Timer(SpawnTimerProc, null, 0, 10000);
                     IsOpen = true;
-                    //log.Warn("LittleGame Open");
+                    log.Warn("LittleGame Open");
                     foreach (var player in WorldMgr.GetAllPlayers())
                     {
                         player.Out.SendLittleGameActived();
-                        //player.Out.SendMessage(Packets.eMessageType.Normal, "Hút Gà đã mở!\nMau mau tham gia kiếm điểm nào!.");
+                        player.Out.SendMessage(Packets.eMessageType.Normal, "Sự kiện Đại chiến Hút Gà đã mở! Mau mau tham gia kiếm điểm nào!");
                         //player.Out.SendMessage(Packets.eMessageType.Normal, string.Format("Open Little Game {0}", DateTime.Now));
                     }
                 }
@@ -118,18 +169,22 @@ namespace Game.Server.LittleGame
                 _SpawTimer = null;
                 IsOpen = false;
 
-                //log.Warn("LittleGame Closed");
+                log.Warn("LittleGame Closed");
 
                 foreach (var keyValuePair in ScenariObjects.Where(kvp => kvp.Value is Bogu).ToList())
                 {
                     RemoveBogu((Bogu)keyValuePair.Value);
                 }
 
+                foreach (var keyValuePair in ScenariObjects.Where(kvp => kvp.Value is GamePlayer).ToList())
+                {
+                    RemovePlayer((GamePlayer)keyValuePair.Value);
+                }
 
                 foreach (var player in WorldMgr.GetAllPlayers())
                 {
                     player.Out.SendLittleGameActived();
-                    //player.Out.SendMessage(Packets.eMessageType.Normal, "Hút Gà đã đóng!\nHẹn gặp lại vào ngày mai!.");
+                    player.Out.SendMessage(Packets.eMessageType.Normal, "Sự kiện Đại chiến Hút Gà đã đóng! Hẹn gặp lại vào ngày mai!.");
                     //player.Out.SendMessage(Packets.eMessageType.Normal, string.Format("Close Little Game {0}", DateTime.Now));
                 }
             }

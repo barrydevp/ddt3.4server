@@ -130,6 +130,7 @@ namespace Center.Server
 
         public void HandleLogin(GSPacketIn pkg)
         {
+            log.Info("Recv Login from " + base.TcpEndpoint);
             byte[] rgb = pkg.ReadBytes();
             string[] strArray = Encoding.UTF8.GetString(_rsa.Decrypt(rgb, fOAEP: false)).Split(',');
             if (strArray.Length != 2)

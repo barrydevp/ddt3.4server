@@ -96,7 +96,7 @@ namespace Game.Server
 		[ConfigProperty("ZoneName", "频道的名称", "7Road")]
 		public string ZoneName;
 
-		[ConfigProperty("DoubleEvent", "Evento duplicado", true)]
+		[ConfigProperty("DoubleEvent", "Event Double", true)]
 		public bool DoubleEvent;
 
 		public GameServerConfig()

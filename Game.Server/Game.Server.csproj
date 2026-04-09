@@ -1695,6 +1695,7 @@
     <Compile Include="GameServerScript\AI\NPC\WarriorsArena\ThirteenTerrorShadowBoss.cs" />
     <Compile Include="GameServerScript\AI\NPC\WarriorsArena\ThirteenTerrorThirdBoss.cs" />
     <Compile Include="GameServerScript\AI\NPC\WorldBoss\WorldAcientDragon.cs" />
+    <Compile Include="GameServerScript\AI\NPC\WorldBoss\WorldAcientDragonOld.cs" />
     <Compile Include="GameServerScript\AI\NPC\XHN\SimpleNpcFor2001004.cs" />
     <Compile Include="GameServerScript\AI\NPC\XHN\SimpleNpcFor2001011.cs" />
     <Compile Include="GameServerScript\AI\NPC\XHN\SteamFactoryBossFor2001005.cs" />
