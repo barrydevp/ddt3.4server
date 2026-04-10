@@ -1032,7 +1032,7 @@ namespace Game.Base.Packets
 
 		public virtual GSPacketIn SendMessage(eMessageType type, string message)
 		{
-			GSPacketIn packet = new GSPacketIn(3);
+			GSPacketIn packet = new GSPacketIn((int)ePackageType.SYS_MESSAGE);
 			packet.WriteInt((int)type);
 			packet.WriteString(message);
 			SendTCP(packet);
@@ -2759,7 +2759,7 @@ namespace Game.Base.Packets
 		{
 			BaseWorldBossRoom worldBossRoom = RoomMgr.WorldBossRoom;
 			GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
-			gSPacketIn.WriteByte(0);
+			gSPacketIn.WriteByte((byte)eWorldBossPackageType.OPEN);
 			gSPacketIn.WriteString(worldBossRoom.BossResourceId);
 			gSPacketIn.WriteInt(worldBossRoom.CurrentPVE);
 			gSPacketIn.WriteString("Thần thú");
@@ -2784,13 +2784,16 @@ namespace Game.Base.Packets
             //gSPacketIn.WriteInt(worldBossRoom.addInjureBuffMoney);
             //gSPacketIn.WriteInt(worldBossRoom.addInjureValue);
             // START BUFF ARRAY
-            gSPacketIn.WriteInt(1); // nBuff
-            // Buff1                        
-            gSPacketIn.WriteInt(1);    //_loc_6.ID = event.pkg.readInt();
-            gSPacketIn.WriteString("Tăng Sát Thương");    //_loc_6.name = event.pkg.readUTF();
-            gSPacketIn.WriteInt(30);    //_loc_6.price = event.pkg.readInt();
-            gSPacketIn.WriteString("Sát thương cơ bản tăng 200.");    //_loc_6.decription = event.pkg.readUTF();  
-            gSPacketIn.WriteInt(-1);//_loc_8.costID = event.pkg.readInt();
+            gSPacketIn.WriteInt(worldBossRoom.buyableBuffs.Count); // nBuff
+            // write buff
+			foreach (WorldBossBuffInfo buff in worldBossRoom.buyableBuffs.Values)
+			{
+				gSPacketIn.WriteInt(buff.ID);    //_loc_6.ID = event.pkg.readInt();
+				gSPacketIn.WriteString(buff.Name);    //_loc_6.name = event.pkg.readUTF();
+				gSPacketIn.WriteInt(buff.Price);    //_loc_6.price = event.pkg.readInt();
+				gSPacketIn.WriteString(buff.Description);    //_loc_6.decription = event.pkg.readUTF();  
+				gSPacketIn.WriteInt(-1);//_loc_8.costID = event.pkg.readInt();
+			}
 			//END BUFF ARRAY
             gSPacketIn.WriteBoolean(true); //_isShowBlood = event.pkg.readBoolean();
             gSPacketIn.WriteBoolean(false); //_autoBlood = event.pkg.readBoolean();

@@ -333,7 +333,7 @@ namespace Game.Server.Games
 				}
 				if (pveInfo != null)
 				{
-					PVEGame pVEGame = new PVEGame(GameMgr.m_gameId++, roomId, pveInfo, players, null, roomType, gameType, timeType, hardLevel, currentFloor);
+					PVEGame pVEGame = new PVEGame(GameMgr.m_gameId++, roomId, pveInfo, players, null, roomType, gameType, timeType, hardLevel, currentFloor, RoomMgr.WorldBossRoom.Blood);
 					List<BaseGame> games;
 					Monitor.Enter(games = GameMgr.m_games);
 					try
@@ -360,7 +360,7 @@ namespace Game.Server.Games
 			return result;
 		}
 
-		public static BaseGame StartChallengePVPGame(List<IGamePlayer> red, List<IGamePlayer> blue, BaseRoom redRoom, BaseRoom blueRoom, int mapIndex, eRoomType roomType, eGameType gameType, int timeType)
+        public static BaseGame StartChallengePVPGame(List<IGamePlayer> red, List<IGamePlayer> blue, BaseRoom redRoom, BaseRoom blueRoom, int mapIndex, eRoomType roomType, eGameType gameType, int timeType)
 		{
 			try
 			{

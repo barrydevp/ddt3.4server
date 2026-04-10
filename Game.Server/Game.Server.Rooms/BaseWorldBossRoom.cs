@@ -4,6 +4,7 @@ using Bussiness.Managers;
 using Game.Base;
 using Game.Base.Packets;
 using Game.Server;
+using Game.Server.Buffer;
 using Game.Server.GameObjects;
 using Game.Server.Managers;
 using Game.Server.Packets;
@@ -13,8 +14,38 @@ using System.Collections.Generic;
 
 namespace Game.Server.Rooms
 {
+    public class WorldBossBuffInfo
+    {
+        public int ID { get; set; }
+
+        public BuffType Type { get; set; }
+
+        public string Name { get; set; }
+
+        public int Price { get; set; }
+
+        public int Value { get; set; }
+
+        public int MaxCount { get; set; }
+
+        public string Description { get; set; }
+
+        public WorldBossBuffInfo(int id, BuffType type, string name, int price, int value, int maxCount, string description)
+        {
+            this.ID = id;
+            this.Type = type;
+            this.Name = name;
+            this.Price = price;
+            this.Value = value;
+            this.MaxCount = maxCount;
+            this.Description = description;
+        }
+    }
+
     public class BaseWorldBossRoom
     {
+        public Dictionary<int, WorldBossBuffInfo> buyableBuffs = new Dictionary<int, WorldBossBuffInfo>();
+
         private Dictionary<int, GamePlayer> m_list;
 
         private long MAX_BLOOD = (long)350000000;
@@ -51,11 +82,11 @@ namespace Game.Server.Rooms
 
         public int timeCD = 15;
 
-        public int reviveMoney = 10000;
+        public int reviveMoney = 500;
 
-        public int reFightMoney = 12000;
+        public int reFightMoney = 600;
 
-        public int addInjureBuffMoney = 30000;
+        public int addInjureBuffMoney = 100;
 
         public int addInjureValue = 200;
 
@@ -169,6 +200,24 @@ namespace Game.Server.Rooms
             this.m_name = "Boss";
             this.m_bossResourceId = "0";
             this.m_currentPVE = 0;
+            this.buyableBuffs.Add(1, new WorldBossBuffInfo(
+                1, 
+                BuffType.WorldBossAttrack_MoneyBuff, 
+                "Tăng Sát Thương", 
+                100, 
+                200,
+                WorldBossAttrack_MoneyBuffBuffer.MAX_COUNT,
+                "Sát thương cơ bản tăng 200"
+            ));
+            this.buyableBuffs.Add(2, new WorldBossBuffInfo(
+                2,
+                BuffType.WorldBossHP_MoneyBuff,
+                "Tăng Máu",
+                100,
+                5000,
+                WorldBossHP_MoneyBuffBuffer.MAX_COUNT,
+                "Máu tăng 5000"
+            ));
         }
 
         public bool AddPlayer(GamePlayer player)
@@ -182,7 +231,7 @@ namespace Game.Server.Rooms
                     this.m_list.Add(player.PlayerId, player);
                     flag = true;
                     this.ShowRank();
-                    this.SendPrivateInfo(player.PlayerCharacter.NickName);
+                    this.SendPrivateInfoToCenter(player.PlayerCharacter.NickName);
                 }
             }
             if (flag)
@@ -258,15 +307,24 @@ namespace Game.Server.Rooms
             return true;
         }
 
-        public void SendFightOver()
+        public void WorldBossFightOver()
         {
-            GSPacketIn gSPacketIn = new GSPacketIn(102);
-            gSPacketIn.WriteByte(8);
-            gSPacketIn.WriteBoolean(true);
+            m_fightOver = true;
+
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+            gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_FIGHTOVER);
+            gSPacketIn.WriteBoolean(m_die);
             this.SendToALLPlayers(gSPacketIn);
         }
 
-        public void SendPrivateInfo(string name)
+        public void SendAllOver()
+        {
+            GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
+            gSPacketIn.WriteByte((byte)eWorldBossPackageType.OVER);
+            this.SendToALLPlayers(gSPacketIn);
+        }
+
+        public void SendPrivateInfoToCenter(string name)
         {
             GSPacketIn gSPacketIn = new GSPacketIn(85);
             gSPacketIn.WriteString(name);
@@ -364,39 +422,53 @@ namespace Game.Server.Rooms
 
         public void UpdateWorldBoss(GSPacketIn pkg)
         {
-            long num = pkg.ReadLong();
-            long num1 = pkg.ReadLong();
-            string str = pkg.ReadString();
-            string str1 = pkg.ReadString();
-            int num2 = pkg.ReadInt();
-            bool flag = pkg.ReadBoolean();
-            bool flag1 = pkg.ReadBoolean();
-            this.m_begin_time = pkg.ReadDateTime();
-            this.m_end_time = pkg.ReadDateTime();
-            this.m_fight_time = pkg.ReadInt();
-            bool flag2 = pkg.ReadBoolean();
-            if (!this.m_worldOpen)
+            long newMAX_BLOOD = pkg.ReadLong();
+            long newBlood = pkg.ReadLong();
+            string newName = pkg.ReadString();
+            string newBossResourceId = pkg.ReadString();
+            int newCurrentPVE = pkg.ReadInt();
+            bool newFightOver = pkg.ReadBoolean();
+            bool newRoomClose = pkg.ReadBoolean();
+            DateTime newBeginTime = pkg.ReadDateTime();
+            DateTime newEndTime = pkg.ReadDateTime();
+            int newFightTime = pkg.ReadInt();
+            bool newIsOpen = pkg.ReadBoolean();
+            
+            bool oldIsOpen = this.m_worldOpen;
+            bool oldFightOver = this.m_fightOver;
+            bool oldDie = this.m_die;
+
+            this.m_begin_time = newBeginTime;
+            this.m_end_time = newEndTime;
+            this.m_begin_time = newBeginTime;
+            this.m_fight_time = newFightTime;
+            //this.m_die = newFightOver;
+            this.m_fightOver = newFightOver;
+            this.m_roomClose = newRoomClose;
+            this.MAX_BLOOD = newMAX_BLOOD;
+            this.m_blood = newBlood;
+            this.m_name = newName;
+            this.m_bossResourceId = newBossResourceId;
+            this.m_currentPVE = newCurrentPVE;
+            this.m_worldOpen = newIsOpen;
+
+            //if (isOpenLast && this.m_fightOver && !this.m_die)
+            //{
+            //    this.FightOverAll();
+            //    this.m_die = true;
+            //}
+
+            if (!oldIsOpen)
             {
-                this.m_die = flag;
-                this.m_fightOver = flag;
-                this.m_roomClose = flag1;
-                this.MAX_BLOOD = num;
-                this.m_blood = num1;
-                this.m_name = str;
-                this.m_bossResourceId = str1;
-                this.m_currentPVE = num2;
-                this.m_worldOpen = flag2;
-                GamePlayer[] allPlayers = WorldMgr.GetAllPlayers();
-                for (int i = 0; i < (int)allPlayers.Length; i++)
+                if (newIsOpen)
                 {
-                    GamePlayer gamePlayer = allPlayers[i];
-                    gamePlayer.Out.SendOpenWorldBoss(gamePlayer.X, gamePlayer.Y);
+                    GamePlayer[] allPlayers = WorldMgr.GetAllPlayers();
+                    for (int i = 0; i < (int)allPlayers.Length; i++)
+                    {
+                        GamePlayer gamePlayer = allPlayers[i];
+                        gamePlayer.Out.SendOpenWorldBoss(gamePlayer.X, gamePlayer.Y);
+                    }
                 }
-            }
-            if (this.m_fightOver && !this.m_die)
-            {
-                this.FightOverAll();
-                this.m_die = true;
             }
         }
 
@@ -404,9 +476,9 @@ namespace Game.Server.Rooms
         {
             GSPacketIn gSPacketIn = new GSPacketIn((int)ePackageType.WORLD_BOSS);
             gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_RANKING);
-            bool flag = packet.ReadBoolean();
+            bool isEndRank = packet.ReadBoolean();
             int num = packet.ReadInt();
-            gSPacketIn.WriteBoolean(flag);
+            gSPacketIn.WriteBoolean(isEndRank);
             gSPacketIn.WriteInt(num);
             for (int i = 0; i < num; i++)
             {
@@ -416,12 +488,12 @@ namespace Game.Server.Rooms
                 gSPacketIn.WriteInt(num1);
                 gSPacketIn.WriteString(str);
                 gSPacketIn.WriteInt(num2);
-                if (this.m_fightOver)
+                if (this.m_fightOver && isEndRank)
                 {
                     SendWorldBossRankAward(str, num1);
                 }
             }
-            if (flag)
+            if (isEndRank)
             {
                 this.SendToALLPlayers(gSPacketIn);
                 return;

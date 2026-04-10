@@ -2,7 +2,7 @@
 
 namespace Game.Server.Packets.Client
 {
-    [PacketHandler(94, "游戏创建")]
+    [PacketHandler((int)ePackageType.GAME_ROOM, "游戏创建")]
     public class GameRoomHandler : IPacketHandler
     {
         public int HandlePacket(GameClient client, GSPacketIn packet)

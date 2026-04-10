@@ -12,7 +12,7 @@ namespace Game.Logic
 		Academy = 11,
 		EliteGameScore = 12,
 		EliteGameChampion = 13,
-		WordBossFight = 14,
+		WorldBossFight = 14,
 		Labyrinth = 15,
 		FightGround = 18,
 		ConsortiaBattle = 19,

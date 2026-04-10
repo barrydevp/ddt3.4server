@@ -590,8 +590,18 @@ namespace Bussiness
 
 		[ConfigProperty("DdtLuckOpenBoxMoney", "DdtLuckOpenBoxMoney", 350)]
 		public static readonly int DdtLuckOpenBoxMoney;
-		#endregion
-		public static int ConsortiaStrengExp(int Lv)
+
+        [ConfigProperty("WorldBossStart", "WorldBossStart", "01:00:00|13:00:00")]
+        public static string WorldBossStart;
+
+        [ConfigProperty("WorldBossEnd", "WorldBossEnd", "11:59:00|23:59:00")]
+        public static string WorldBossEnd;
+
+        [ConfigProperty("WorldBossID", "WorldBossID", 0)]
+        public static int WorldBossID;
+
+        #endregion
+        public static int ConsortiaStrengExp(int Lv)
 		{
 			return getProp(ConsortiaStrengthenEx)[Lv];
 		}

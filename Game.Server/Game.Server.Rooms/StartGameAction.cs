@@ -275,7 +275,7 @@ namespace Game.Server.Rooms
                 case eRoomType.Academy:
                 case eRoomType.Boss:
                 case eRoomType.FightLab:
-                case eRoomType.WordBossFight:
+                case eRoomType.WorldBossFight:
                 case eRoomType.Christmas:
                     return true;
             }

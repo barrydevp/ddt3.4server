@@ -149,8 +149,8 @@ namespace Center.Server
                 return;
             }
             base.Strict = false;
-            CenterServer.Instance.SendConfigState();
-            CenterServer.Instance.SendUpdateWorldEvent();
+            CenterServer.Instance.SendConfigState(this);
+            CenterServer.Instance.SendUpdateWorldEvent(this);
             Info.Online = 0;
             Info.State = 2;
         }
@@ -518,7 +518,7 @@ namespace Center.Server
                                         HandleWorldBossRoomClose(pkg);
                                         break;
                                     case 84:
-                                        HandleWorldBossUpdateBlood(pkg);
+                                        HandleWorldBossReduceBlood(pkg);
                                         break;
                                     case 85:
                                         HandleWorldBossPrivateInfo(pkg);
@@ -771,10 +771,10 @@ namespace Center.Server
         public void HandleWorldBossRoomClose(GSPacketIn pkg)
         {
             WorldMgr.WorldBossRoomClose();
-            this._svr.SendRoomClose(0);
+            this._svr.SendWorldBossClose(0);
         }
 
-        public void HandleWorldBossUpdateBlood(GSPacketIn pkg)
+        public void HandleWorldBossReduceBlood(GSPacketIn pkg)
         {
             int num = pkg.ReadInt();
             if (num > 0)

@@ -1,5 +1,8 @@
-﻿using Game.Base.Packets;
+﻿using Bussiness;
+using Game.Base.Packets;
 using Game.Logic;
+using Game.Logic.Phy.Object;
+using Game.Server.Buffer;
 using Game.Server.GameObjects;
 using Game.Server.Managers;
 using System;
@@ -57,12 +60,28 @@ namespace Game.Server.Rooms
             {
                 RoomMgr.WaitingRoom.RemovePlayer(m_player);
                 room.Start();
-                if (m_roomType == eRoomType.Dungeon)
+                switch(m_roomType)
                 {
-                    room.HardLevel = eHardLevel.Normal;
-                    room.LevelLimits = (int)room.GetLevelLimit(m_player);
-                    room.isOpenBoss = false;
-                    room.currentFloor = 0;
+                    case eRoomType.WorldBossFight:
+                        m_player.LastEnterWorldBoss = DateTime.Now;
+                        //m_player.WorldbossBood = RoomMgr.WorldBossRoom.Blood;
+                        AbstractBuffer abstractBuffer = BufferList.CreatePayBuffer((int)BuffType.WorldBossHP, 50000, 1);
+                        if (abstractBuffer != null)
+                        {
+                            abstractBuffer.Start(m_player);
+                        }
+                        abstractBuffer = BufferList.CreatePayBuffer((int)BuffType.WorldBossAddDamage, 30000, 1);
+                        if (abstractBuffer != null)
+                        {
+                            abstractBuffer.Start(m_player);
+                        }
+                        break;
+                    case eRoomType.Dungeon:
+                        room.HardLevel = eHardLevel.Normal;
+                        room.LevelLimits = (int)room.GetLevelLimit(m_player);
+                        room.isOpenBoss = false;
+                        room.currentFloor = 0;
+                        break;
                 }
 
                 if(WorldMgr.IsLeagueOpen)
@@ -74,7 +93,11 @@ namespace Game.Server.Rooms
                 m_player.Out.SendRoomCreate(room);
                 room.AddPlayerUnsafe(m_player);
                 RoomMgr.WaitingRoom.SendUpdateCurrentRoom(room);
+            } else
+            {
+                RoomMgr.Log.Warn("No room could be created for player " + m_player.PlayerCharacter.NickName);
             }
+            
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Game.Server.Packets.Client
 {
-    [PacketHandler(63, "打开物品")]
+    [PacketHandler((int)ePackageType.ITEM_OPENUP, "打开物品")]
     public class OpenUpArkHandler : IPacketHandler
     {
         public static readonly ILog log = LogManager.GetLogger("FlashErrorLogger");
@@ -162,7 +162,7 @@ namespace Game.Server.Packets.Client
                             if (num16 > 0)
                             {
                                 client.Player.AddOffer(num16);
-                                arg = string.Format("Max level khinh nghiệm quy đổi thành {0} công trạng", num16);
+                                arg = string.Format("Max level kinh nghiệm quy đổi thành {0} công trạng", num16);
                             }
                         }
                         else

@@ -643,13 +643,7 @@ namespace Fighting.Server.GameObjects
 		public void UpdateConsortiaBattle(int leftBlood, bool isWin, int tieStatus)
 		{
 		}
-		public long WorldbossBood
-		{
-			get
-			{
-				return 0L;
-			}
-		}
+
 		public bool IsQuanChien { get; set; }
 		public int Place { get; set; }
 

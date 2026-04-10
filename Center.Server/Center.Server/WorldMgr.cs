@@ -1,4 +1,6 @@
-﻿using System;
+﻿using log4net;
+using SqlDataProvider.Data;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -6,13 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Xml.Linq;
-using Bussiness;
-using Bussiness.CenterService;
-using Bussiness.Managers;
-using Center.Server.Managers;
-using Game.Base.Packets;
-using log4net;
-using SqlDataProvider.Data;
 
 namespace Center.Server
 {
@@ -35,7 +30,7 @@ namespace Center.Server
 
         public static long current_blood = 0;
 
-        public static readonly long MAX_BLOOD = 210000000;
+        public static readonly long MAX_BLOOD = 350000000;
 
         public static int currentPVE_ID;
 
@@ -47,13 +42,15 @@ namespace Center.Server
 
         public static DateTime begin_time;
 
+        public static DateTime stop_time;
+
         public static DateTime end_time;
 
         public static int fight_time;
 
         public static bool worldOpen;
 
-        private static readonly int worldbossTime = 60;
+        private static readonly int worldbossTime = 360;
 
         private static ReaderWriterLock m_lock;
         private static string SystemNoticeFile => ConfigurationManager.AppSettings["SystemNoticePath"];
@@ -115,16 +112,20 @@ namespace Center.Server
             }
         }
 
-        public static void SetupWorldBoss(int id)
+        public static void SetupWorldBoss(int id, DateTime beginTime, DateTime stopTime, DateTime endTime)
         {
-            current_blood = MAX_BLOOD;
-            begin_time = DateTime.Now;
-            end_time = begin_time.AddDays(1.0);
-            fight_time = worldbossTime - begin_time.Minute;
-            fightOver = false;
-            roomClose = false;
-            currentPVE_ID = id;
-            worldOpen = true;
+            lock (m_lock)
+            {
+                current_blood = MAX_BLOOD;
+                begin_time = beginTime;
+                end_time = endTime;
+                stop_time = stopTime;
+                fight_time = (int)stopTime.Subtract(beginTime).TotalMinutes;
+                fightOver = false;
+                roomClose = false;
+                currentPVE_ID = id;
+                worldOpen = true;
+            }
         }
 
         public static void WorldBossClearRank()
@@ -173,9 +174,12 @@ namespace Center.Server
 
         public static void ReduceBlood(int value)
         {
-            if (current_blood > 0L)
+            lock (m_lock)
             {
-                current_blood -= (long)value;
+                if (current_blood > 0L)
+                {
+                    current_blood = Math.Max(0, current_blood - (long)value);
+                }
             }
         }
 

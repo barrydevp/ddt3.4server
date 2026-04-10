@@ -1,7 +1,9 @@
 ﻿using Bussiness;
 using Game.Base.Packets;
+using Game.Logic.Phy.Object;
 using Game.Server.Buffer;
 using Game.Server.Rooms;
+using SqlDataProvider.Data;
 using System;
 namespace Game.Server.Packets.Client
 {
@@ -20,19 +22,19 @@ namespace Game.Server.Packets.Client
             {
                 switch(b)
                 {
-                    case 32:
-                        gSPacketIn.WriteByte(2);
+                    case (byte)eWorldBossPackageRecvType.ENTER_WORLDBOSSROOM:
+                        gSPacketIn.WriteByte((byte)eWorldBossPackageType.CANENTER);
                         gSPacketIn.WriteBoolean(true);
                         gSPacketIn.WriteBoolean(false);
                         gSPacketIn.WriteInt(0);
                         gSPacketIn.WriteInt(0);
                         client.Out.SendTCP(gSPacketIn);
                         return 0;
-                    case 33:
+                    case (byte)eWorldBossPackageRecvType.LEAVE_ROOM:
                         RoomMgr.WorldBossRoom.RemovePlayer(client.Player);
                         client.Player.IsInWorldBossRoom = false;
                         break;
-                    case 34:
+                    case (byte)eWorldBossPackageRecvType.ADDPLAYERS:
                         {
                             int x = packet.ReadInt();
                             int y = packet.ReadInt();
@@ -45,7 +47,7 @@ namespace Game.Server.Packets.Client
                             BaseWorldBossRoom worldBossRoom = RoomMgr.WorldBossRoom;
                             if (client.Player.IsInWorldBossRoom)
                             {
-                                gSPacketIn.WriteByte(4);
+                                gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_EXIT);
                                 gSPacketIn.WriteInt(client.Player.PlayerId);
                                 worldBossRoom.SendToALL(gSPacketIn);
                                 worldBossRoom.RemovePlayer(client.Player);
@@ -60,12 +62,12 @@ namespace Game.Server.Packets.Client
                             }
                             break;
                         }
-                    case 35:
+                    case (byte)eWorldBossPackageRecvType.MOVE:
                         {
                             int num = packet.ReadInt();
                             int num2 = packet.ReadInt();
                             string str = packet.ReadString();
-                            gSPacketIn.WriteByte(6);
+                            gSPacketIn.WriteByte((byte)eWorldBossPackageType.MOVE);
                             gSPacketIn.WriteInt(client.Player.PlayerId);
                             gSPacketIn.WriteInt(num);
                             gSPacketIn.WriteInt(num2);
@@ -76,12 +78,12 @@ namespace Game.Server.Packets.Client
                             client.Player.Y = num2;
                             break;
                         }
-                    case 36:
+                    case (byte)eWorldBossPackageRecvType.STAUTS:
                         {
                             byte b2 = packet.ReadByte();
                             if (b2 != 3 || client.Player.States != 3)
                             {
-                                gSPacketIn.WriteByte(7);
+                                gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_PLAYERSTAUTSUPDATE);
                                 gSPacketIn.WriteInt(client.Player.PlayerId);
                                 gSPacketIn.WriteByte(b2);
                                 gSPacketIn.WriteInt(client.Player.X);
@@ -92,12 +94,12 @@ namespace Game.Server.Packets.Client
                                     client.Player.CurrentRoom.RemovePlayerUnsafe(client.Player);
                                 }
                                 string nickName = client.Player.PlayerCharacter.NickName;
-                                RoomMgr.WorldBossRoom.SendPrivateInfo(nickName);
+                                RoomMgr.WorldBossRoom.SendPrivateInfoToCenter(nickName);
                             }
                             client.Player.States = b2;
                             break;
                         }
-                    case 37:
+                    case (byte)eWorldBossPackageRecvType.REQUEST_REVIVE:
                         {
                             int num3 = packet.ReadInt();
                             packet.ReadBoolean();
@@ -108,25 +110,51 @@ namespace Game.Server.Packets.Client
                             }
                             if (client.Player.MoneyDirect(value, false))
                             {
-                                gSPacketIn.WriteByte(11);
+                                client.Player.LastEnterWorldBoss = DateTime.MinValue;
+                                gSPacketIn.WriteByte((byte)eWorldBossPackageType.WORLDBOSS_PLAYER_REVIVE);
                                 gSPacketIn.WriteInt(client.Player.PlayerId);
                                 RoomMgr.WorldBossRoom.SendToALL(gSPacketIn);
                             }
                             break;
                         }
-                    case 38:
+                    case (byte)eWorldBossPackageRecvType.BUFF_BUY:
                         {
-                            int addInjureBuffMoney = RoomMgr.WorldBossRoom.addInjureBuffMoney;
-                            int addInjureValue = RoomMgr.WorldBossRoom.addInjureValue;
-                            if (client.Player.MoneyDirect(addInjureBuffMoney, false))
+                            //int addInjureBuffMoney = RoomMgr.WorldBossRoom.addInjureBuffMoney;
+                            //int addInjureValue = RoomMgr.WorldBossRoom.addInjureValue;
+                            int nBuff = packet.ReadInt();
+                            int nBuy = 0;
+                            for (int i = 0; i < nBuff; i++)
                             {
-                                client.Player.RemoveMoney(addInjureBuffMoney);
-                                AbstractBuffer abstractBuffer = BufferList.CreatePayBuffer(403, addInjureValue, 1);
-                                if (abstractBuffer != null)
+                                int bufId = packet.ReadInt();
+
+                                WorldBossBuffInfo info = null;
+                                //Console.WriteLine($"buffId: {bufId}");
+                                if(!RoomMgr.WorldBossRoom.buyableBuffs.TryGetValue(bufId, out info) || info == null)
                                 {
+                                    continue;
+                                }
+                                BufferInfo appliedBuff = client.Player.FindFightBuff(info.Type);
+                                if (appliedBuff != null && appliedBuff.ValidCount >= info.MaxCount)
+                                {
+                                    client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation($"Chỉ được mua tối đa {info.MaxCount} {info.Name}!"));
+                                    continue;
+                                }
+
+                                AbstractBuffer abstractBuffer = BufferList.CreatePayBuffer((int)info.Type, info.Value, 5);
+                                if (abstractBuffer == null)
+                                {
+                                    client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation($"Không tìm thấy {info.Name}!"));
+                                    continue;
+                                }
+
+                                if (client.Player.MoneyDirect(info.Price, false))
+                                {
+                                    //client.Player.RemoveMoney(info.Price);
                                     abstractBuffer.Start(client.Player);
+                                    client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation($"Đã mua {info.Name}, tốn {info.Price} xu!"));
                                 }
                             }
+                           
                             break;
                         }
                     default:

@@ -6489,7 +6489,7 @@ namespace Game.Server.GameObjects
             {
 				if (RoomMgr.WorldBossRoom.WorldbossOpen)
 				{
-					this.Out.SendOpenWorldBoss(this.X, this.Y);
+					Out.SendOpenWorldBoss(this.X, this.Y);
 				}
 			}
 			if(PlayerCharacter.Grade >= 13)
@@ -6822,11 +6822,24 @@ namespace Game.Server.GameObjects
 			}
 		}
 
-        public long WorldbossBood { get; set; }
+        //public long WorldbossBood { get; set; }
 
 		public bool IsInWorldBossRoom;
 
 		public bool IsQuanChien { get; set; }
 		public int Place { get; set; }
+
+		public BufferInfo FindFightBuff(BuffType type)
+		{
+			for (int i = 0; i < FightBuffs.Count; i++)
+			{
+				if (FightBuffs[i].Type == (int)type)
+				{
+					return FightBuffs[i];
+				}
+			}
+
+			return null;
+		}
 	}
 }

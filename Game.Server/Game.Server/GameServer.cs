@@ -238,16 +238,16 @@ namespace Game.Server
                 
                 if (tickCount > 120000)
                 {
-                    log.WarnFormat("WroldEvent Scan take long time {0} ms", tickCount);
+                    log.WarnFormat("WorldEvent Scan take long time {0} ms", tickCount);
                 } 
 				else
 				{
-                    log.Info("WroldEvent Scan complete in " + tickCount + "ms!");
+                    log.Info("WorldEvent Scan complete in " + tickCount + "ms!");
                 }
             }
             catch (Exception exception)
             {
-                log.Error("WroldEventScanProc", exception);
+                log.Error("WorldEventScanProc", exception);
             }
         }
 
@@ -1000,7 +1000,12 @@ namespace Game.Server
 					log.Info("GameServer is now open for connections!");
 				}
 				m_isRunning = true;
-				return true;
+
+				// First time SCAN
+				log.Info("First time scan...");
+                WorldEventScanProc(null);
+
+                return true;
 			}
 			catch (Exception exception)
 			{

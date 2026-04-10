@@ -17,12 +17,27 @@
         WORLDBOSS_BUYBUFF = 12
     }
 
+    public enum eWorldBossPackageRecvType
+    {
+        ENTER_WORLDBOSSROOM = 32,
+        LEAVE_ROOM = 33,
+        ADDPLAYERS = 34,
+        MOVE = 35,
+        STAUTS = 36,
+        REQUEST_REVIVE = 37,
+        BUFF_BUY = 38
+    }
+
     public enum eServerCmdType
     {
+        WORLDBOSS_ALLOVER = 78,
+        WORLDBOSS_UPDATE_BLOOD = 79,
         WORLDBOSS_UPDATE_INFO = 80,
         WORLDBOSS_UPDATE_RANK = 81,
         WORLDBOSS_FIGHTOVER = 82,
+        WORLDBOSS_CLOSE = 83,
         WORLDBOSS_REDUCE_BLOOD = 84,
+        WORLDBOSS_PRIVATE_INFO = 85,
         WORLDBOSS_SHOW_RANK = 86,
     }
 }

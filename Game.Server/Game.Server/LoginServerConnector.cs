@@ -91,12 +91,21 @@ namespace Game.Server
 						case 38:
 							HandleSysMess(pkg);
 							break;
-						case 71:
+						case 39:
+							HandleSendMessage(pkg);
+							break;
+                        case 40:
+                            HandleSendMessageAll(pkg);
+                            break;
+                        case 71:
 						case 72:
 						case 73:
 							HandleBigBugle(pkg);
 							break;
-						case 79:
+                        case (int)eServerCmdType.WORLDBOSS_ALLOVER:
+                            HandleWorldBossAllOver(pkg);
+							break;
+                        case (int)eServerCmdType.WORLDBOSS_UPDATE_BLOOD:
 							HandleWorldBossUpdateBlood(pkg);
 							break;
 						case (int)eServerCmdType.WORLDBOSS_UPDATE_INFO:
@@ -105,13 +114,13 @@ namespace Game.Server
 						case (int)eServerCmdType.WORLDBOSS_UPDATE_RANK:
 							HandleWorldBossRank(pkg);
 							break;
-						case 82:
+						case (int)eServerCmdType.WORLDBOSS_FIGHTOVER:
 							HandleWorldBossFightOver(pkg);
 							break;
-						case 83:
-							HandleWorldBossRoomClose(pkg);
+						case (int)eServerCmdType.WORLDBOSS_CLOSE:
+							HandleWorldBossClose(pkg);
 							break;
-						case 85:
+						case (int)eServerCmdType.WORLDBOSS_PRIVATE_INFO:
 							HandleWorldBossPrivateInfo(pkg);
 							break;
 						case 87:
@@ -322,18 +331,23 @@ namespace Game.Server
 
 		public void HandleWorldBossFightOver(GSPacketIn pkg)
 		{
-			RoomMgr.WorldBossRoom.SendFightOver();
+			RoomMgr.WorldBossRoom.WorldBossFightOver();
 		}
+        public void HandleWorldBossAllOver(GSPacketIn pkg)
+        {
+            RoomMgr.WorldBossRoom.SendAllOver();
+        }
 
-		public void HandleWorldBossRoomClose(GSPacketIn pkg)
+        public void HandleWorldBossClose(GSPacketIn pkg)
 		{
-			if (pkg.ReadByte() == 0)
+            if (pkg.ReadByte() == 0) // !isWorldClose
 			{
-				RoomMgr.WorldBossRoom.SendRoomClose();
-				return;
+                RoomMgr.WorldBossRoom.SendRoomClose();
+				//return;
 			}
-			RoomMgr.WorldBossRoom.WorldBossClose();
-		}
+
+            RoomMgr.WorldBossRoom.WorldBossClose();
+        }
 
 		public void HandleWorldBossPrivateInfo(GSPacketIn pkg)
 		{
@@ -1056,7 +1070,27 @@ namespace Game.Server
 			}
 		}
 
-		public void HandleSystemNotice(GSPacketIn packet)
+		public void HandleSendMessage(GSPacketIn packet)
+		{
+			int playerId = packet.ReadInt();
+			int type = packet.ReadInt();
+            string msg = packet.ReadString();
+			WorldMgr.GetPlayerById(playerId)?.Out.SendMessage((eMessageType)type, msg);
+        }
+
+        public void HandleSendMessageAll(GSPacketIn packet)
+        {
+            int playerId = packet.ReadInt();
+            int type = packet.ReadInt();
+            string msg = packet.ReadString();
+            GamePlayer[] allPlayers = WorldMgr.GetAllPlayers();
+            for (int i = 0; i < allPlayers.Length; i++)
+            {
+                allPlayers[i].Out.SendMessage((eMessageType)type, msg);
+            }
+        }
+
+        public void HandleSystemNotice(GSPacketIn packet)
 		{
 			GamePlayer[] allPlayers = WorldMgr.GetAllPlayers();
 			for (int i = 0; i < allPlayers.Length; i++)

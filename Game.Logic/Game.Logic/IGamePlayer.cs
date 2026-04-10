@@ -258,11 +258,6 @@ namespace Game.Logic
 
 		int AddDamageScores(int value);
 
-		long WorldbossBood
-		{
-			get;
-		}
-
 		bool IsQuanChien { get; set; }
 
 		int Place { get; set; }

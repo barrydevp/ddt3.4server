@@ -51,7 +51,10 @@ namespace Game.Server.Rooms
             get { return m_worldbossRoom; }
         }
 
-
+        public static ILog Log
+        {
+            get { return log; }
+        }
 
         public static bool Setup(int maxRoom)
         {

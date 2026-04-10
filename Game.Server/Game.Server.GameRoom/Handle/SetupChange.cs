@@ -1,4 +1,5 @@
-﻿using Game.Base.Packets;
+﻿using Bussiness;
+using Game.Base.Packets;
 using Game.Logic;
 using Game.Server.GameObjects;
 using Game.Server.Packets;
@@ -57,6 +58,21 @@ namespace Game.Server.GameRoom.Handle
                             Player.SendMessage("Số lượt ngày hôm nay đã hết hoặc không đủ xu!");
                             return false;
                         }
+                    }
+                }
+                if(roomType == eRoomType.WorldBossFight)
+                {
+                    if (!RoomMgr.WorldBossRoom.WorldbossOpen)
+                    {
+                        Player.CurrentRoom.RemovePlayerUnsafe(Player);
+                        Player.SendMessage(LanguageMgr.GetTranslation("Boss thế giới đã kết thúc!"));
+                        return false;
+                    }
+
+                    if (RoomMgr.WorldBossRoom.FightOver)
+                    {
+                        Player.SendMessage(LanguageMgr.GetTranslation("Ngoài thời gian chiến đấu!"));
+                        return false;
                     }
                 }
                 RoomMgr.UpdateRoomGameType(Player.CurrentRoom, roomType, timeType, (eHardLevel)hardLevel, levelLimits, mapId, roomPass, roomName, isCrossZone, isOpenBoss, pic, currentFloor);
