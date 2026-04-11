@@ -6,7 +6,7 @@ using SqlDataProvider.Data;
 
 namespace Game.Server.Packets.Client
 {
-    [PacketHandler(133, "场景用户离开")]
+    [PacketHandler((int)ePackageType.LATENT_ENERGY, "场景用户离开")]
     public class LatentEnergyHandler : IPacketHandler
     {
         public static Random random = new Random();
@@ -28,7 +28,7 @@ namespace Game.Server.Packets.Client
             ItemInfo itemCell = null;
             PlayerInventory inventory = client.Player.GetInventory((eBageType)BagType);
             string msg = LanguageMgr.GetTranslation("LatentEnergyHandler.Msg2");
-            GSPacketIn pkg = new GSPacketIn(133, client.Player.PlayerCharacter.ID);
+            GSPacketIn pkg = new GSPacketIn((int)ePackageType.LATENT_ENERGY, client.Player.PlayerCharacter.ID);
             if (type == 1)
             {
                 temBagType = packet.ReadInt();
@@ -37,6 +37,12 @@ namespace Game.Server.Packets.Client
                 if (itemCell == null || itemCell.Count < 1)
                 {
                     client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("LatentEnergyHandler.Msg3"));
+                    return 0;
+                }
+
+                if (itemCell.Template == null || itemCell.Template.CategoryID != 11 || itemCell.Template.Property1 != 101)
+                {
+                    client.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("LatentEnergyHandler.Msg1"));
                     return 0;
                 }
 

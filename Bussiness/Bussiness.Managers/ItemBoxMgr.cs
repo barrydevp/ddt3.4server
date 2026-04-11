@@ -219,7 +219,143 @@ namespace Bussiness.Managers
 			return true;
 		}
 
-		public static bool CreateItemBox(int DateId, List<ItemInfo> itemInfos, ref int gold, ref int point, ref int giftToken, ref int medal, ref int exp, ref int hardCurrency, ref int leagueMoney, ref int useableScore, ref int prestge)
+        public static bool CreateItemBox(int boxId, List<ItemInfo> resultItems, ref int gold, ref int point, ref int giftToken, ref int medal, ref int exp, ref int hardCurrency, ref int leagueMoney, ref int useableScore, ref int prestge, ref int honor)
+        {
+            List<ItemBoxInfo> finalRewards = new List<ItemBoxInfo>();
+            List<ItemBoxInfo> allBoxItems = ItemBoxMgr.FindItemBox(boxId);
+
+            if (allBoxItems == null)
+            {
+                return false;
+            }
+
+            // Get all guaranteed items (IsSelect = true)
+            finalRewards = (from item in allBoxItems
+                            where item.IsSelect
+                            select item).ToList();
+
+            int itemsToDropCount = 1;
+            int randomBound = 0;
+
+            // If there are random items in this box, generate a random bound for selection
+            if (finalRewards.Count < allBoxItems.Count)
+            {
+                randomBound = ThreadSafeRandom.NextStatic((from item in allBoxItems
+                                                                      where !item.IsSelect
+                                                                      select item.Random).Max());
+            }
+
+            // Create the item pool, the rule is:
+            // - Larger random value means higher chance to be selected (common)
+            // - Lower random value means lower chance to be selected (rare)
+            List<ItemBoxInfo> randomItemPool = (from item in allBoxItems
+                                                where !item.IsSelect && item.Random >= randomBound
+                                                select item).ToList();
+
+            int poolSize = randomItemPool.Count;
+            if (poolSize > 0)
+            {
+                // Don't try to draw more items than exist in the pool
+                itemsToDropCount = itemsToDropCount > poolSize ? poolSize : itemsToDropCount;
+				// Get random item from pool (it's like double random drawing :>)
+                int[] randomlySelectedIndices = ItemBoxMgr.GetRandomUnrepeatArray(0, poolSize - 1, itemsToDropCount);
+
+                foreach (int index in randomlySelectedIndices)
+                {
+                    ItemBoxInfo drawnItem = randomItemPool[index];
+                    if (finalRewards == null)
+                    {
+                        finalRewards = new List<ItemBoxInfo>();
+                    }
+                    finalRewards.Add(drawnItem);
+                }
+            }
+
+            // Produce the final items from reward list
+            foreach (ItemBoxInfo rewardInfo in finalRewards)
+            {
+                if (rewardInfo == null)
+                {
+                    return false;
+                }
+
+                int templateId = rewardInfo.TemplateId;
+
+				if(templateId < 0)
+				{
+                    // Check for some virtual currency rewards
+                    switch (templateId)
+                    {
+                        case -1300:
+                            prestge += rewardInfo.ItemCount; // danh vong
+                            continue;
+                        case -1200:
+                            useableScore += rewardInfo.ItemCount; // diem tich luy thuyen rong
+                            continue;
+                        case -1100:
+                            giftToken += rewardInfo.ItemCount; // le kim
+                            continue;
+                        case -1000:
+                            leagueMoney += rewardInfo.ItemCount; // lenh bai
+                            continue;
+                        case -900:
+                            hardCurrency += rewardInfo.ItemCount; // vang me cung
+                            continue;
+                        case -800:
+                            honor += rewardInfo.ItemCount; // vinh du
+                            continue;
+                        case -300:
+                            medal += rewardInfo.ItemCount; // huan chuong
+                            continue;
+                        case -200:
+                            point += rewardInfo.ItemCount; // xu
+                            continue;
+                        case -100:
+                            gold += rewardInfo.ItemCount; // vang
+                            continue;
+                    }
+
+                }
+				else
+				{
+                    switch (templateId)
+					{
+						case 11107:
+							exp += rewardInfo.ItemCount; // kinh nghiem
+							continue;
+                    }
+                }
+               
+
+                // For real items
+                ItemTemplateInfo itemTemplate = ItemMgr.FindItemTemplate(rewardInfo.TemplateId);
+                ItemInfo createdItem = ItemInfo.CreateFromTemplate(itemTemplate, rewardInfo.ItemCount, 101);
+
+                if (createdItem != null)
+                {
+                    createdItem.Count = rewardInfo.ItemCount;
+                    createdItem.IsBinds = rewardInfo.IsBind;
+                    createdItem.ValidDate = rewardInfo.ItemValid;
+                    createdItem.StrengthenLevel = rewardInfo.StrengthenLevel;
+                    createdItem.AttackCompose = rewardInfo.AttackCompose;
+                    createdItem.DefendCompose = rewardInfo.DefendCompose;
+                    createdItem.AgilityCompose = rewardInfo.AgilityCompose;
+                    createdItem.LuckCompose = rewardInfo.LuckCompose;
+                    createdItem.IsTips = (rewardInfo.IsTips != 0);
+                    createdItem.IsLogs = rewardInfo.IsLogs;
+
+                    if (resultItems == null)
+                    {
+                        resultItems = new List<ItemInfo>();
+                    }
+                    resultItems.Add(createdItem);
+                }
+            }
+
+            return true;
+        }
+
+        public static bool CreateItemBoxV0(int DateId, List<ItemInfo> itemInfos, ref int gold, ref int point, ref int giftToken, ref int medal, ref int exp, ref int hardCurrency, ref int leagueMoney, ref int useableScore, ref int prestge)
 		{
 			List<ItemBoxInfo> FiltInfos = new List<ItemBoxInfo>();
 			List<ItemBoxInfo> unFiltInfos = ItemBoxMgr.FindItemBox(DateId);

@@ -58,9 +58,10 @@ namespace Game.Server.Packets.Client
                     int num11 = 0;
                     int num12 = 0;
                     int num13 = 0;
+                    int honor = 0;
                     Random rand = new Random();
                     List<ItemInfo> list2 = new List<ItemInfo>();
-                    ItemBoxMgr.CreateItemBox(itemAt.TemplateID, list2, ref num5, ref num4, ref num6, ref num7, ref num8, ref num10, ref num11, ref num12, ref num13);
+                    ItemBoxMgr.CreateItemBox(itemAt.TemplateID, list2, ref num5, ref num4, ref num6, ref num7, ref num8, ref num10, ref num11, ref num12, ref num13, ref honor);
                     #region Rương Xu
                     if (itemAt.TemplateID == 52000621)//Rương Trung Cấp
                     {
@@ -74,7 +75,7 @@ namespace Game.Server.Packets.Client
                         client.Player.SendMessage(string.Format("Bạn nhận được {0} xu từ Rương Xu PVE(Cao Cấp)", moneyRand));
                         client.Player.AddMoney(moneyRand);
                     }
-                    if(itemAt.TemplateID == 11917)
+                    if (itemAt.TemplateID == 11917)
                     {
                         int myHonor = 200;
                         client.Player.AddHonor(myHonor);
@@ -193,6 +194,12 @@ namespace Game.Server.Packets.Client
                         num2 += num13;
                         arg = LanguageMgr.GetTranslation("OpenUpArkHandler.prestge", new object[0]);
                     }
+                    if (honor != 0)
+                    {
+                        num2 += honor;
+                        arg = LanguageMgr.GetTranslation("OpenUpArkHandler.honor");
+                        client.Player.AddHonor(honor);
+                    }
                     foreach (ItemInfo current in list2)
                     {
                         if (!dictionary.ContainsKey(current.TemplateID))
@@ -214,10 +221,7 @@ namespace Game.Server.Packets.Client
                 if (stringBuilder.Length > 0)
                 {
                     stringBuilder.Remove(stringBuilder.Length - 1, 1);
-                    string[] array = stringBuilder.ToString().Split(new char[]
-                    {
-                        ','
-                    });
+                    string[] array = stringBuilder.ToString().Split(',');
                     for (int j = 0; j < array.Length; j++)
                     {
                         int num17 = 1;

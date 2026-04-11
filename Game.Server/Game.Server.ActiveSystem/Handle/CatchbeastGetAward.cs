@@ -37,7 +37,7 @@ namespace Game.Server.ActiveSystem.Handle
                 int num11 = 0;
                 int num12 = 0;
                 int num13 = 0;
-                ItemBoxMgr.CreateItemBox(templateID, infos, ref num4, ref num5, ref num6, ref num7, ref num8, ref num10, ref num11, ref num12, ref num13);
+                ItemBoxMgr.CreateItemBoxV0(templateID, infos, ref num4, ref num5, ref num6, ref num7, ref num8, ref num10, ref num11, ref num12, ref num13);
                 StringBuilder msga = new StringBuilder();
                 foreach (ItemInfo item in infos)
                 {

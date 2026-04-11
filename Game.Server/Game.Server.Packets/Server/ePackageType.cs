@@ -269,5 +269,6 @@ namespace Game.Server.Packets
         NEWCHICKENBOX_SYS = 87,
         SAN_XIAO = 329,
         WORLD_BOSS = 102,
+        LATENT_ENERGY = 133,
     }
 }

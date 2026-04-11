@@ -1,13 +1,14 @@
 ﻿using Bussiness;
 using Game.Base.Packets;
 using Game.Server.GameUtils;
+using Game.Server.Packets;
 using Game.Server.Packets.Client;
 using SqlDataProvider.Data;
 using System;
 
 namespace Game.Server.Packet.Client
 {
-    [PacketHandler(252, "场景用户离开")]
+    [PacketHandler((int)ePackageType.USE_CHANGE_SEX, "场景用户离开")]
     public class ChangeSexHandler : IPacketHandler
     {
         public int HandlePacket(GameClient client, GSPacketIn pkg)
@@ -57,7 +58,7 @@ namespace Game.Server.Packet.Client
                 }
             }
 
-            else if (card.TemplateID == 12545)
+            else if (card.TemplateID == 12545) // su dung tai tu luyen, dhs lai nhet vao change sex => !TODOL: implement useSpecial for this such cases
             {
                 TexpInfo texpInfo = client.Player.PlayerCharacter.Texp;
                 if (texpInfo.resetCount >= card.Template.Property2 && texpInfo.lastReset.Date < DateTime.Now.Date)
