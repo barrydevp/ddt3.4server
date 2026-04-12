@@ -248,7 +248,7 @@ namespace Game.Server.GameUtils
 							AddBaseLatentProperty(itemInfo, ref attack, ref defence, ref agility, ref lucky);
 							AddBaseGemstoneProperty(itemInfo, ref gemAtk, ref gemDef, ref gemAgi, ref gemLuck, ref gemHp);
 							var info = SubActiveMgr.GetSubActiveInfo(itemInfo);
-							if (info != null && SubActiveMgr.Checked())
+							if (info != null && SubActiveMgr.Checked(info))
 							{
 								attack += info.GetValue("1");
 								defence += info.GetValue("2");

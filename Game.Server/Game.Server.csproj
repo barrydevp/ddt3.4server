@@ -632,6 +632,7 @@
     <Compile Include="Game.Server.Packets\Added\winLeagueRankHandler.cs" />
     <Compile Include="Game.Server.Packets\Added\winRankHandler.cs" />
     <Compile Include="Game.Server.Packets\Added\WorldBossHandler.cs" />
+    <Compile Include="Game.Server.Packets\Client\OpenUpArkHandler.cs" />
     <Compile Include="Game.Server.Packets\Server\ChickActivationType.cs" />
     <Compile Include="Game.Server.Packets\Client\AASInfoSetHandle.cs" />
     <Compile Include="Game.Server.Packets\Client\ACActionHandler.cs" />
@@ -731,7 +732,7 @@
     <Compile Include="Game.Server.Packets\Client\OpenAllCardBoxHandler.cs" />
     <Compile Include="Game.Server.Packets\Client\OpenDailyView.cs" />
     <Compile Include="Game.Server.Packets\Client\OpenFiveSixHoleHandler.cs" />
-    <Compile Include="Game.Server.Packets\Client\OpenUpArkHandler.cs" />
+    <Compile Include="Game.Server.Packets\Client\OpenUpArkHandlerOld.cs" />
     <Compile Include="Game.Server.Packets\Client\OpenVipHandler.cs" />
     <Compile Include="Game.Server.Packets\Client\OptionHandler.cs" />
     <Compile Include="Game.Server.Packets\Client\PacketHandlerAttribute.cs" />

@@ -15,7 +15,9 @@ namespace Bussiness.Managers
 
 		public static Dictionary<int, List<SubActiveInfo>> m_SubActiveInfo = new Dictionary<int, List<SubActiveInfo>>();
 
-		public static SubActiveConditionInfo GetSubActiveInfo(ItemInfo item)
+        public static Dictionary<(int, int), SubActiveInfo> m_DirectSubActiveInfo = new Dictionary<(int, int), SubActiveInfo>();
+
+        public static SubActiveConditionInfo GetSubActiveInfo(ItemInfo item)
 		{
 			SubActiveConditionInfo result;
 			foreach (List<SubActiveInfo> value in m_SubActiveInfo.Values)
@@ -90,9 +92,11 @@ namespace Bussiness.Managers
 			}
 		}
 
-		public static Dictionary<int, List<SubActiveInfo>> LoadSubActiveDb()
+		public static Dictionary<int, List<SubActiveInfo>> LoadSubActiveDb(out Dictionary<(int, int), SubActiveInfo> directSubActiveInfo)
 		{
 			Dictionary<int, List<SubActiveInfo>> dictionary = new Dictionary<int, List<SubActiveInfo>>();
+			directSubActiveInfo = new Dictionary<(int, int), SubActiveInfo>();
+
 			using (ProduceBussiness bussiness = new ProduceBussiness())
 			{
 				SubActiveInfo[] allSubActive = bussiness.GetAllSubActive();
@@ -108,7 +112,12 @@ namespace Bussiness.Managers
 					{
 						dictionary[info.ActiveID].Add(info);
 					}
-				}
+
+					if (!directSubActiveInfo.ContainsKey((info.ActiveID, info.SubID)))
+					{
+						directSubActiveInfo.Add((info.ActiveID, info.SubID), info);
+					}
+                }
 				return dictionary;
 			}
 		}
@@ -117,12 +126,13 @@ namespace Bussiness.Managers
 		{
 			try
 			{
-				Dictionary<int, List<SubActiveInfo>> conditions = LoadSubActiveDb();
+				Dictionary<int, List<SubActiveInfo>> conditions = LoadSubActiveDb(out var directSubActiveInfo);
 				Dictionary<int, SubActiveConditionInfo> dictionary2 = LoadSubActiveConditionDb(conditions);
 				if (conditions.Count > 0)
 				{
 					Interlocked.Exchange(ref m_SubActiveInfo, conditions);
 					Interlocked.Exchange(ref m_SubActiveConditionInfo, dictionary2);
+					Interlocked.Exchange(ref m_DirectSubActiveInfo, directSubActiveInfo);
 				}
 				return true;
 			}
@@ -133,24 +143,17 @@ namespace Bussiness.Managers
 			return false;
 		}
 
-		public static bool Checked()
+		public static bool Checked(SubActiveConditionInfo subCondInfo)
 		{
-			bool result = false;
-			foreach (List<SubActiveInfo> subActiveInfoList in SubActiveMgr.m_SubActiveInfo.Values)
+			if(m_DirectSubActiveInfo.TryGetValue((subCondInfo.ActiveID, subCondInfo.SubID), out var subActiveInfo))
 			{
-				foreach (SubActiveInfo info in subActiveInfoList)
+				if (DateTime.Now.Date <= subActiveInfo.EndTime.Date)
 				{
-					if (DateTime.Now.Date <= info.EndTime.Date)
-					{
-						result = true;
-					}
-					else
-					{
-						result = false;
-					}
+					return true;
 				}
-			}
-			return result;
+            }
+
+			return false;
 		}
 	}
 }

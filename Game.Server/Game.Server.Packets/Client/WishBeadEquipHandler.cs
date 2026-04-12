@@ -58,7 +58,7 @@ namespace Game.Server.Packets.Client
                     return 0;
                 }
 
-                if (!item.IsValidGoldItem())
+                if (item.IsValidGoldItem())
                 {
                     pkg.WriteInt(6);
                     client.Out.SendTCP(pkg);

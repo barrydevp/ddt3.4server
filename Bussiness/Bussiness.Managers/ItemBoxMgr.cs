@@ -219,7 +219,39 @@ namespace Bussiness.Managers
 			return true;
 		}
 
-        public static bool CreateItemBox(int boxId, List<ItemInfo> resultItems, ref int gold, ref int point, ref int giftToken, ref int medal, ref int exp, ref int hardCurrency, ref int leagueMoney, ref int useableScore, ref int prestge, ref int honor)
+		public static bool CreateItemBox(ItemInfo boxInfo, List<ItemInfo> resultItems, ref int gold, ref int money, ref int giftToken, ref int medal, ref int exp, ref int hardCurrency, ref int leagueMoney, ref int useableScore, ref int prestge, ref int honor)
+		{
+            switch (boxInfo.Template.Property2)
+            {
+                // Rương Xu
+                case 130:
+					money += ThreadSafeRandom.NextStatic(boxInfo.Template.Property5, boxInfo.Template.Property6);
+                    return true;
+                // Rương Random
+                case 140:
+                    int totalCount = ThreadSafeRandom.NextStatic(boxInfo.Template.Property5, boxInfo.Template.Property6);
+                    ItemTemplateInfo goods = ItemMgr.FindItemTemplate(GameProperties.AwardItemBox);
+					if (goods != null)
+					{
+						ItemInfo item = ItemInfo.CreateFromTemplate(goods, totalCount, 106);
+						item.IsBinds = true;
+						resultItems.Add(item);
+					}
+					break;
+            }
+
+            switch (boxInfo.TemplateID)
+            {
+                // Tinh hoa vinh dự
+                case 11917:
+					honor += 200;
+					return true;
+            }
+
+            return CreateItemBox(boxInfo.TemplateID, resultItems, ref gold, ref money, ref giftToken, ref medal, ref exp, ref hardCurrency, ref leagueMoney, ref useableScore, ref prestge, ref honor);
+        }
+
+        public static bool CreateItemBox(int boxId, List<ItemInfo> resultItems, ref int gold, ref int money, ref int giftToken, ref int medal, ref int exp, ref int hardCurrency, ref int leagueMoney, ref int useableScore, ref int prestge, ref int honor)
         {
             List<ItemBoxInfo> finalRewards = new List<ItemBoxInfo>();
             List<ItemBoxInfo> allBoxItems = ItemBoxMgr.FindItemBox(boxId);
@@ -308,7 +340,7 @@ namespace Bussiness.Managers
                             medal += rewardInfo.ItemCount; // huan chuong
                             continue;
                         case -200:
-                            point += rewardInfo.ItemCount; // xu
+                            money += rewardInfo.ItemCount; // xu
                             continue;
                         case -100:
                             gold += rewardInfo.ItemCount; // vang

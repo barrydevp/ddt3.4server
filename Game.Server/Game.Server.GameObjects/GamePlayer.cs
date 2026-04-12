@@ -2520,7 +2520,7 @@ namespace Game.Server.GameObjects
 			foreach (var item in allEquipItems)
 			{
 				var info = SubActiveMgr.GetSubActiveInfo(item);
-				if (info != null && SubActiveMgr.Checked())
+				if (info != null && SubActiveMgr.Checked(info))
 				{
 					num2 += info.GetValue("6");
 				}
@@ -2681,7 +2681,7 @@ namespace Game.Server.GameObjects
 			foreach (var item in allEquipItems)
 			{
 				var info = SubActiveMgr.GetSubActiveInfo(item);
-				if (info != null && SubActiveMgr.Checked())
+				if (info != null && SubActiveMgr.Checked(info))
 				{
 					num1 += info.GetValue("7");
 				}
