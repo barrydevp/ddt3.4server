@@ -45,7 +45,7 @@ namespace Tank.Request
 					length = aLllShop.Length;
 					result.Add(xelement);
 					flag = true;
-					str = "Successcvbcvbcb!";
+					str = $"Success{length}!";
 				}
 			}
 			catch

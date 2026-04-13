@@ -336,7 +336,7 @@ namespace Bussiness
 			info.isContinue = (int)dr["isContinue"];
 			info.status = (int)dr["status"];
 			info.remain1 = (int)dr["remain1"];
-			info.remain2 = (string)dr["remain2"];
+			info.remain2 = dr["remain2"] == DBNull.Value ? "" : (string)dr["remain2"];
 			//info.order = (int)dr["order"];
 			return info;
 		}

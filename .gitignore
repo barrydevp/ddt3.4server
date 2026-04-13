@@ -61,3 +61,5 @@ Tank.Flash/obj
 Tank.Request/obj
 Center.Service/obj
 Fighting.Service/obj
+Request/bin
+Request/obj
