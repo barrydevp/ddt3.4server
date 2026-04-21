@@ -208,11 +208,11 @@ namespace Game.Base.Packets
 
 		public void SendShopGoodsCountUpdate(List<ShopFreeCountInfo> list)
 		{
-			GSPacketIn packet = new GSPacketIn(168);
+			GSPacketIn packet = new GSPacketIn((int)ePackageType.GOODS_COUNT);
 			packet.WriteInt(list.Count);
 			foreach (ShopFreeCountInfo shopFreeCountInfo in list)
 			{
-				packet.WriteInt(shopFreeCountInfo.ShopID);
+				packet.WriteLong(shopFreeCountInfo.ShopID);
 				packet.WriteInt(shopFreeCountInfo.Count);
 			}
 			packet.WriteInt(0);
@@ -540,7 +540,7 @@ namespace Game.Base.Packets
 
 		public void SendOpenNoviceActive(int channel, int activeId, int condition, int awardGot, DateTime startTime, DateTime endTime)
 		{
-			GSPacketIn packet = new GSPacketIn(258);
+			GSPacketIn packet = new GSPacketIn((int)ePackageType.NOVICEACTIVITY);
 			packet.WriteInt(channel);
 			switch (channel)
 			{

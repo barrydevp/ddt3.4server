@@ -50,10 +50,10 @@ namespace Game.Server.Packets.Client
 				List<string> stringList = new List<string>();
 				for (int index2 = 0; index2 < num1; index2++)
 				{
-					int ID = packet.ReadInt();
-					int type2 = packet.ReadInt();
+					long ID = packet.ReadLong();
+                    int type2 = packet.ReadInt();
 					string str1 = packet.ReadString();
-					bool flag = packet.ReadBoolean();
+                    bool flag = packet.ReadBoolean();
 					string str4 = packet.ReadString();
 					int num2 = packet.ReadInt();
 					stringList.Add(ID.ToString());

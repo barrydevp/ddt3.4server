@@ -154,7 +154,7 @@ namespace SqlDataProvider.Data
 			set;
 		}
 
-		public int ID
+		public long ID
 		{
 			get;
 			set;

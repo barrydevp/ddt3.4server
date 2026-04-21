@@ -5,7 +5,7 @@ using SqlDataProvider.Data;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(168, "物品强化")]
+	[PacketHandler((int)ePackageType.GOODS_COUNT, "物品强化")]
 	public class GoodsCountHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)

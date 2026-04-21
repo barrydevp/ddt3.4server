@@ -31,7 +31,7 @@ namespace Game.Server.Managers
 
 		private static Dictionary<int, EdictumInfo> dictionary_2;
 
-		private static Dictionary<int, ShopFreeCountInfo> dictionary_3;
+		private static Dictionary<long, ShopFreeCountInfo> dictionary_3;
 
 		private static Dictionary<int, UserExitRoomLogInfo> dictionary_4;
 
@@ -519,7 +519,7 @@ namespace Game.Server.Managers
 			}
 		}
 
-		public static bool UpdateShopFreeCount(int shopId, int total)
+		public static bool UpdateShopFreeCount(long shopId, int total)
 		{
 			bool flag = false;
 			lock (dictionary_3)
@@ -1050,7 +1050,7 @@ namespace Game.Server.Managers
 			CaddyRank = new Dictionary<int, UsersExtraInfo>();
 			dictionary_1 = new Dictionary<int, AreaConfigInfo>();
 			dictionary_2 = new Dictionary<int, EdictumInfo>();
-			dictionary_3 = new Dictionary<int, ShopFreeCountInfo>();
+			dictionary_3 = new Dictionary<long, ShopFreeCountInfo>();
 			dictionary_4 = new Dictionary<int, UserExitRoomLogInfo>();
 			LastTimeUpdateCaddyRank = DateTime.Now;
 			string_0 = new string[17]

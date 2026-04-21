@@ -1062,7 +1062,10 @@ namespace Game.Server.GameUtils
 			return false;
 		}
 
-		public void GetUserNimbus()
+        // Nimbus is the player's state related to the strength level of their equipment
+        // this decides the circlelight, sinplelight, ...
+        // and is encoded as base-10 position, for example: 101 means circlelight 1 (weapon strengthen level 5-8), sinplelight 1 (armor strengthen level 5-8)
+        public void GetUserNimbus()
 		{
 			var i = 0;
 			var j = 0;

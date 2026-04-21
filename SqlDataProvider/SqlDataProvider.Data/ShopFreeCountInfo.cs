@@ -7,7 +7,7 @@ namespace SqlDataProvider.Data
 	public class ShopFreeCountInfo
 	{
 		[ProtoMember(1)]
-		public int ShopID
+		public long ShopID
 		{
 			get;
 			set;

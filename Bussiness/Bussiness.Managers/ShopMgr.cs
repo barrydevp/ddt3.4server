@@ -14,11 +14,11 @@ namespace Bussiness.Managers
 
 		private static ReaderWriterLock m_lock = new ReaderWriterLock();
 
-		private static Dictionary<int, ShopItemInfo> m_shop = new Dictionary<int, ShopItemInfo>();
+		private static Dictionary<long, ShopItemInfo> m_shop = new Dictionary<long, ShopItemInfo>();
 
-		private static Dictionary<int, ShopGoodsShowListInfo> m_ShopGoodsCanBuy = new Dictionary<int, ShopGoodsShowListInfo>();
+		private static Dictionary<long, ShopGoodsShowListInfo> m_ShopGoodsCanBuy = new Dictionary<long, ShopGoodsShowListInfo>();
 
-		private static Dictionary<int, ShopGoodsShowListInfo> m_shopGoodsShowLists = new Dictionary<int, ShopGoodsShowListInfo>();
+		private static Dictionary<long, ShopGoodsShowListInfo> m_shopGoodsShowLists = new Dictionary<long, ShopGoodsShowListInfo>();
 
 		private static Dictionary<int, MinigameShopTemplateInfo> m_miniShop = new Dictionary<int, MinigameShopTemplateInfo>();
 
@@ -168,7 +168,7 @@ namespace Bussiness.Managers
 			return null;
 		}
 
-		public static ShopItemInfo FindShopbyID(int ID)
+		public static ShopItemInfo FindShopbyID(long ID)
 		{
 			foreach (ShopItemInfo info in m_shop.Values)
 			{
@@ -284,7 +284,7 @@ namespace Bussiness.Managers
 			}
 		}
 
-		public static ShopItemInfo GetShopItemInfoById(int ID)
+		public static ShopItemInfo GetShopItemInfoById(long ID)
 		{
 			if (m_shop.ContainsKey(ID))
 			{
@@ -298,7 +298,7 @@ namespace Bussiness.Managers
 			return ReLoad();
 		}
 
-		public static bool IsOnShop(int Id)
+		public static bool IsOnShop(long Id)
 		{
 			if (m_shopGoodsShowLists == null)
 			{
@@ -323,7 +323,7 @@ namespace Bussiness.Managers
 			return false;
 		}
 
-		public static bool IsSpecialItem(int Id)
+		public static bool IsSpecialItem(long Id)
 		{
 			if (Id <= 1100801)
 			{
@@ -339,9 +339,9 @@ namespace Bussiness.Managers
 			return true;
 		}
 
-		private static Dictionary<int, ShopItemInfo> LoadFromDatabase()
+		private static Dictionary<long, ShopItemInfo> LoadFromDatabase()
 		{
-			Dictionary<int, ShopItemInfo> dictionary = new Dictionary<int, ShopItemInfo>();
+			Dictionary<long, ShopItemInfo> dictionary = new Dictionary<long, ShopItemInfo>();
 			using (ProduceBussiness bussiness = new ProduceBussiness())
 			{
 				ShopItemInfo[] aLllShop = bussiness.GetALllShop();
@@ -356,9 +356,9 @@ namespace Bussiness.Managers
 			}
 		}
 
-		private static Dictionary<int, ShopGoodsShowListInfo> LoadShopGoodsCanBuyFromDatabase()
+		private static Dictionary<long, ShopGoodsShowListInfo> LoadShopGoodsCanBuyFromDatabase()
 		{
-			Dictionary<int, ShopGoodsShowListInfo> dictionary = new Dictionary<int, ShopGoodsShowListInfo>();
+			var dictionary = new Dictionary<long, ShopGoodsShowListInfo>();
 			using (ProduceBussiness bussiness = new ProduceBussiness())
 			{
 				ShopGoodsShowListInfo[] allShopGoodsShowList = bussiness.GetAllShopGoodsShowList();
@@ -373,9 +373,9 @@ namespace Bussiness.Managers
 			}
 		}
 
-		private static Dictionary<int, ShopGoodsShowListInfo> LoadShowListFromDatabase()
+		private static Dictionary<long, ShopGoodsShowListInfo> LoadShowListFromDatabase()
 		{
-			Dictionary<int, ShopGoodsShowListInfo> dictionary = new Dictionary<int, ShopGoodsShowListInfo>();
+			var dictionary = new Dictionary<long, ShopGoodsShowListInfo>();
 			using (ProduceBussiness bussiness = new ProduceBussiness())
 			{
 				ShopGoodsShowListInfo[] allShopGoodsShowList = bussiness.GetAllShopGoodsShowList();
@@ -412,9 +412,9 @@ namespace Bussiness.Managers
 		{
 			try
 			{
-				Dictionary<int, ShopItemInfo> dictionary = LoadFromDatabase();
-				Dictionary<int, ShopGoodsShowListInfo> dictionary2 = LoadShowListFromDatabase();
-				Dictionary<int, MinigameShopTemplateInfo> tempMinigameShopLists = LoadMinigameShopDatabase();
+				var dictionary = LoadFromDatabase();
+				var dictionary2 = LoadShowListFromDatabase();
+				var tempMinigameShopLists = LoadMinigameShopDatabase();
 				if (dictionary.Count > 0)
 				{
 					Interlocked.Exchange(ref m_shop, dictionary);
@@ -429,7 +429,7 @@ namespace Bussiness.Managers
                 }
 				try
 				{
-					Dictionary<int, ShopGoodsShowListInfo> dictionary3 = LoadShopGoodsCanBuyFromDatabase();
+					var dictionary3 = LoadShopGoodsCanBuyFromDatabase();
 					if (dictionary3.Count > 0)
 					{
 						Interlocked.Exchange(ref m_ShopGoodsCanBuy, dictionary3);

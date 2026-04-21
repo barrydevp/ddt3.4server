@@ -7,6 +7,6 @@ namespace SqlDataProvider.Data
 	public class WorldMgrDataInfo
 	{
 		[ProtoMember(1)]
-		public Dictionary<int, ShopFreeCountInfo> ShopFreeCount;
+		public Dictionary<long, ShopFreeCountInfo> ShopFreeCount;
 	}
 }

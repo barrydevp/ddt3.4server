@@ -3503,8 +3503,9 @@ namespace Game.Server.GameObjects
                         {
 							Out.SendLeagueNotice(m_character.ID);
                         }
-						#region
-						if (PlayerCharacter.GhostEquipList == "{}")
+
+                        #region Init Equip Ghost if empty
+                        if (PlayerCharacter.GhostEquipList == "{}")
 						{
 							//Weapon
 							List<SpiritInfo> spiList = SpiritInfoMgr.GetSpirit(7);
@@ -3534,8 +3535,9 @@ namespace Game.Server.GameObjects
 							AddEquipGhost(used1);
 							AddEquipGhost(used2);
 						}
-						#endregion
-						WorldMgr.Test();
+                        #endregion
+
+                        WorldMgr.Test();
 						if (PlayerCharacter.Repute > 0 && PlayerCharacter.Repute <= 10)
 						{
 							string Ranked = PlayerCharacter.Honor;
@@ -5642,8 +5644,11 @@ namespace Game.Server.GameObjects
 			num += PlayerCharacter.Luck;
 			double baseAttack = GetBaseAttack();
 			double baseDefence = GetBaseDefence();
-			double probability = Convert.ToDouble(ConfigurationManager.AppSettings["probability"]);
-			FightPower += (int)((double)(num + 1000) * ((probability * baseAttack * baseAttack * baseAttack) + 3.5 * baseDefence * baseDefence * baseDefence) / 100000000.0 + (double)hp * 0.95);
+            double fightPowerBasicPropertiesScale = Convert.ToDouble(ConfigurationManager.AppSettings.Get("fightPowerBasicPropertiesScale") ?? "4.0");
+            double fightPowerAttackScale = Convert.ToDouble(ConfigurationManager.AppSettings.Get("fightPowerAttackScale") ?? "0.9");
+            double fightPowerDefenseScale = Convert.ToDouble(ConfigurationManager.AppSettings.Get("fightPowerDefenseScale") ?? "1.4");
+            double fightPowerHpScale = Convert.ToDouble(ConfigurationManager.AppSettings.Get("fightPowerHpScale") ?? "0.4");
+            FightPower += (int)((double)(num) * fightPowerBasicPropertiesScale + ((fightPowerAttackScale * baseAttack * baseAttack * baseAttack) + (fightPowerDefenseScale * baseDefence * baseDefence * baseDefence)) / 100000.0 + (double)hp * fightPowerHpScale);
 			if (m_currentSecondWeapon != null)
 			{
 				int multiple = 1;

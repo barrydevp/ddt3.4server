@@ -1270,7 +1270,7 @@ namespace Bussiness
 				{
 					ShopItemInfo item = new ShopItemInfo
 					{
-						ID = int.Parse(resultDataReader["ID"].ToString()),
+						ID = long.Parse(resultDataReader["ID"].ToString()),
 						ShopID = int.Parse(resultDataReader["ShopID"].ToString()),
 						GroupID = int.Parse(resultDataReader["GroupID"].ToString()),
 						TemplateID = int.Parse(resultDataReader["TemplateID"].ToString()),
@@ -2582,7 +2582,7 @@ namespace Bussiness
 			return new ShopGoodsShowListInfo
 			{
 				Type = (int)reader["Type"],
-				ShopId = (int)reader["ShopId"]
+				ShopId = (long)reader["ShopId"]
 			};
 		}
 

@@ -2,7 +2,7 @@ namespace SqlDataProvider.Data
 {
 	public class ShopGoodsShowListInfo : DataObject
 	{
-		public int ShopId
+		public long ShopId
 		{
 			get;
 			set;
