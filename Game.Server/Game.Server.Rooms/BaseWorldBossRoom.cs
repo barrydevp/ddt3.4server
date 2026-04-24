@@ -401,7 +401,6 @@ namespace Game.Server.Rooms
             gSPacketIn.WriteBoolean(false);
             gSPacketIn.WriteLong(num);
             gSPacketIn.WriteLong(this.m_blood);
-            Console.WriteLine("Boss Blood Update:" + this.m_blood);
             this.SendToALL(gSPacketIn);
         }
 

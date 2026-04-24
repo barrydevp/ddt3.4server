@@ -45,7 +45,7 @@ namespace Center.Server
 		[ConfigProperty("ScriptCompilationTarget", "脚本编译目标名称", "")]
 		public string ScriptCompilationTarget;
 
-		[ConfigProperty("SystemNoticeInterval", "登陆超时时间,分钟为单位", 2)]
+		[ConfigProperty("SystemNoticeInterval", "登陆超时时间,分钟为单位", 5)]
 		public int SystemNoticeInterval;
 
 		public CenterServerConfig()

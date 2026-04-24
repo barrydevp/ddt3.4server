@@ -598,7 +598,7 @@ namespace Game.Server.Managers
 		public static GSPacketIn SendSysNotice(eMessageType type, string msg, int ItemID, int TemplateID, string key)
 		{
 			int val = msg.IndexOf(TemplateID.ToString(), StringComparison.Ordinal);
-			GSPacketIn pkg = new GSPacketIn(10);
+			GSPacketIn pkg = new GSPacketIn((int)ePackageType.SYS_NOTICE);
 			pkg.WriteInt((int)type);
 			pkg.WriteString(msg.Replace(TemplateID.ToString(), ""));
 			pkg.WriteByte(1);

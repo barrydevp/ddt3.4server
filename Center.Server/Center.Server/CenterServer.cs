@@ -205,11 +205,11 @@ namespace Center.Server
             dueTime = _config.SystemNoticeInterval * 60 * 1000;
             if (m_sytemNotice == null)
             {
-                m_sytemNotice = new Timer(SystemNoticeTimerProc, null, dueTime, dueTime);
+                m_sytemNotice = new Timer(SystemNoticeTimerProc, null, 0, dueTime);
             }
             else
             {
-                m_sytemNotice.Change(dueTime, dueTime);
+                m_sytemNotice.Change(0, dueTime);
             }
             dueTime = _config.LoginLapseInterval * 60 * 1000;
             if (m_loginLapseTimer == null)

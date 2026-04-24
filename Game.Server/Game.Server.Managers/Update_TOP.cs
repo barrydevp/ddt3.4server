@@ -8,7 +8,8 @@ namespace Game.Server
 {
     public class Update_TOP
     {
-        private bool isuptop;
+        private bool isuptop = false;
+        private DateTime lastUpdate = DateTime.MinValue;
         private string req = ConfigurationManager.AppSettings["request"] + "CelebList/CreateAllCeleb.ashx";
 
         private void uptop()
@@ -29,12 +30,14 @@ namespace Game.Server
 
         public void UpdateCeleb()
         {
-            if (DateTime.Now.Minute > 5)
-                isuptop = false;
-            if (DateTime.Now.Minute <= 5 && !isuptop)
+            Console.WriteLine("CHECK UPDATE PHONG CAO THU, Last: " + lastUpdate);
+            //if (DateTime.Now.Minute > 10)
+            //    isuptop = false;
+            if (DateTime.Now > lastUpdate.AddMinutes(60))
             {
+                //isuptop = true;
+                lastUpdate = DateTime.Now;
                 this.uptop();
-                isuptop = true;
             }
 
         }

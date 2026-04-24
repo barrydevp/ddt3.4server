@@ -133,7 +133,7 @@ namespace Game.Server.Packets.Client
 						client.Out.SendAuctionRefresh(info, info.AuctionID, isExist: true, itemAt);
 						if (num13 > 1)
                         {
-							string msg = string.Format("|Đấu Giá| - [{0}] vừa bán đấu giá vật phẩm {1} với giá {2} xu. Mau mau vào đấu giá xúc ngay nào!", client.Player.PlayerCharacter.NickName, itemInfo.TemplateID, num13);
+							string msg = string.Format("[{0}] vừa bán đấu giá vật phẩm {1} với giá {2} xu. Mau mau vào đấu giá xúc ngay nào!", client.Player.PlayerCharacter.NickName, itemInfo.TemplateID, num13);
 							GSPacketIn pkg = WorldMgr.SendSysNotice(eMessageType.ChatNormal, msg, 0, itemInfo.TemplateID, null);
 							GameServer.Instance.LoginServer.SendPacket(pkg);
                         }							

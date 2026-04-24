@@ -46,6 +46,8 @@ namespace Game.Server.Packets.Client
                     return 0;
                 }
 
+                // This is where the game command is processed.
+                // It will call the ProcessData of the current executed Game (BaseGame{PVEGame, PVPGame}, ProxyGame, ProxyRingStationGame{AutoBot})
                 client.Player.CurrentRoom.ProcessData(packet);
             }
 

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Bussiness;
+using Game.Logic;
+using Game.Logic.Actions;
 using Game.Logic.AI;
 using Game.Logic.Phy.Object;
-using Game.Logic;
+using Game.Server.GameRoom.Handle;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using Game.Logic.Actions;
-using Bussiness;
+using System.Text;
 
 namespace GameServerScript.AI.NPC
 {
@@ -113,10 +115,15 @@ namespace GameServerScript.AI.NPC
 
             if (m_attackTurn == 0)
             {
-                PersonalAttackC();
+                Breath();
                 m_attackTurn++;
             }
             else if (m_attackTurn == 1)
+            {
+                PersonalAttackC();
+                m_attackTurn++;
+            }
+            else if (m_attackTurn == 2)
             {
                 PersonalAttackE();
                 m_attackTurn++;
@@ -124,9 +131,15 @@ namespace GameServerScript.AI.NPC
             else
             {
                 KillAttack();
-                m_attackTurn = 0;
+                m_attackTurn = 1;
             }
         }
+
+        private void Breath()
+        {
+            base.Body.PlayMovie("beatA", 1000, 4000);
+        }
+
         private void KillAttack(int fx, int tx)
         {
             int index = Game.Random.Next(0, KillAttackChat.Length);
@@ -143,7 +156,7 @@ namespace GameServerScript.AI.NPC
             if (target != null)
             {
                 int index = Game.Random.Next(0, KillAttackChat.Length);
-                Body.Say(KillAttackChat[index], 1, 1000);
+                //Body.Say(KillAttackChat[index], 1, 1000);
                 Body.CurrentDamagePlus = 15;
                 Body.PlayMovie("beatF", 3000, 0);
                 Body.RangeAttacking(0, Body.X + 1000, "cry", 5000, null);
@@ -159,7 +172,7 @@ namespace GameServerScript.AI.NPC
             {
                 Body.CurrentDamagePlus = 5;
                 int index = Game.Random.Next(0, ShootChat.Length);
-                Body.Say(ShootChat[index], 1, 0);
+                //Body.Say(ShootChat[index], 1, 0);
                 int dis = Game.Random.Next(0, 1200);
                 Body.PlayMovie("beatC", 1700, 0);
                 Body.RangeAttacking(0, Body.X + 1000, "cry", 4000, null);
@@ -175,7 +188,7 @@ namespace GameServerScript.AI.NPC
             {
                 Body.CurrentDamagePlus = 10;
                 int index = Game.Random.Next(0, ShootChat.Length);
-                Body.Say(ShootChat[index], 1, 0);
+                //Body.Say(ShootChat[index], 1, 0);
                 int dis = Game.Random.Next(0, 1200);
                 Body.PlayMovie("beatE", 1700, 0);
                 Body.RangeAttacking(0, Body.X + 1000, "cry", 4000, null);

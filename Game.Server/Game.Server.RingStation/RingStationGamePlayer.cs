@@ -451,6 +451,7 @@ namespace Game.Server.RingStation
 			return (dx - (double)(f / m * t * t / 2f)) / (double)t + (double)(af / m) * dx * 1.3;
 		}
 
+		// This will send a BotCommand to be executed in the BaseGame, this is how the bot plays the game (shoots the player).
 		public void FindTarget()
 		{
 			GSPacketIn pkg = new GSPacketIn(91)

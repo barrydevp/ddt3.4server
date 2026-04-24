@@ -203,7 +203,7 @@ namespace Fighting.Server
 
 		public void HandleGameRoomCreate(GSPacketIn pkg)
 		{
-			int num1 = pkg.ReadInt();
+            int num1 = pkg.ReadInt();
 			int num5 = pkg.ReadInt();
 			int num6 = pkg.ReadInt();
 			int num7 = pkg.ReadInt();
@@ -216,7 +216,7 @@ namespace Fighting.Server
 			int num9 = 0;
 			int zoneID = 0;
 			int totalFightPower = 0;
-			IGamePlayer[] players = new IGamePlayer[length];
+            IGamePlayer[] players = new IGamePlayer[length];
 			for (int index1 = 0; index1 < length; index1++)
 			{
 				PlayerInfo character = new PlayerInfo();
@@ -389,7 +389,8 @@ namespace Fighting.Server
 			}
 			if (room != null)
 			{
-				ProxyRoomMgr.AddRoom(room);
+                Console.WriteLine($"HandleGameRoomCreate success: isBot={isBot} roomType={room.RoomType}");
+                ProxyRoomMgr.AddRoom(room);
 				return;
 			}
 			RemoveRoom(num1, room);
@@ -710,7 +711,7 @@ namespace Fighting.Server
 
 		public void SendBeginFightNpc(int playerId, int RoomType, int GameType, int OrientRoomId)
 		{
-			GSPacketIn pkg = new GSPacketIn(88);
+			GSPacketIn pkg = new GSPacketIn((int)eFightPackageType.FIGHT_NPC);
 			pkg.Parameter1 = playerId;
 			pkg.WriteInt(RoomType);
 			pkg.WriteInt(GameType);

@@ -1,15 +1,16 @@
+using Game.Base;
+using Game.Base.Packets;
+using Game.Logic;
+using Game.Logic.Protocol;
+using Game.Server.GameObjects;
+using Game.Server.Managers;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Game.Base;
-using Game.Base.Packets;
-using Game.Logic;
-using Game.Server.GameObjects;
-using Game.Server.Managers;
-using log4net;
 
 namespace Game.Server.RingStation.Battle
 {
@@ -382,7 +383,7 @@ namespace Game.Server.RingStation.Battle
 
 		public void SendAddRoom(BaseRoomRingStation room)
 		{
-			GSPacketIn pkg = new GSPacketIn(64);
+			GSPacketIn pkg = new GSPacketIn((int)eFightPackageType.ROOM_CREATE);
 			pkg.WriteInt(room.RoomId);
 			pkg.WriteInt(room.RoomType);
 			pkg.WriteInt(room.GameType);
@@ -508,7 +509,8 @@ namespace Game.Server.RingStation.Battle
 
 		public void SendToGame(int gameId, GSPacketIn pkg)
 		{
-			GSPacketIn @in = new GSPacketIn(2, gameId);
+			// this will send the package to the ServerClient.cs (which is the ClientHandler of FightService)
+			GSPacketIn @in = new GSPacketIn((int)eFightPackageType.SEND_TO_GAME, gameId);
 			@in.WritePacket(pkg);
 			SendTCP(@in);
 		}

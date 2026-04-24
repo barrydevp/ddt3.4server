@@ -1,25 +1,30 @@
 using Bussiness;
 using Game.Base.Packets;
 using SqlDataProvider.Data;
+using System;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(119, "物品比较")]
+	//[PacketHandler((int)ePackageType.LINKREQUEST_GOODS, "物品比较")]
 	public class ItemCompareHandler : IPacketHandler
 	{
 		public int HandlePacket(GameClient client, GSPacketIn packet)
 		{
-			if (packet.ReadInt() != 2)
+			//Console.WriteLine("ItemCompare");
+            if (packet.ReadInt() != 2)
 			{
 				return 0;
 			}
-			int itemID = packet.ReadInt();
+            string itemIDStr = packet.ReadString();
+            int itemID = Int32.Parse(itemIDStr);
+			//Console.WriteLine("ItemCompare: " + itemID);
 			using (PlayerBussiness playerBussiness = new PlayerBussiness())
 			{
 				ItemInfo userItemSingle = playerBussiness.GetUserItemSingle(itemID);
+				//Console.WriteLine("ItemCompare userItemSingle: " + (userItemSingle != null ? userItemSingle.ItemID.ToString() : "null"));
 				if (userItemSingle != null)
 				{
-					GSPacketIn packet2 = new GSPacketIn(119, client.Player.PlayerCharacter.ID);
+					GSPacketIn packet2 = new GSPacketIn((int)ePackageType.LINKREQUEST_GOODS, client.Player.PlayerCharacter.ID);
 					packet2.WriteInt(userItemSingle.TemplateID);
 					packet2.WriteInt(userItemSingle.ItemID);
 					packet2.WriteInt(userItemSingle.StrengthenLevel);

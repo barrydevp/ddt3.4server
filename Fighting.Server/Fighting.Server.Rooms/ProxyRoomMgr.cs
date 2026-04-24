@@ -320,7 +320,7 @@ namespace Fighting.Server.Rooms
 						if(red.NpcId != -1 && (DateTime.Now - red.createDate).TotalSeconds >= 40 && !red.startWithNpc && !red.isAutoBot)
                         {
 							red.Client.SendBeginFightNpc(red.selfId, (int)red.RoomType, (int)red.GameType, red.NpcId);
-							//Console.WriteLine("--1.?????ID? No.{0}", red.NpcId);
+							Console.WriteLine("Send Create Bot (or NPC) Command to Road");
 						}
                     }
 					else if ((DateTime.Now - red.createDate).TotalSeconds >= 40 && red.startWithNpc && !red.isAutoBot)
@@ -329,7 +329,7 @@ namespace Fighting.Server.Rooms
 						{
 							if (autoBot != red && autoBot.PlayerCount == red.PlayerCount && !autoBot.IsPlaying && autoBot.isAutoBot && red.NpcId == autoBot.NpcId)
 							{
-								//Console.WriteLine("--2.???????ID? No.{0}", red.NpcId);
+								Console.WriteLine("Start game with Bot(NPC) Room");
 								smethod_6(red, autoBot);
 							}
 						}
